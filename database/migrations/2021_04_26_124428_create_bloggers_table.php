@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLodgersTable extends Migration
+class CreateBloggersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateLodgersTable extends Migration
      */
     public function up()
     {
-        Schema::create('lodgers', function (Blueprint $table) {
-            $table->id_lodger();
-            $table->nama_lodger();
-            $table->no_ktp();
-            $table->password_lodger();
-            $table->no_telp();
-            $table->no_wa();
-            $table->alamat();
+        Schema::create('bloggers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->boolean('is_editor')->default(false);
             $table->rememberToken();
             $table->timestamps();
@@ -34,6 +31,6 @@ class CreateLodgersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lodgers');
+        Schema::dropIfExists('bloggers');
     }
 }

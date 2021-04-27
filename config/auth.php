@@ -46,6 +46,21 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'blogger' => [
+            'driver' => 'session',
+            'provider' => 'bloggers',
+        ],
     ],
 
     /*
@@ -70,7 +85,15 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
 
+        'bloggers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Blogger::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
