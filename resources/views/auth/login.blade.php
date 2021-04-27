@@ -14,23 +14,44 @@
                         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                             @endisset
                             @csrf
+                            @if($url == 'lodger')
 
                             <div class="form-group row">
-                                <label for="email"
+                                <label for="no_ktp"
                                     class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="no_ktp" type="text"
+                                        class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp"
+                                        value="{{ old('no_ktp') }}" required autocomplete="no_ktp" autofocus>
 
-                                    @error('email')
+                                    @error('no_ktp')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
+                            @else
+                            <div class="form-group row">
+                                <label for="username"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="username" type="text"
+                                        class="form-control @error('username') is-invalid @enderror" name="username"
+                                        value="{{ old('username') }}" required autocomplete="username" autofocus>
+
+                                    @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            @endif
+
 
                             <div class="form-group row">
                                 <label for="password"

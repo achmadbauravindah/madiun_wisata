@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Blogger;
+use App\Models\Lodger;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -42,6 +43,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
         $this->middleware('guest:admin');
         $this->middleware('guest:blogger');
+        $this->middleware('guest:lodger');
     }
 
     /**
@@ -68,6 +70,15 @@ class RegisterController extends Controller
         return view('auth.register', ['url' => 'blogger']);
     }
 
+    // Lodger
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showLodgerRegisterForm()
+    {
+        return view('auth.register', ['url' => 'lodger']);
+    }
+
     /**
      * @param array $data
      *
@@ -84,12 +95,12 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins',
+            'username' => 'required|string|max:255|unique:admins',
             'password' => 'required|string|min:6|confirmed',
         ]);
         Admin::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
         return redirect()->intended('login/admin');
@@ -104,14 +115,39 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:bloggers',
+            'username' => 'required|string|max:255|unique:bloggers',
             'password' => 'required|string|min:6|confirmed',
         ]);
         Blogger::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
         return redirect()->intended('login/blogger');
+    }
+
+
+    // Lodger
+
+
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function createLodger(Request $request)
+    {
+        // dd($request->no_ktp);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'no_ktp' => 'required|string|max:255|unique:lodgers',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        Lodger::create([
+            'name' => $request->name,
+            'no_ktp' => $request->no_ktp,
+            'password' => Hash::make($request->password),
+        ]);
+        return redirect()->intended('login/lodger');
     }
 }

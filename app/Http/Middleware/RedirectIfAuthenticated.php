@@ -9,14 +9,18 @@ class RedirectIfAuthenticated
 {
     public function handle($request, Closure $next, $guard = null)
     {
+        // dd(Auth::guard($guard)->check());
         if ($guard == "admin" && Auth::guard($guard)->check()) {
             return redirect('/admin');
         }
         if ($guard == "blogger" && Auth::guard($guard)->check()) {
             return redirect('/blogger');
         }
+        if ($guard == "lodger" && Auth::guard($guard)->check()) {
+            return redirect('/lodger');
+        }
         if (Auth::guard($guard)->check()) {
-            return redirect('/');
+            return redirect('/lodger');
         }
 
         return $next($request);

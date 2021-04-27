@@ -33,22 +33,43 @@
                                 </div>
                             </div>
 
+                            @if ($url == 'lodger')
                             <div class="form-group row">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="no_ktp"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('No. KTP') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email">
+                                    <input id="no_ktp" type="text"
+                                        class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp"
+                                        value="{{ old('no_ktp') }}" required autocomplete="no_ktp">
 
-                                    @error('email')
+                                    @error('no_ktp')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
+                            @else
+
+                            <div class="form-group row">
+                                <label for="username"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="username" type="text"
+                                        class="form-control @error('username') is-invalid @enderror" name="username"
+                                        value="{{ old('username') }}" required autocomplete="username">
+
+                                    @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            @endif
 
                             <div class="form-group row">
                                 <label for="password"

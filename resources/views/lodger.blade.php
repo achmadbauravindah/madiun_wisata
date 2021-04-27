@@ -8,8 +8,11 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    Hi boss!
-                    {{ Auth::user()->name }}
+                    Hi boss Lodger!
+                    <br>
+                    Namamu adalah {{ Auth::user()->name }}
+                    <br>
+                    No Ktpmu adalah {{ Auth::user()->no_ktp }}
                 </div>
             </div>
         </div>

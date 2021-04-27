@@ -1,3 +1,4 @@
+@extends('layouts.auth')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +9,11 @@
 </head>
 
 <body>
+    Halaman Home
 
-    {{ dd(session())->all() }}
+    {{ if(isset(Session::get('user'))){ $user = Session::get('user');} }}
+    {{  dd($user) }}
 
-    aa
 </body>
 
 </html>

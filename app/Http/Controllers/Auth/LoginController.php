@@ -52,15 +52,15 @@ class LoginController extends Controller
     public function adminLogin(Request $request)
     {
         $this->validate($request, [
-            'email'   => 'required|email',
+            'username'   => 'required',
             'password' => 'required|min:6'
         ]);
 
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+        if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/admin');
         }
-        return back()->withInput($request->only('email', 'remember'));
+        return back()->withInput($request->only('username', 'remember'));
     }
 
     public function showBloggerLoginForm()
@@ -80,5 +80,25 @@ class LoginController extends Controller
             return redirect()->intended('/blogger');
         }
         return back()->withInput($request->only('email', 'remember'));
+    }
+
+    // Lodgers
+    public function showLodgerLoginForm()
+    {
+        return view('auth.login', ['url' => 'lodger']);
+    }
+
+    public function lodgerLogin(Request $request)
+    {
+        $this->validate($request, [
+            'no_ktp'   => 'required',
+            'password' => 'required|min:6'
+        ]);
+
+        if (Auth::guard('lodger')->attempt(['no_ktp' => $request->no_ktp, 'password' => $request->password], $request->get('remember'))) {
+
+            return redirect()->intended('/');
+        }
+        return back()->withInput($request->only('no_ktp', 'remember'));
     }
 }

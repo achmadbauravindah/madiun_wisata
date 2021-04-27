@@ -12,7 +12,7 @@ class Blogger extends Authenticatable
     protected $guard = 'bloggers';
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'password',
     ];
 
     protected $hidden = [

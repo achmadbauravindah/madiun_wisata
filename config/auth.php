@@ -61,6 +61,11 @@ return [
             'driver' => 'session',
             'provider' => 'bloggers',
         ],
+
+        'lodger' => [
+            'driver' => 'session',
+            'provider' => 'lodgers',
+        ],
     ],
 
     /*
@@ -93,6 +98,11 @@ return [
         'bloggers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Blogger::class,
+        ],
+
+        'lodgers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Lodger::class,
         ],
         // 'users' => [
         //     'driver' => 'database',
