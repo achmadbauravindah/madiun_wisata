@@ -46,7 +46,7 @@ class LodgerController extends Controller
      */
     public function show(Lodger $lodger)
     {
-        //
+        return view('lodger');
     }
 
     /**

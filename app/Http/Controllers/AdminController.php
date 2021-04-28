@@ -1,9 +1,12 @@
 <?php
 
+namespace App\Http\Controllers\Auth;
+
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -45,7 +48,8 @@ class AdminController extends Controller
      */
     public function show(Admin $admin)
     {
-        //
+        $user = Auth::user();
+        return view('admin', compact('user'));
     }
 
     /**

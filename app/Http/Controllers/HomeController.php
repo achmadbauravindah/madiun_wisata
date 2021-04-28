@@ -11,10 +11,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // Construct ini akan jalan jika sistem tampil, jika tidak memerlukan login, ini di disable saja
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,7 +24,11 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request);
-        return view('home', compact('request'));
+        return view('home');
+    }
+
+    function disableDefaultAuth()
+    {
+        return redirect('/');
     }
 }

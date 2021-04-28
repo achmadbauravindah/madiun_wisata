@@ -13,6 +13,8 @@
                     Namamu adalah {{ Auth::user()->name }}
                     <br>
                     No Ktpmu adalah {{ Auth::user()->no_ktp }}
+
+                    {{-- {{ user() }} --}}
                 </div>
             </div>
         </div>

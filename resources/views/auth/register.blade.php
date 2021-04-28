@@ -18,14 +18,14 @@
 
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nama" type="text"
+                                        class="form-control @error('nama') is-invalid @enderror" name="nama"
+                                        value="{{ old('nama') }}" required autocomplete="nama" autofocus>
 
-                                    @error('name')
+                                    @error('nama')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
 
-                            @if ($url == 'lodger')
+                            @if(request()->is('register/lodger'))
                             <div class="form-group row">
                                 <label for="no_ktp"
                                     class="col-md-4 col-form-label text-md-right">{{ __('No. KTP') }}</label>
@@ -44,6 +44,55 @@
                                         value="{{ old('no_ktp') }}" required autocomplete="no_ktp">
 
                                     @error('no_ktp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="no_telp"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('No. Telp') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="no_telp" type="text"
+                                        class="form-control @error('no_telp') is-invalid @enderror" name="no_telp"
+                                        value="{{ old('no_telp') }}" required autocomplete="no_telp">
+
+                                    @error('no_telp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="no_wa"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('No. WA') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="no_wa" type="text"
+                                        class="form-control @error('no_wa') is-invalid @enderror" name="no_wa"
+                                        value="{{ old('no_wa') }}" required autocomplete="no_wa">
+
+                                    @error('no_wa')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="alamat"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="alamat" type="text"
+                                        class="form-control @error('alamat') is-invalid @enderror" name="alamat"
+                                        value="{{ old('alamat') }}" required autocomplete="alamat">
+
+                                    @error('alamat')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

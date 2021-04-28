@@ -12,7 +12,7 @@ class Lodger extends Authenticatable
     protected $guard = 'lodgers';
 
     protected $fillable = [
-        'name', 'no_ktp', 'password',
+        'nama', 'no_ktp', 'password', 'no_telp', 'no_wa', 'alamat',
     ];
 
     protected $hidden = [

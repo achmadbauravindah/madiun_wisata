@@ -57,10 +57,6 @@ return [
             'provider' => 'admins',
         ],
 
-        'blogger' => [
-            'driver' => 'session',
-            'provider' => 'bloggers',
-        ],
 
         'lodger' => [
             'driver' => 'session',
@@ -95,10 +91,6 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
-        'bloggers' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Blogger::class,
-        ],
 
         'lodgers' => [
             'driver' => 'eloquent',

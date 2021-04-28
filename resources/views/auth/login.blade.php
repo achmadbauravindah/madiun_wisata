@@ -14,11 +14,12 @@
                         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                             @endisset
                             @csrf
-                            @if($url == 'lodger')
 
+                            {{-- Lodger input no_ktp --}}
+                            @if(request()->is('login/lodger'))
                             <div class="form-group row">
                                 <label for="no_ktp"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('No. KTP') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="no_ktp" type="text"
@@ -33,9 +34,10 @@
                                 </div>
                             </div>
                             @else
+                            {{-- All user input username --}}
                             <div class="form-group row">
                                 <label for="username"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="username" type="text"

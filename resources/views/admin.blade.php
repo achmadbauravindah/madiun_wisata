@@ -9,7 +9,8 @@
 
                 <div class="card-body">
                     Hi boss!
-                    {{ Auth::user()->name }}
+                    {{ $user->id }}
+                    {{-- {{ Auth::user()->name }} --}}
                 </div>
             </div>
         </div>

@@ -15,9 +15,12 @@ class CreateLodgersTable extends Migration
     {
         Schema::create('lodgers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('no_ktp')->unique();
-            $table->string('password');
+            $table->string('nama');
+            $table->char('no_ktp', 16)->unique();
+            $table->string('password', 64);
+            $table->string('no_telp', 20);
+            $table->string('no_wa', 20);
+            $table->text('alamat');
             $table->boolean('is_super')->default(false);
             $table->rememberToken();
             $table->timestamps();

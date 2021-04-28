@@ -13,14 +13,11 @@ class RedirectIfAuthenticated
         if ($guard == "admin" && Auth::guard($guard)->check()) {
             return redirect('/admin');
         }
-        if ($guard == "blogger" && Auth::guard($guard)->check()) {
-            return redirect('/blogger');
-        }
         if ($guard == "lodger" && Auth::guard($guard)->check()) {
             return redirect('/lodger');
         }
         if (Auth::guard($guard)->check()) {
-            return redirect('/lodger');
+            return redirect('/');
         }
 
         return $next($request);

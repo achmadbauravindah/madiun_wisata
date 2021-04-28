@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 
-
 class LoginController extends Controller
 {
 
@@ -41,7 +40,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
-        $this->middleware('guest:blogger')->except('logout');
     }
 
     public function showAdminLoginForm()
@@ -55,7 +53,6 @@ class LoginController extends Controller
             'username'   => 'required',
             'password' => 'required|min:6'
         ]);
-
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/admin');
@@ -63,24 +60,7 @@ class LoginController extends Controller
         return back()->withInput($request->only('username', 'remember'));
     }
 
-    public function showBloggerLoginForm()
-    {
-        return view('auth.login', ['url' => 'blogger']);
-    }
 
-    public function bloggerLogin(Request $request)
-    {
-        $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:6'
-        ]);
-
-        if (Auth::guard('blogger')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-
-            return redirect()->intended('/blogger');
-        }
-        return back()->withInput($request->only('email', 'remember'));
-    }
 
     // Lodgers
     public function showLodgerLoginForm()
@@ -97,7 +77,8 @@ class LoginController extends Controller
 
         if (Auth::guard('lodger')->attempt(['no_ktp' => $request->no_ktp, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/');
+            return redirect()->intended('/lodger');
+            // return redirect()->intended('/lodger');
         }
         return back()->withInput($request->only('no_ktp', 'remember'));
     }
