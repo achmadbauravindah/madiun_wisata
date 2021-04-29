@@ -4,7 +4,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LapakUMKMController;
 use App\Http\Controllers\LodgerController;
+use App\Http\Controllers\MabourController;
+use App\Http\Controllers\PenginapanController;
+use App\Http\Controllers\WisataController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,8 +27,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+// Auth Route (Login and Register)
 Auth::routes();
 
+// Disable Default Auth from Laravel UI Auth
 Route::get('/login', [HomeController::class, 'disableDefaultAuth']);
 Route::get('/register', [HomeController::class, 'disableDefaultAuth']);
 
@@ -54,3 +61,12 @@ Route::group(['middleware' => 'auth:lodger'], function () {
 });
 
 Route::get('logout', [LoginController::class, 'logout']);
+Route::get('logout', [LoginController::class, 'logout']);
+
+
+
+// MAIN ROUTE
+Route::get('wisata', [WisataController::class, 'index']);
+Route::get('penginapan', [PenginapanController::class, 'index']);
+Route::get('lapakUMKM', [LapakUMKMController::class, 'index']);
+Route::get('mabour', [MabourController::class, 'index']);
