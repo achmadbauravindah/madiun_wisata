@@ -29,10 +29,11 @@
     </div>
 
     <div class="row">
-
         @forelse ( $wisatas as $wisata )
         <div class="col-md-4">
             <div class="card mb-4">
+                {{-- Untuk menampilkan gambar, ini akan ditampilkan melalui folder storage --}}
+                <img class="card-img-top" src="{{  asset($wisata->takeImage()) }}">
                 <div class="card-header">
                     {{ $wisata->nama }}
                 </div>

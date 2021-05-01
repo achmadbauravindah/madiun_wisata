@@ -42,10 +42,16 @@ class WisataController extends Controller
      */
     public function store(RequestsWisata $request)
     {
-        // Validasi terjadi di RequestWisata (file Request)
         $attr = $request->all();
-        $attr['slug'] = \Str::slug($request->nama);
+        $slug = \Str::slug($request->nama);
+        $attr['slug'] = $slug;
 
+        // Menyimpan File gambar
+        $gambar = request()->file('gambar');
+        $gambarUrl = $gambar->storeAs("images/wisatas", "{$slug}.{$gambar->extension()}");
+        $attr['gambar'] = $gambarUrl;
+
+        // Validasi terjadi di RequestWisata (file Request)
         Wisata::create($attr);
 
         session()->flash('success', 'The post was created');

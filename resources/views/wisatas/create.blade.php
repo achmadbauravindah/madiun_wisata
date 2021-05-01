@@ -16,7 +16,7 @@
 
                 <div class="card-body   ">
 
-                    <form action="{{ route('wisatas.store') }}" method="post">
+                    <form action="{{ route('wisatas.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         {{-- Isi dari semua form berada pada file form-control --}}
                         <div class="form-group">
@@ -34,8 +34,11 @@
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <input type="text" name="deskripsi" id="deskripsi" class="form-control"
-                                value="{{ old('deskripsi')??$wisata->deskripsi }}">
+
+                            <textarea class="form-control" name="deskripsi" id="deskripsi"
+                                rows="4">{{ old('deskripsi') ?? $wisata->deskripsi }}</textarea>
+                            {{-- <input type=" text" name="deskripsi" id="deskripsi" class="form-control" rows="5"
+                                value="{{ old('deskripsi')??$wisata->deskripsi }}"> --}}
                             {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
                             @error('deskripsi')
                             <div class="mt-2 text-danger">
@@ -60,7 +63,7 @@
                         </div>
                         <div class="form-group">
                             <label for="gambar">gambar Wisata</label>
-                            <input type="text" name="gambar" id="gambar" class="form-control"
+                            <input type="file" name="gambar" id="gambar" class="form-control"
                                 value="{{ old('gambar')??$wisata->gambar }}">
                             {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
                             @error('gambar')

@@ -12,4 +12,10 @@ class Wisata extends Model
     protected $fillable = [
         'nama', 'slug', 'deskripsi', 'lokasi', 'gambar',
     ];
+
+    public function takeImage()
+    {
+        // dd($this->gambar);
+        return "/storage/" . $this->gambar;
+    }
 }
