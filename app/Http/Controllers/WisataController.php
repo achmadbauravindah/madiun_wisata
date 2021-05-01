@@ -1,9 +1,14 @@
 <?php
 
+namespace App\Http\Controllers\Auth;
+// For Auth
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Wisata as RequestsWisata;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
+use Auth;
+
 
 class WisataController extends Controller
 {
@@ -14,7 +19,9 @@ class WisataController extends Controller
      */
     public function index()
     {
-        return view('wisata');
+        $user = Auth::user();
+        $wisatas =  Wisata::latest()->paginate(8);
+        return view('wisatas.index', compact('wisatas'));
     }
 
     /**
@@ -22,9 +29,9 @@ class WisataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Wisata $wisata)
     {
-        //
+        return view('wisatas.create', compact('wisata'));
     }
 
     /**
@@ -33,9 +40,16 @@ class WisataController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestsWisata $request)
     {
-        //
+        // Validasi terjadi di RequestWisata (file Request)
+        $attr = $request->all();
+        $attr['slug'] = \Str::slug($request->nama);
+
+        Wisata::create($attr);
+
+        session()->flash('success', 'The post was created');
+        return redirect(route('wisatas.create'));
     }
 
     /**
@@ -46,7 +60,11 @@ class WisataController extends Controller
      */
     public function show(Wisata $wisata)
     {
-        //
+        if (!$wisata) {
+            abort(404);
+        }
+
+        return view('wisatas.show', compact('wisata'));
     }
 
     /**

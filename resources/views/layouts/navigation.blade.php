@@ -12,16 +12,18 @@
                     <a class="nav-link{{ request()->is('/') ? ' active':''}}" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('wisata') ? ' active':''}}" href="/wisata">Tempat Wisata</a>
+                    <a class="nav-link{{ request()->is('wisatas') ? ' active':''}}" href="/wisatas">Tempat
+                        Wisata</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('penginapan') ? ' active':''}}" href="/penginapan">Penginapan</a>
+                    <a class="nav-link{{ request()->is('penginapans') ? ' active':''}}"
+                        href="/penginapans">Penginapan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('lapakUMKM') ? ' active':''}}" href="/lapakUMKM">Lapak UMKM</a>
+                    <a class="nav-link{{ request()->is('lapakumkms') ? ' active':''}}" href="/lapakumkms">Lapak UMKM</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('mabour') ? ' active':''}}" href="/mabour">Mabour</a>
+                    <a class="nav-link{{ request()->is('mabours') ? ' active':''}}" href="/mabours">Mabour</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">

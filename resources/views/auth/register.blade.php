@@ -23,7 +23,7 @@
                                 <div class="col-md-6">
                                     <input id="nama" type="text"
                                         class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                        value="{{ old('nama') }}" required autocomplete="nama" autofocus>
+                                        value="{{ old('nama') }}" autocomplete="nama" autofocus>
 
                                     @error('nama')
                                     <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                                 <div class="col-md-6">
                                     <input id="no_ktp" type="text"
                                         class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp"
-                                        value="{{ old('no_ktp') }}" required autocomplete="no_ktp">
+                                        value="{{ old('no_ktp') }}" autocomplete="no_ktp" maxlength="16">
 
                                     @error('no_ktp')
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                                 <div class="col-md-6">
                                     <input id="no_telp" type="text"
                                         class="form-control @error('no_telp') is-invalid @enderror" name="no_telp"
-                                        value="{{ old('no_telp') }}" required autocomplete="no_telp">
+                                        value="{{ old('no_telp') }}" autocomplete="no_telp">
 
                                     @error('no_telp')
                                     <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
                                 <div class="col-md-6">
                                     <input id="no_wa" type="text"
                                         class="form-control @error('no_wa') is-invalid @enderror" name="no_wa"
-                                        value="{{ old('no_wa') }}" required autocomplete="no_wa">
+                                        value="{{ old('no_wa') }}" autocomplete="no_wa">
 
                                     @error('no_wa')
                                     <span class="invalid-feedback" role="alert">
@@ -90,7 +90,7 @@
                                 <div class="col-md-6">
                                     <input id="alamat" type="text"
                                         class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                        value="{{ old('alamat') }}" required autocomplete="alamat">
+                                        value="{{ old('alamat') }}" autocomplete="alamat">
 
                                     @error('alamat')
                                     <span class="invalid-feedback" role="alert">
@@ -108,7 +108,7 @@
                                 <div class="col-md-6">
                                     <input id="username" type="text"
                                         class="form-control @error('username') is-invalid @enderror" name="username"
-                                        value="{{ old('username') }}" required autocomplete="username">
+                                        value="{{ old('username') }}" autocomplete="username">
 
                                     @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -127,7 +127,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
+                                        autocomplete="new-password">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -143,7 +143,7 @@
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password">
+                                        name="password_confirmation" autocomplete="new-password">
                                 </div>
                             </div>
 

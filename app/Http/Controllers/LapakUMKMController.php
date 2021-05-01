@@ -1,11 +1,17 @@
 <?php
 
+// namespace App\Http\Controllers\Auth;
+
 namespace App\Http\Controllers;
 
-use App\Models\LapakUMKM;
-use Illuminate\Http\Request;
 
-class LapakUMKMController extends Controller
+
+
+use App\Models\Lapakumkm;
+use Illuminate\Http\Request;
+use Auth;
+
+class LapakumkmController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +20,9 @@ class LapakUMKMController extends Controller
      */
     public function index()
     {
-        return view('lapakUMKM');
+        $user = Auth::user();
+        $wisatas =  Lapakumkm::latest()->paginate(8);
+        return view('lapakumkm', compact('wisatas'));
     }
 
     /**
@@ -41,10 +49,10 @@ class LapakUMKMController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\LapakUMKM  $lapakUMKM
+     * @param  \App\Models\Lapakumkm  $lapakumkm
      * @return \Illuminate\Http\Response
      */
-    public function show(LapakUMKM $lapakUMKM)
+    public function show(Lapakumkm $lapakumkm)
     {
         //
     }
@@ -52,10 +60,10 @@ class LapakUMKMController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\LapakUMKM  $lapakUMKM
+     * @param  \App\Models\Lapakumkm  $lapakumkm
      * @return \Illuminate\Http\Response
      */
-    public function edit(LapakUMKM $lapakUMKM)
+    public function edit(Lapakumkm $lapakumkm)
     {
         //
     }
@@ -64,10 +72,10 @@ class LapakUMKMController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LapakUMKM  $lapakUMKM
+     * @param  \App\Models\Lapakumkm  $lapakumkm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LapakUMKM $lapakUMKM)
+    public function update(Request $request, Lapakumkm $lapakumkm)
     {
         //
     }
@@ -75,10 +83,10 @@ class LapakUMKMController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\LapakUMKM  $lapakUMKM
+     * @param  \App\Models\Lapakumkm  $lapakumkm
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LapakUMKM $lapakUMKM)
+    public function destroy(Lapakumkm $lapakumkm)
     {
         //
     }

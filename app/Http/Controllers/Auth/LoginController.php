@@ -36,7 +36,7 @@ class LoginController extends Controller
      * @return void
      */
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
@@ -54,7 +54,6 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
-
             return redirect()->intended('/admin');
         }
         return back()->withInput($request->only('username', 'remember'));
@@ -74,6 +73,7 @@ class LoginController extends Controller
             'no_ktp'   => 'required',
             'password' => 'required|min:6'
         ]);
+
 
         if (Auth::guard('lodger')->attempt(['no_ktp' => $request->no_ktp, 'password' => $request->password], $request->get('remember'))) {
 

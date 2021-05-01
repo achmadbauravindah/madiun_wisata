@@ -111,7 +111,7 @@ class RegisterController extends Controller
         // dd($request->no_ktp);
         $request->validate([
             'nama' => 'required|string|max:255',
-            'no_ktp' => 'required|string|max:16|unique:lodgers',
+            'no_ktp' => 'required|string|min:16|unique:lodgers',
             'password' => 'required|string|min:6|confirmed',
             'no_telp' => 'required|string|max:20',
             'no_wa' => 'required|string|max:20',

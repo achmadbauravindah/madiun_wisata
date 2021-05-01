@@ -9,6 +9,7 @@ use App\Http\Controllers\LodgerController;
 use App\Http\Controllers\MabourController;
 use App\Http\Controllers\PenginapanController;
 use App\Http\Controllers\WisataController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,10 +26,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Auth Route (Login and Register)
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Auth::routes();
 
 // Disable Default Auth from Laravel UI Auth
@@ -41,7 +42,7 @@ Route::get('/login/lodger', [LoginController::class, 'showLodgerLoginForm']);
 Route::get('/register/admin', [RegisterController::class, 'showAdminRegisterForm']);
 Route::get('/register/lodger', [RegisterController::class, 'showLodgerRegisterForm']);
 
-Route::post('/login/admin', [LoginController::class, 'adminLogin']);
+Route::post('/login/admin', [LoginController::class, 'adminLogin'])->name('login.admin');
 Route::post('/login/lodger', [LoginController::class, 'lodgerLogin']);
 Route::post('/register/admin', [RegisterController::class, 'createAdmin']);
 Route::post('/register/lodger', [RegisterController::class, 'createLodger']);
@@ -49,9 +50,21 @@ Route::post('/register/lodger', [RegisterController::class, 'createLodger']);
 
 // Middleware Admin
 Route::group(['middleware' => 'auth:admin'], function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
-    // Route::view('/admin', 'admin');
-    Route::get('/admin', [AdminController::class, 'show'])->name('admin');
+    // Wisatas
+    Route::get('/admin/wisatas', [WisataController::class, 'index'])->name('admin.wisatas');
+    Route::get('/admin/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
+    Route::post('/admin/wisatas/store', [WisataController::class, 'store'])->name('wisatas.store');
+
+    // Penginapans
+    Route::get('/admin/penginapans', [PenginapanController::class, 'index'])->name('admin.penginapans');
+
+    // Penginapans
+    Route::get('/admin/lapakumkms', [LapakUMKMController::class, 'index'])->name('admin.lapakumkms');
+
+    // Penginapans
+    Route::get('/admin/mabours', [MabourController::class, 'index'])->name('admin.mabours');
 });
 
 // Middleware Lodger
@@ -66,7 +79,12 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 
 // MAIN ROUTE
-Route::get('wisata', [WisataController::class, 'index']);
-Route::get('penginapan', [PenginapanController::class, 'index']);
-Route::get('lapakUMKM', [LapakUMKMController::class, 'index']);
-Route::get('mabour', [MabourController::class, 'index']);
+// Wisatas
+Route::get('/wisatas', [WisataController::class, 'index'])->name('wisatas');
+Route::get('/wisatas/{wisata:slug}', [WisataController::class, 'show']);
+
+
+// Sekk
+Route::get('/penginapans', [PenginapanController::class, 'index']);
+Route::get('/lapakumkms', [LapakUMKMController::class, 'index']);
+Route::get('/mabours', [MabourController::class, 'index']);

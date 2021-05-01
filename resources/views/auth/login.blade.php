@@ -24,7 +24,7 @@
                                 <div class="col-md-6">
                                     <input id="no_ktp" type="text"
                                         class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp"
-                                        value="{{ old('no_ktp') }}" required autocomplete="no_ktp" autofocus>
+                                        value="{{ old('no_ktp') }}" autocomplete="no_ktp" autofocus maxlength="16">
 
                                     @error('no_ktp')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
                                 <div class="col-md-6">
                                     <input id="username" type="text"
                                         class="form-control @error('username') is-invalid @enderror" name="username"
-                                        value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                        value="{{ old('username') }}" autocomplete="username" autofocus>
 
                                     @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password">
+                                        autocomplete="current-password">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">

@@ -1,8 +1,17 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+namespace App\Http\Controllers\Auth;
+
+namespace App\Http\Controllers;
+
+use App\Models\Admin;
+// use Illuminate\Http\Request;
+use Auth;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class HomeController extends Controller
 {
@@ -22,9 +31,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index(Admin $admin, Request $request)
     {
-        return view('home');
+        $user = Auth::user();
+        return view('home', compact('user'));
     }
 
     function disableDefaultAuth()

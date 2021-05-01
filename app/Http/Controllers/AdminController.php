@@ -17,6 +17,8 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        return view('admin', compact('user'));
     }
 
     /**
@@ -48,8 +50,6 @@ class AdminController extends Controller
      */
     public function show(Admin $admin)
     {
-        $user = Auth::user();
-        return view('admin', compact('user'));
     }
 
     /**
