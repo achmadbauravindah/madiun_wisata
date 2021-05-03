@@ -11,9 +11,9 @@
                 <div class="card-body">
                     Selamat Datang Lodger, Silahkan Pilih
                     <br>
-                    <a href="/login/lodger">Login Lodgers</a>
+                    <a href="{{ route('showLodgerLoginForm') }}">Login Lodgers</a>
                     <br>
-                    <a href="/register/lodger">Sign Up Lodgers</a>
+                    <a href="{{ route('showLodgerRegisterForm') }}">Sign Up Lodgers</a>
                 </div>
             </div>
         </div>

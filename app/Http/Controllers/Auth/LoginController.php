@@ -83,7 +83,6 @@ class LoginController extends Controller
         if (Auth::guard('lodger')->attempt(['no_ktp' => $request->no_ktp, 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/lodger');
-            // return redirect()->intended('/lodger');
         }
         return back()->withInput($request->only('no_ktp', 'remember'));
     }

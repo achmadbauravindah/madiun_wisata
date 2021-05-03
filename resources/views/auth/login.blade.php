@@ -94,14 +94,14 @@
                                         {{ __('Login') }}
                                     </button>
                                     @if(request()->is('login/admin'))
-                                    <a class="btn btn-link" href="{{ route('showRegister.admin') }}">
+                                    <a class="btn btn-link" href="{{ route('showAdminRegisterForm') }}">
                                         {{ __('Sign Up?') }}
                                     </a>
                                     <a class="btn btn-link" href="{{ route('home') }}">
                                         {{ __('Bukan Admin?') }}
                                     </a>
                                     @else
-                                    <a class="btn btn-link" href="{{ route('showRegister.lodger') }}">
+                                    <a class="btn btn-link" href="{{ route('showLodgerRegisterForm') }}">
                                         {{ __('Sign Up?') }}
                                     </a>
                                     @endif

@@ -38,9 +38,13 @@
             <ul class="navbar-nav ml-auto">
                 <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
             </ul>
+            @elseif (auth()->guard('lodger')->check())
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout Lodger') }}</a>
+            </ul>
             @else
             <ul class="navbar-nav ml-auto">
-                <a class="nav-link" href="{{ route('showLogin.admin') }}">{{ __('Login As Admin') }}</a>
+                <a class="nav-link" href="{{ route('showAdminLoginForm') }}">{{ __('Login As Admin') }}</a>
             </ul>
             @endif
         </div>

@@ -1,5 +1,4 @@
-@extends('layouts.auth')
-
+@extends('layouts.app')
 
 {{-- {{ dd(auth()->user()) }} --}}
 
