@@ -54,8 +54,8 @@ class WisataController extends Controller
         // Validasi terjadi di RequestWisata (file Request)
         Wisata::create($attr);
 
-        session()->flash('success', 'The post was created');
-        return redirect(route('wisatas.create'));
+        session()->flash('success', 'Wisata telah ditambahkan');
+        return redirect(route('wisatas'));
     }
 
     /**
@@ -81,7 +81,7 @@ class WisataController extends Controller
      */
     public function edit(Wisata $wisata)
     {
-        //
+        return view('wisatas.edit', compact('wisata'));
     }
 
     /**
@@ -93,7 +93,28 @@ class WisataController extends Controller
      */
     public function update(Request $request, Wisata $wisata)
     {
-        //
+
+        $attr = $request->all();
+        $slug = \Str::slug($request->nama);
+
+        $attr['slug'] = $slug;
+
+        // Jika tidak ada gambar maka ambil gambar sebelumnya
+        $gambar = request()->file('gambar');
+        if (isset($gambar)) {
+            \Storage::delete($wisata->gambar);
+            $gambarUrl = $gambar->storeAs("images/wisatas", "{$slug}.{$gambar->extension()}");
+        } else {
+            $gambarUrl = $wisata->gambar;
+        }
+
+        $attr['gambar'] = $gambarUrl;
+
+        // Validasi terjadi di RequestWisata (file Request)
+        $wisata->update($attr);
+
+        session()->flash('success', 'Wisata berhasil diedit');
+        return redirect(route('wisatas'));
     }
 
     /**
@@ -104,6 +125,9 @@ class WisataController extends Controller
      */
     public function destroy(Wisata $wisata)
     {
-        //
+        $wisata->delete();
+        \Storage::delete($wisata->gambar);
+        session()->flash('success', 'Wisata berhasil dihapus');
+        return redirect(route('wisatas'));
     }
 }

@@ -47,9 +47,9 @@ Route::get('/register/admin', [RegisterController::class, 'showAdminRegisterForm
 Route::get('/register/lodger', [RegisterController::class, 'showLodgerRegisterForm'])->name('showRegister.lodger');
 
 Route::post('/login/admin', [LoginController::class, 'adminLogin'])->name('login.admin');
-Route::post('/login/lodger', [LoginController::class, 'lodgerLogin']);
-Route::post('/register/admin', [RegisterController::class, 'createAdmin']);
-Route::post('/register/lodger', [RegisterController::class, 'createLodger']);
+Route::post('/login/lodger', [LoginController::class, 'lodgerLogin'])->name('login.lodger');
+Route::post('/register/admin', [RegisterController::class, 'createAdmin'])->name('login.admin');
+Route::post('/register/lodger', [RegisterController::class, 'createLodger'])->name('login.admin');
 
 
 // WISATAS
@@ -64,12 +64,12 @@ Route::post('/register/lodger', [RegisterController::class, 'createLodger']);
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     // Wisatas
-    Route::get('/admin/wisatas', [WisataController::class, 'index'])->name('admin.wisatas');
-    Route::get('admin/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
-    Route::post('admin/wisatas/store', [WisataController::class, 'store'])->name('wisatas.store');
-    Route::get('admin/wisatas/{wisata:slug}/edit', [WisataController::class, 'edit'])->name('wisatas.edit');
-    Route::patch('admin/wisatas/{wisata:slug}/update', [WisataController::class, 'update'])->name('wisatas.update');
-    Route::delete('admin/wisatas/{wisata:slug}/delete', [WisataController::class, 'destroy'])->name('wisatas.delete');
+    // Route::get('/wisatas', [WisataController::class, 'index'])->name('admin.wisatas');
+    Route::get('/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
+    Route::post('/wisatas/store', [WisataController::class, 'store'])->name('wisatas.store');
+    Route::get('/wisatas/{wisata:slug}/edit', [WisataController::class, 'edit'])->name('wisatas.edit');
+    Route::patch('/wisatas/{wisata:slug}/update', [WisataController::class, 'update'])->name('wisatas.update');
+    Route::delete('/wisatas/{wisata:slug}/delete', [WisataController::class, 'destroy'])->name('wisatas.delete');
 
     // Penginapans
     Route::get('/admin/penginapans', [PenginapanController::class, 'index'])->name('admin.penginapans');

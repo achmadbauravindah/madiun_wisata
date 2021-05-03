@@ -34,9 +34,15 @@
                     <a class="nav-link{{ request()->is('mabours') ? ' active':''}}" href="/mabours">Mabour</a>
                 </li>
             </ul>
+            @if (auth()->guard('admin')->check())
             <ul class="navbar-nav ml-auto">
-                <a class="nav-link" href="/login/admin">{{ __('Login As Admin') }}</a>
+                <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
             </ul>
+            @else
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-link" href="{{ route('showLogin.admin') }}">{{ __('Login As Admin') }}</a>
+            </ul>
+            @endif
         </div>
     </div>
 </nav>

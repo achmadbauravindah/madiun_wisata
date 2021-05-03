@@ -1,9 +1,6 @@
 @extends('layouts.app')
 {{-- @extends('layouts.auth') --}}
 
-{{-- {{ dd(auth()->user()->nama) }} --}}
-<a href="{{ route('home') }}">HOME</a>
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
