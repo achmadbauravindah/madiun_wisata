@@ -38,8 +38,12 @@ class LoginController extends Controller
 
     public function __construct(Request $request)
     {
+        // Ini digunakan untuk melindungi Controller ini di middleware
+        // Artinya gini, jika ada admin atau lodger yang sudah login, maka
+        // akan dilindungi oleh midlewarenya, kecuali kalau dia logout (tidak login sama sekali)
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:lodger')->except('logout');
     }
 
     public function showAdminLoginForm()
@@ -54,6 +58,7 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
+            // dd(auth()->guard('admin')->check());
             return redirect()->intended('/admin');
         }
         return back()->withInput($request->only('username', 'remember'));

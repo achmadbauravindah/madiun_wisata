@@ -28,19 +28,23 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Auth Route (Login and Register)
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+// Auth Route (Login and Register)
 Auth::routes();
 
+// AUTHENTICATION
 // Disable Default Auth from Laravel UI Auth
 Route::get('/login', [HomeController::class, 'disableDefaultAuth']);
 Route::get('/register', [HomeController::class, 'disableDefaultAuth']);
 
 
-Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
-Route::get('/login/lodger', [LoginController::class, 'showLodgerLoginForm']);
-Route::get('/register/admin', [RegisterController::class, 'showAdminRegisterForm']);
-Route::get('/register/lodger', [RegisterController::class, 'showLodgerRegisterForm']);
+Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm'])->name('showLogin.admin');
+Route::get('/login/lodger', [LoginController::class, 'showLodgerLoginForm'])->name('showLogin.lodger');
+Route::get('/register/admin', [RegisterController::class, 'showAdminRegisterForm'])->name('showRegister.admin');
+Route::get('/register/lodger', [RegisterController::class, 'showLodgerRegisterForm'])->name('showRegister.lodger');
 
 Route::post('/login/admin', [LoginController::class, 'adminLogin'])->name('login.admin');
 Route::post('/login/lodger', [LoginController::class, 'lodgerLogin']);
@@ -48,14 +52,24 @@ Route::post('/register/admin', [RegisterController::class, 'createAdmin']);
 Route::post('/register/lodger', [RegisterController::class, 'createLodger']);
 
 
+// WISATAS
+
 // Middleware Admin
+// Route::middleware(['auth', 'admin'])->group(function () {
+// });
+
+
+
+
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-
     // Wisatas
     Route::get('/admin/wisatas', [WisataController::class, 'index'])->name('admin.wisatas');
-    Route::get('/admin/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
-    Route::post('/admin/wisatas/store', [WisataController::class, 'store'])->name('wisatas.store');
+    Route::get('admin/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
+    Route::post('admin/wisatas/store', [WisataController::class, 'store'])->name('wisatas.store');
+    Route::get('admin/wisatas/{wisata:slug}/edit', [WisataController::class, 'edit'])->name('wisatas.edit');
+    Route::patch('admin/wisatas/{wisata:slug}/update', [WisataController::class, 'update'])->name('wisatas.update');
+    Route::delete('admin/wisatas/{wisata:slug}/delete', [WisataController::class, 'destroy'])->name('wisatas.delete');
 
     // Penginapans
     Route::get('/admin/penginapans', [PenginapanController::class, 'index'])->name('admin.penginapans');
@@ -66,6 +80,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
     // Penginapans
     Route::get('/admin/mabours', [MabourController::class, 'index'])->name('admin.mabours');
 });
+Route::get('/wisatas', [WisataController::class, 'index'])->name('wisatas');
+Route::get('wisatas/{wisata:slug}', [WisataController::class, 'show']);
 
 // Middleware Lodger
 Route::group(['middleware' => 'auth:lodger'], function () {
@@ -80,11 +96,9 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 // MAIN ROUTE
 // Wisatas
-Route::get('/wisatas', [WisataController::class, 'index'])->name('wisatas');
-Route::get('/wisatas/{wisata:slug}', [WisataController::class, 'show']);
+Route::get('/penginapans', [PenginapanController::class, 'index']);
 
 
 // Sekk
-Route::get('/penginapans', [PenginapanController::class, 'index']);
 Route::get('/lapakumkms', [LapakUMKMController::class, 'index']);
 Route::get('/mabours', [MabourController::class, 'index']);

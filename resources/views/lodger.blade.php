@@ -1,13 +1,7 @@
 @extends('layouts.auth')
 
-{{-- Ini terlalu ga rapi (harusnya navigasi ada di file app), ganti kalo nemu cara lain --}}
-@section('navigation')
-@if(request()->is('admin/*') and auth()->user())
-@include('layouts.navigation_admin')
-@elseif (!auth()->user())
-@include('layouts.navigation')
-@endif
-@stop
+
+{{-- {{ dd(auth()->user()) }} --}}
 
 @section('content')
 <div class="container">

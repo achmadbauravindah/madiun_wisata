@@ -8,9 +8,17 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 {{-- Untuk mengaktifkan navbar di tulisan akan dibuat kondisi, halaman apa yang aktif --}}
+
+                {{-- {{ dd((auth()->guard('admin')->check())) }} --}}
+                @if (auth()->guard('admin')->check())
+                <li class="nav-item">
+                    <a class="nav-link{{ request()->is('/') ? ' active':''}}" aria-current="page" href="/">Admin</a>
+                </li>
+                @else
                 <li class="nav-item">
                     <a class="nav-link{{ request()->is('/') ? ' active':''}}" aria-current="page" href="/">Home</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link{{ request()->is('wisatas') ? ' active':''}}" href="/wisatas">Tempat
                         Wisata</a>

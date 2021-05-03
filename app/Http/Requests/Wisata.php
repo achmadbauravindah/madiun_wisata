@@ -27,7 +27,7 @@ class Wisata extends FormRequest
             'nama' => 'required',
             'deskripsi' => 'required',
             'lokasi' => 'required',
-            'gambar' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
 
         ];
     }

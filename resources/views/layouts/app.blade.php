@@ -24,9 +24,11 @@
 
 <body>
     <div id="app">
-        {{-- @include('layouts.navigation') --}}
-        @yield('navigation')
+        {{-- Navigasi --}}
+        @include('layouts.navigation')
+
         <main class="py-4">
+            {{-- Content --}}
             @yield('content')
         </main>
     </div>
