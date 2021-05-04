@@ -14,7 +14,8 @@ class PenginapanController extends Controller
      */
     public function index()
     {
-        return view('penginapan');
+        $penginapans =  Penginapan::latest()->paginate(8);
+        return view('penginapans.index', compact('penginapans'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PenginapanController extends Controller
      */
     public function create()
     {
-        //
+        dd('wait');
     }
 
     /**
@@ -35,7 +36,7 @@ class PenginapanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('wait');
     }
 
     /**
@@ -46,7 +47,7 @@ class PenginapanController extends Controller
      */
     public function show(Penginapan $penginapan)
     {
-        //
+        dd('wait');
     }
 
     /**
@@ -57,7 +58,7 @@ class PenginapanController extends Controller
      */
     public function edit(Penginapan $penginapan)
     {
-        //
+        dd('wait');
     }
 
     /**
@@ -69,7 +70,7 @@ class PenginapanController extends Controller
      */
     public function update(Request $request, Penginapan $penginapan)
     {
-        //
+        dd('wait');
     }
 
     /**
@@ -80,6 +81,6 @@ class PenginapanController extends Controller
      */
     public function destroy(Penginapan $penginapan)
     {
-        //
+        dd('wait');
     }
 }

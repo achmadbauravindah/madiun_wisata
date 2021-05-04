@@ -85,7 +85,7 @@ class RegisterController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:admins',
+            'username' => 'required|string|alpha_num|min:5|max:25|unique:admins',
             'password' => 'required|string|min:6|confirmed',
         ]);
         Admin::create([

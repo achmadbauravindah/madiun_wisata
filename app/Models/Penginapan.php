@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Penginapan extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'lodger_id', 'nama', 'slug', 'lokasi', 'harga', 'spesifikasi', 'gambar', 'agree',
+    ];
+
+    public function lodger()
+    {
+        return $this->belongsTo(Lodger::class, 'lodger_id');
+    }
+
+    public function takeImage()
+    {
+        // dd($this->gambar);
+        return "/storage/" . $this->gambar;
+    }
 }

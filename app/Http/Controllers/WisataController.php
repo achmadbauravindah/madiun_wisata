@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 // For Auth
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Http\Requests\Wisata as RequestsWisata;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
-use Auth;
-
+// use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class WisataController extends Controller
 {
@@ -19,6 +21,7 @@ class WisataController extends Controller
      */
     public function index()
     {
+
         $user = Auth::user();
         $wisatas =  Wisata::latest()->paginate(8);
         return view('wisatas.index', compact('wisatas'));
@@ -43,7 +46,7 @@ class WisataController extends Controller
     public function store(RequestsWisata $request)
     {
         $attr = $request->all();
-        $slug = \Str::slug($request->nama);
+        $slug = Str::slug($request->nama);
         $attr['slug'] = $slug;
 
         // Menyimpan File gambar
@@ -95,14 +98,14 @@ class WisataController extends Controller
     {
 
         $attr = $request->all();
-        $slug = \Str::slug($request->nama);
+        $slug = Str::slug($request->nama);
 
         $attr['slug'] = $slug;
 
         // Jika tidak ada gambar maka ambil gambar sebelumnya
         $gambar = request()->file('gambar');
         if (isset($gambar)) {
-            \Storage::delete($wisata->gambar);
+            Storage::delete($wisata->gambar);
             $gambarUrl = $gambar->storeAs("images/wisatas", "{$slug}.{$gambar->extension()}");
         } else {
             $gambarUrl = $wisata->gambar;
@@ -126,7 +129,7 @@ class WisataController extends Controller
     public function destroy(Wisata $wisata)
     {
         $wisata->delete();
-        \Storage::delete($wisata->gambar);
+        Storage::delete($wisata->gambar);
         session()->flash('success', 'Wisata berhasil dihapus');
         return redirect(route('wisatas'));
     }

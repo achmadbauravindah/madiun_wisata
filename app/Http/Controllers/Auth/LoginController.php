@@ -54,7 +54,7 @@ class LoginController extends Controller
     public function adminLogin(Request $request)
     {
         $this->validate($request, [
-            'username'   => 'required',
+            'username'   => 'required|alpha_num|min:5',
             'password' => 'required|min:6'
         ]);
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
@@ -75,7 +75,7 @@ class LoginController extends Controller
     public function lodgerLogin(Request $request)
     {
         $this->validate($request, [
-            'no_ktp'   => 'required',
+            'no_ktp'   => 'required|numeric|min:16',
             'password' => 'required|min:6'
         ]);
 
