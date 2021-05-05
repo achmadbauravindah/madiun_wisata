@@ -9,9 +9,11 @@
 
                 <div class="card-body">
                     @isset($url)
-                    <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}">
+                    <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}"
+                        enctype="multipart/form-data">
                         @else
-                        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}"
+                            enctype="multipart/form-data">
                             @endisset
                             @csrf
 
@@ -35,6 +37,22 @@
 
                             @if(request()->is('register/lodger'))
                             <div class="form-group row">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="text"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" autocomplete="email">
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="no_ktp"
                                     class="col-md-4 col-form-label text-md-right">{{ __('No. KTP') }}</label>
 
@@ -50,6 +68,23 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="ktp_img"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Bukti Foto KTP') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="ktp_img" type="file"
+                                        class="form-control @error('no_ktp') is-invalid @enderror" name="ktp_img"
+                                        value="{{ old('ktp_img') }}" autocomplete="ktp_img">
+
+                                    @error('ktp_img')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="no_telp"
                                     class="col-md-4 col-form-label text-md-right">{{ __('No. Telp') }}</label>

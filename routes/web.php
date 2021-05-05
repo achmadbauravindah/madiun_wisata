@@ -87,6 +87,13 @@ Route::group(['middleware' => 'auth:admin'], function () {
 Route::group(['middleware' => 'auth:lodger'], function () {
 
     Route::get('/lodger', [LodgerController::class, 'show'])->name('lodger');
+
+    // penginapans
+    Route::get('/penginapans/create', [PenginapanController::class, 'create'])->name('penginapans.create');
+    Route::post('/penginapans/store', [PenginapanController::class, 'store'])->name('penginapans.store');
+    Route::get('/penginapans/{penginapan:slug}/edit', [PenginapanController::class, 'edit'])->name('penginapans.edit');
+    Route::patch('/penginapans/{penginapan:slug}/update', [PenginapanController::class, 'update'])->name('penginapans.update');
+    Route::delete('/penginapans/{penginapan:slug}/delete', [PenginapanController::class, 'destroy'])->name('penginapans.delete');
 });
 
 

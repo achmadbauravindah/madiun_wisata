@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+    @if (auth()->guard('lodger')->check())
+    FOTO KTP
+    <img class="card-img-top" src="{{  asset(auth()->guard('lodger')->user()->ktp_img) }}">
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

@@ -18,18 +18,18 @@
                             @endisset
                             @csrf
 
-                            {{-- Lodger input no_ktp --}}
+                            {{-- Lodger input email --}}
                             @if(request()->is('login/lodger'))
                             <div class="form-group row">
-                                <label for="no_ktp"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('No. KTP') }}</label>
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="no_ktp" type="text"
-                                        class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp"
-                                        value="{{ old('no_ktp') }}" autocomplete="no_ktp" autofocus maxlength="16">
+                                    <input id="email" type="text"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" autocomplete="email" autofocus>
 
-                                    @error('no_ktp')
+                                    @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

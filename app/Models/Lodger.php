@@ -14,7 +14,7 @@ class Lodger extends Authenticatable
     protected $guard = 'lodgers';
 
     protected $fillable = [
-        'nama', 'no_ktp', 'password', 'no_telp', 'no_wa', 'alamat',
+        'nama', 'email', 'no_ktp', 'ktp_img', 'password', 'no_telp', 'no_wa', 'alamat',
     ];
 
     protected $hidden = [
@@ -24,5 +24,11 @@ class Lodger extends Authenticatable
     public function penginapans()
     {
         return $this->hasMany(Penginapan::class);
+    }
+
+    public function takeImage()
+    {
+        // dd($this->gambar);
+        return "/storage/" . $this->ktp_img;
     }
 }

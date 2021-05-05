@@ -108,10 +108,16 @@ class RegisterController extends Controller
      */
     protected function createLodger(Request $request)
     {
-        // dd($request->no_ktp);
+        // Get Path File For FOTO KTP (ktp_img)
+        $no_ktp = request()->no_ktp;
+        $ktp_img = request()->file('ktp_img');
+        $gambarUrl = $ktp_img->storeAs("images/ktps", "{$no_ktp}.{$ktp_img->extension()}");
+
         $request->validate([
             'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:lodgers',
             'no_ktp' => 'required|string|min:16|unique:lodgers',
+            'ktp_img' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
             'password' => 'required|string|min:6|confirmed',
             'no_telp' => 'required|string|max:20',
             'no_wa' => 'required|string|max:20',
@@ -119,12 +125,15 @@ class RegisterController extends Controller
         ]);
         Lodger::create([
             'nama' => $request->nama,
+            'email' => $request->email,
             'no_ktp' => $request->no_ktp,
+            'ktp_img' => $gambarUrl,
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,
             'no_wa' => $request->no_wa,
             'alamat' => $request->alamat,
         ]);
+
         return redirect()->intended('login/lodger');
     }
 }

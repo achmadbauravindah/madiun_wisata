@@ -16,7 +16,9 @@ class CreateLodgersTable extends Migration
         Schema::create('lodgers', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('email')->unique();
             $table->char('no_ktp', 16)->unique();
+            $table->string('ktp_img')->nullable();
             $table->string('password', 64);
             $table->string('no_telp', 20);
             $table->string('no_wa', 20);

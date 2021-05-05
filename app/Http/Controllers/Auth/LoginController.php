@@ -75,15 +75,14 @@ class LoginController extends Controller
     public function lodgerLogin(Request $request)
     {
         $this->validate($request, [
-            'no_ktp'   => 'required|numeric|min:16',
+            'email'   => 'required|email|string',
             'password' => 'required|min:6'
         ]);
 
 
-        if (Auth::guard('lodger')->attempt(['no_ktp' => $request->no_ktp, 'password' => $request->password], $request->get('remember'))) {
-
+        if (Auth::guard('lodger')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
             return redirect()->intended('/lodger');
         }
-        return back()->withInput($request->only('no_ktp', 'remember'));
+        return back()->withInput($request->only('email', 'remember'));
     }
 }

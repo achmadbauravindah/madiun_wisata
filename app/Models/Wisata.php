@@ -13,6 +13,11 @@ class Wisata extends Model
         'nama', 'slug', 'deskripsi', 'lokasi', 'gambar',
     ];
 
+    public function galeriwisatas()
+    {
+        return $this->hasMany(Galeriwisata::class);
+    }
+
     public function takeImage()
     {
         // dd($this->gambar);

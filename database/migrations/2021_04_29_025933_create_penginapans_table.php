@@ -24,6 +24,11 @@ class CreatePenginapansTable extends Migration
             $table->string('gambar')->nullable();
             $table->boolean('agree')->default(false);
             $table->timestamps();
+
+            // Foreign Constraint jika Lodger di hapus
+            $table->foreign('lodger_id')
+                ->references('id')->on('lodgers')
+                ->onDelete('cascade');
         });
     }
 

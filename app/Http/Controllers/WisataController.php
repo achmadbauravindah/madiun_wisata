@@ -6,10 +6,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Http\Requests\Wisata as RequestsWisata;
+use App\Models\Galeriwisata;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
-// use Auth;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class WisataController extends Controller
@@ -43,7 +44,7 @@ class WisataController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestsWisata $request)
+    public function store(RequestsWisata $request, Wisata $wisata)
     {
         $attr = $request->all();
         $slug = Str::slug($request->nama);
@@ -54,8 +55,22 @@ class WisataController extends Controller
         $gambarUrl = $gambar->storeAs("images/wisatas", "{$slug}.{$gambar->extension()}");
         $attr['gambar'] = $gambarUrl;
 
-        // Validasi terjadi di RequestWisata (file Request)
         Wisata::create($attr);
+
+
+        $lastIdWisata = DB::getPdo()->lastInsertId();
+        // GALERY
+        $galeries = request()->file('galeri');
+        foreach ($galeries as $galeri) {
+            $rand = rand(0, 10);
+            $galeriUrl = $galeri->storeAs("images/galerywisatas", "{$slug}.{$rand}.{$galeri->extension()}");
+            Galeriwisata::create([
+                'galeri' => $galeriUrl,
+                'wisata_id' => $lastIdWisata,
+            ]);
+        }
+
+        // Validasi terjadi di RequestWisata (file Request)
 
         session()->flash('success', 'Wisata telah ditambahkan');
         return redirect(route('wisatas'));

@@ -1,5 +1,5 @@
 {{-- Dibawah ini akan mengirimkan data title ke layouts/app --}}
-@extends('layouts/app', ['title' => 'Tambah Wisata'])
+@extends('layouts/app', ['title' => 'Tambah penginapan'])
 
 
 {{-- @section('title', 'Create Post') --}}
@@ -12,15 +12,15 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Tambah Wisata</div>
+                <div class="card-header">Tambah penginapan</div>
 
                 <div class="card-body   ">
 
-                    <form action="{{ route('wisatas.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('penginapans.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         {{-- Isi dari semua form berada pada file form-control --}}
                         <div class="form-group">
-                            <label for="nama">Nama Wisata</label>
+                            <label for="nama">Nama penginapan</label>
                             <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}">
                             @error('nama')
                             <div class="mt-2 text-danger">
@@ -29,18 +29,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
-
-                            <textarea class="form-control" name="deskripsi" id="deskripsi"
-                                rows="4">{{ old('deskripsi') }}</textarea>
-                            @error('deskripsi')
-                            <div class="mt-2 text-danger">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="lokasi">lokasi Wisata</label>
+                            <label for="lokasi">lokasi penginapan</label>
                             <input type="text" name="lokasi" id="lokasi" class="form-control"
                                 value="{{ old('lokasi') }}">
                             @error('lokasi')
@@ -50,7 +39,29 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="gambar">gambar Wisata</label>
+                            <label for="harga">harga</label>
+
+                            <textarea class="form-control" name="harga" id="harga"
+                                rows="4">{{ old('harga') }}</textarea>
+                            @error('harga')
+                            <div class="mt-2 text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="spesifikasi">spesifikasi</label>
+
+                            <textarea class="form-control" name="spesifikasi" id="spesifikasi"
+                                rows="4">{{ old('spesifikasi') }}</textarea>
+                            @error('spesifikasi')
+                            <div class="mt-2 text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="gambar">gambar penginapan</label>
                             <input type="file" name="gambar" id="gambar" class="form-control"
                                 value="{{ old('gambar') }}">
                             {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}

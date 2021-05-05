@@ -60,6 +60,17 @@
                             </div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="galeri">galeri Wisata</label>
+                            <input type="file" name="galeri[]" id="galeri" class="form-control"
+                                value="{{ old('galeri') }}" multiple="true">
+                            {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
+                            @error('galeri')
+                            <div class="mt-2 text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
 
 
