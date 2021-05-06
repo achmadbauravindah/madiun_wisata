@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MaxCountGaleries;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class Wisata extends FormRequest
 {
@@ -23,12 +25,13 @@ class Wisata extends FormRequest
      */
     public function rules()
     {
+        // $slug = \Str::slug(request()->nama);
         return [
-            'nama' => 'required',
+            'nama' => 'required|unique:wisatas,nama',
             'deskripsi' => 'required',
             'lokasi' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'galeri' => ['required', new MaxCountGaleries],
         ];
     }
 }

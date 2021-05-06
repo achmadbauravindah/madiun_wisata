@@ -67,7 +67,7 @@ class PenginapanController extends Controller
             abort(404);
         }
 
-        return view('penginapan.show', compact('penginapan'));
+        return view('penginapans.show', compact('penginapan'));
     }
 
     /**
@@ -78,7 +78,7 @@ class PenginapanController extends Controller
      */
     public function edit(Penginapan $penginapan)
     {
-        return view('penginapan.edit', compact('penginapan'));
+        return view('penginapans.edit', compact('penginapan'));
     }
 
     /**

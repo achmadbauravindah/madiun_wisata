@@ -41,7 +41,7 @@
                         {{-- parameter limit(datanya, maks karakter, karakter yang akan diganti)  --}}
                         {{ Str::limit($wisata->deskripsi,100,'...') }}
                     </div>
-                    <a href="wisatas/{{ $wisata->slug }}">Read more</a>
+                    <a href="wisatas/{{ $wisata->slug }}">Details</a>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     {{-- Published On {{ $post->created_at-> format("d M, Y")}} --}}

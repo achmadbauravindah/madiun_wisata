@@ -61,7 +61,41 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <input type="hidden" value="{{ $wisata->id }}" name="getWisataId">
+                        <label>galeri gambar </label>
+                        {{-- @foreach ( as ) --}}
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <img src="fdgffgdf">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-warning"><label for="galeriKe">Ganti</label></button>
+                                <input type="file" name="galeriKe" id="galeriKe" class="form-control" multiple="true"
+                                    style="display:none">
+                            </div>
+                            <div class="col-md-4">
+                                {{-- <form action="" method="post">
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </form> --}}
+                            </div>
+                        </div>
+                        {{-- @endforeach --}}
+
+                        <input type="file" name="galeri[]" id="galeri" class="form-control" multiple="true">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                {{-- <button class="btn btn-success"><label for="galeri">Tambah Galeri</label></button> --}}
+                                @error('galeri')
+                                <div class=" mt-2 text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-4">Simpan</button>
                     </form>
                 </div>
 

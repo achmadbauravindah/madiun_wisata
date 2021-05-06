@@ -1,15 +1,22 @@
 @extends('layouts.app')
+@section('title' , $wisata->nama)
 
-@section('title',$wisata->nama)
 
 @section('content')
 <div class="container">
-    {{-- Mengambil data slug  --}}
-    <h1>{{ $wisata->nama }}</h1>
+    <h1>Nama Wisata : </h1>
+    <p>{{ $wisata->nama }}</p>
+    <h1>Deskripsi : </h1>
     <p>{{ $wisata->deskripsi }}</p>
-    Gambar {{ $wisata->gambar }}
-    {{-- MODAL --}}
-
+    <h1>Gambar Branding :</h1>
+    <img src="{{ $wisata->takeImage() }}" width="150">
+    <h1>Lokasi : </h1>
+    <p>{{ $wisata->lokasi }}</p>
+    <h1>Gambar Galeri :</h1>
+    @foreach ($galeriewisatas as $galeriwisata)
+    {{-- {{ dd(asset('/storage/' . $galeriwisata->galeri)) }} --}}
+    <img src="{{ asset('/storage/' . $galeriwisata->galeri) }}" width="70">
+    @endforeach
 
 
 </div>
