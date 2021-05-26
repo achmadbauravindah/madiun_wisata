@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\MaxCountGaleries;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
@@ -31,7 +30,7 @@ class Wisata extends FormRequest
             'deskripsi' => 'required',
             'lokasi' => 'required',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-            'galeri' => ['required', new MaxCountGaleries],
+            'galeri' => ['required', 'array', 'max:6'],
         ];
     }
 }

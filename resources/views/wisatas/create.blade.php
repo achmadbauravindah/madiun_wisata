@@ -16,7 +16,8 @@
 
                 <div class="card-body   ">
 
-                    <form action="{{ route('wisatas.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('wisatas.store', $wisata->slug) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         {{-- Isi dari semua form berada pada file form-control --}}
                         <div class="form-group">
@@ -44,6 +45,15 @@
                             <input type="text" name="lokasi" id="lokasi" class="form-control"
                                 value="{{ old('lokasi') }}">
                             @error('lokasi')
+                            <div class="mt-2 text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="gmap">lokasi Wisata (GMAPS)</label>
+                            <input type="text" name="gmap" id="gmap" class="form-control" value="{{ old('gmap') }}">
+                            @error('gmap')
                             <div class="mt-2 text-danger">
                                 {{ $message }}
                             </div>

@@ -19,6 +19,7 @@ class CreateWisatasTable extends Migration
             $table->string('slug', 191)->unique();
             $table->text('deskripsi');
             $table->string('lokasi', 191);
+            $table->string('gmap');
             $table->string('gambar')->nullable();
             $table->timestamps();
         });

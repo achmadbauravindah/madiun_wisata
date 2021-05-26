@@ -15,10 +15,11 @@ class CreatePenginapansTable extends Migration
     {
         Schema::create('penginapans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lodger_id')->nullable();
+            $table->foreignId('lodger_id')->nullable()->constrained();
             $table->string('nama', 191);
             $table->string('slug', 191);
             $table->string('lokasi');
+            $table->string('gmap');
             $table->string('harga', 100);
             $table->text('spesifikasi');
             $table->string('gambar')->nullable();
@@ -26,9 +27,9 @@ class CreatePenginapansTable extends Migration
             $table->timestamps();
 
             // Foreign Constraint jika Lodger di hapus
-            $table->foreign('lodger_id')
-                ->references('id')->on('lodgers')
-                ->onDelete('cascade');
+            // $table->foreign('lodger_id')
+            //     ->references('id')->on('lodgers')
+            //     ->onDelete('cascade');
         });
     }
 

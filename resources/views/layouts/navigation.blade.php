@@ -1,52 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light custom-nav">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">{{ config('app.name', 'Laravel') }}</a>
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('images/ornamen/logoMW.png') }}" alt="logo madiun wisata" />
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                {{-- Untuk mengaktifkan navbar di tulisan akan dibuat kondisi, halaman apa yang aktif --}}
-
-                {{-- {{ dd((auth()->guard('admin')->check())) }} --}}
-                @if (auth()->guard('admin')->check())
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('/') ? ' active':''}}" aria-current="page" href="/">Admin</a>
+                    <a class="nav-link {{ request()->is('/') ? ' active':''}}" aria-current="page"
+                        href="{{ route('home') }}">Home</a>
                 </li>
-                @else
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('/') ? ' active':''}}" aria-current="page" href="/">Home</a>
-                </li>
-                @endif
-                <li class="nav-item">
-                    <a class="nav-link{{ request()->is('wisatas') ? ' active':''}}" href="/wisatas">Tempat
+                    <a class="nav-link {{ request()->is('wisatas') ? ' active':''}}"
+                        href="{{ route('wisatas') }}">Tempat
                         Wisata</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('penginapans') ? ' active':''}}"
-                        href="/penginapans">Penginapan</a>
+                    <a class="nav-link {{ request()->is('penginapans') ? ' active':''}}"
+                        href="{{ route('penginapans') }}">Penginapan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('lapakumkms') ? ' active':''}}" href="/lapakumkms">Lapak UMKM</a>
+                    <a class="nav-link{{ request()->is('lapakumkms') ? ' active':''}}"
+                        href="{{ route('lapakumkms') }}">Lapak UMKM</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('mabours') ? ' active':''}}" href="/mabours">Mabour</a>
+                    <a class="nav-link{{ request()->is('mabours') ? ' active':''}}" href="{{ 'mabours' }}">Mabour</a>
                 </li>
             </ul>
-            @if (auth()->guard('admin')->check())
-            <ul class="navbar-nav ml-auto">
-                <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
-            </ul>
-            @elseif (auth()->guard('lodger')->check())
-            <ul class="navbar-nav ml-auto">
-                <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout Lodger') }}</a>
-            </ul>
-            @else
-            <ul class="navbar-nav ml-auto">
-                <a class="nav-link" href="{{ route('showAdminLoginForm') }}">{{ __('Login As Admin') }}</a>
-            </ul>
-            @endif
         </div>
     </div>
 </nav>
+<!-- Akhir Navbar -->

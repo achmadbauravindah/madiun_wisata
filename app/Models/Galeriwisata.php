@@ -18,4 +18,9 @@ class Galeriwisata extends Model
     {
         return $this->belongsTo(Wisata::class, 'wisata_id');
     }
+    public function takeImage()
+    {
+        // dd($this->gambar);
+        return "/storage/" . $this->galeri;
+    }
 }

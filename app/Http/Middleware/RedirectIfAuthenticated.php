@@ -15,11 +15,11 @@ class RedirectIfAuthenticated
             return redirect('/');
         }
         if ($guard == "lodger" && Auth::guard($guard)->check()) {
-            return redirect('/lodger');
+            return redirect('/penginapan');
         }
-        // if (Auth::guard($guard)->check()) {
-        //     return redirect('/');
-        // }
+        if (Auth::guard($guard)->check()) {
+            return abort(403, "WHO ARE YOU?");
+        }
 
         return $next($request);
     }

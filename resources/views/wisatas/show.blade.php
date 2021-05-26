@@ -13,11 +13,9 @@
     <h1>Lokasi : </h1>
     <p>{{ $wisata->lokasi }}</p>
     <h1>Gambar Galeri :</h1>
-    @foreach ($galeriewisatas as $galeriwisata)
+    @foreach ($galeriwisatas as $galeriwisata)
     {{-- {{ dd(asset('/storage/' . $galeriwisata->galeri)) }} --}}
     <img src="{{ asset('/storage/' . $galeriwisata->galeri) }}" width="70">
     @endforeach
-
-
 </div>
 @endsection

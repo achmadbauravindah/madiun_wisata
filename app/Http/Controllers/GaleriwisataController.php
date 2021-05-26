@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galeriwisata;
+use App\Models\Wisata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GaleriwisataController extends Controller
 {
@@ -80,6 +82,13 @@ class GaleriwisataController extends Controller
      */
     public function destroy(Galeriwisata $galeriwisata)
     {
-        //
+        // Slug buat data di routenya
+        $slug = request()->getWisataSlug;
+        // Delete wisatas Storage
+        Storage::delete($galeriwisata->galeri);
+
+        // Delete wisatas Table
+        $galeriwisata->delete();
+        return redirect(route('wisatas.edit', $slug));
     }
 }

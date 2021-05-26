@@ -1,101 +1,83 @@
 @extends('layouts/app')
 
+@section('title', 'Wisata')
+
+@section('header')
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+<!-- AOS Animasi -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!-- custom CSS -->
+<link rel="stylesheet" href="CSS/penginapan.css" />
+@endsection
 @section('content')
-<div class="container">
-    @if (auth()->guard('lodger')->check())
-    FOTO KTP
-    <img class="card-img-top" src="{{  asset('storage/'.auth()->guard('lodger')->user()->ktp_img) }}">
-    @endif
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Penginapan</div>
-
-                <div class="card-body">
-                    Selamat Datang Lodger, Silahkan Pilih
-                    <br>
-                    <a href="{{ route('showLodgerLoginForm') }}">Login Lodgers</a>
-                    <br>
-                    <a href="{{ route('showLodgerRegisterForm') }}">Sign Up Lodgers</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- </div> --}}
-
-    {{-- <div class="container"> --}}
-    @if (session()->has('success'))
+<!-- Bagian Atas -->
+<div class="container atas">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-4 bg-info">
-                {{ request()->session()->get('success') }}
+        <!-- Penginapan Atas kiri -->
+        <div class="col-md-6">
+            <div class="custom-card p-md-4">
+                <h6>Anda memiliki penginapan di Kota Madiun?</h6>
+                <a class="linkhijau" href="{{ route('penginapans.create') }}">Promosikan</a>
+                <a class="linkabu ms-3" href="">Login</a>
             </div>
         </div>
+        <!-- Akhir Penginapan Atas kiri -->
+
+        <!-- Pencarian Atas kanan -->
+        <form class="col-md-6 d-flex align-items-center pencarian" method="POST">
+            <input class="form-control form-control-lg-2" type="text" placeholder="Temukan Penginapan di Madiun"
+                aria-label="default input example" />
+            <!-- Button cari -->
+            <button type="button" class="btn cta">Cari</button>
+        </form>
+        <!-- Akhir Pencarian Atas Kanan -->
     </div>
-    @endif
-    <div class="d-flex justify-content-between">
-        <div>
-            @if (auth()->guard('admin')->check())
-            <h1>All Penginapan, Halo admin {{ auth()->guard('admin')->user()->nama }}</h1>
-            @elseif (auth()->guard('lodger')->check())
-            <h1>All Penginapan, Halo lodger {{ auth()->guard('lodger')->user()->nama }}</h1>
-            @else
-            <h1>All Penginapan</h1>
-            @endif
-            <hr>
-        </div>
-        @if (auth()->guard('admin')->check() or auth()->guard('lodger')->check())
-        <div>
-            <a href="{{ route('penginapans.create') }}" class="btn btn-primary">Tambah Wisata</a>
-        </div>
-        @endif
-    </div>
-
-    <div class="row">
-        @forelse ( $penginapans as $penginapan )
-        <div class="col-md-4">
-            <div class="card mb-4">
-                {{-- Untuk menampilkan gambar, ini akan ditampilkan melalui folder storage --}}
-                <img class="card-img-top" src="{{  asset($penginapan->takeImage()) }}">
-                <div class="card-header">
-                    {{ $penginapan->nama }}
-                </div>
-                <div class="card-body">
-                    <div>
-                        {{-- parameter limit(datanya, maks karakter, karakter yang akan diganti)  --}}
-                        {{ Str::limit($penginapan->deskripsi,100,'...') }}
-                    </div>
-                    <a href="{{ route('penginapans.show', $penginapan->slug) }}">Read more</a>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    {{-- Published On {{ $post->created_at-> format("d M, Y")}} --}}
-                    Published On {{ $penginapan->created_at->diffForHumans()}}
-                    @if (auth()->guard('admin')->check() or auth()->guard('lodger')->check())
-                    <a href="{{ route('penginapans.edit', $penginapan->slug) }}" class="btn btn-success btn-sm">Edit</a>
-                    <form action="{{ route('penginapans.delete', $penginapan->slug) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        @empty
-        <div class="alert alert-warning">There is No penginapans.</div>
-        @endforelse
-
-        {{-- @endforeach --}}
-
-        {{-- Lanjutan pengecekan jika pake @if --}}
-        {{-- @else
-        < class="alert alert-info">There is No Posts.</>
-        @endif --}}
-
-    </div>
-    {{-- PAGINATION --}}
-    {{ $penginapans->links('pagination::bootstrap-4') }}
 </div>
+<!-- Akhir Bagian Atas -->
 
-@stop()
+<!-- Semua Penginapan -->
+<div class="container semua-penginapan">
+    <div class="row judul">
+        <h3>Semua Penginapan</h3>
+    </div>
+    <!-- Semua Card-card  penginapan -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-between">
+
+        @forelse ($penginapans as $penginapan)
+        <!-- Card wisata [1,2] -->
+        <div class="col-md-4">
+            <div class="card h-100 custom-card">
+                <div class="card-body">
+                    <img src="{{ asset($penginapan->gambar) }}" class="card-img-top" alt="psc" />
+                    <h5 class="text-center mb-5 mt-5">{{ $penginapan->nama }}</h5>
+                    <p class="text-center">{{ $penginapan->lokasi }}</p>
+                    <div class="d-flex justify-content-between mt-sm-5">
+                        <h5 class="align-self-center">{{ $penginapan->harga }}</h5>
+                        <a class="cta" href="{{ route('penginapans.show', $penginapan->slug) }}">Lihat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @empty
+        Tidak ada data
+        @endforelse
+    </div>
+    <!-- Akhir semua card-card penginapan -->
+</div>
+<!-- Akhir Semua Penginapan -->
+
+<!-- Footer -->
+<footer class="background">
+    <p>MadiunWisata | 2021</p>
+</footer>
+<!-- Akhir Footer -->
+@endsection()
+
+@section('script')
+<!-- AOS Animasi -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+@endsection

@@ -15,8 +15,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        // Ini harusnya bukan gini, Hati2
-        // Buat view lagi, bahwa dengan kata2 "anda tidak berhak akses ini"
+        // Sebelum ke ini, akan di cek di handler unauthenticated
         if (!$request->expectsJson()) {
             return route('login.admin');
         }

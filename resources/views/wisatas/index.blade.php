@@ -1,77 +1,109 @@
 @extends('layouts/app')
 
+@section('title', 'Wisata')
+
+@section('header')
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+<!-- AOS Animasi -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!-- custom CSS -->
+<link rel="stylesheet" href="CSS/tempatwisata.css" />
+@endsection
 @section('content')
-<div class="container">
-    @if (session()->has('success'))
+<!-- judul -->
+<div class="container judul">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-4 bg-info">
-                {{ request()->session()->get('success') }}
-            </div>
+        <div class="text-center">
+            <h1>Nikmati Pesona Pariwisata Kota Madiun</h1>
         </div>
     </div>
-    @endif
-    <div class="d-flex justify-content-between">
-        <div>
-            @if (auth()->guard('admin')->check())
-            <h1>All Wisata, Halo admin {{ auth()->guard('admin')->user()->nama }}</h1>
-            @else
-            <h1>All Wisata</h1>
-            @endif
-            <hr>
-        </div>
-        @if (auth()->guard('admin')->check())
-        <div>
-            <a href="{{ route('wisatas.create') }}" class="btn btn-primary">Tambah Wisata</a>
-        </div>
-        @endif
-    </div>
-
-    <div class="row">
-        @forelse ( $wisatas as $wisata )
-        <div class="col-md-4">
-            <div class="card mb-4">
-                {{-- Untuk menampilkan gambar, ini akan ditampilkan melalui folder storage --}}
-                <img class="card-img-top" src="{{  asset($wisata->takeImage()) }}">
-                <div class="card-header">
-                    {{ $wisata->nama }}
-                </div>
-                <div class="card-body">
-                    <div>
-                        {{-- parameter limit(datanya, maks karakter, karakter yang akan diganti)  --}}
-                        {{ Str::limit($wisata->deskripsi,100,'...') }}
-                    </div>
-                    <a href="wisatas/{{ $wisata->slug }}">Details</a>
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    {{-- Published On {{ $post->created_at-> format("d M, Y")}} --}}
-                    Published On {{ $wisata->created_at->diffForHumans()}}
-                    @if (auth()->guard('admin')->check())
-                    <a href="{{ route('wisatas.edit', $wisata->slug) }}" class="btn btn-success btn-sm">Edit</a>
-                    <form action="{{ route('wisatas.delete', $wisata->slug) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        @empty
-        <div class="alert alert-warning">There is No Wisatas.</div>
-        @endforelse
-
-        {{-- @endforeach --}}
-
-        {{-- Lanjutan pengecekan jika pake @if --}}
-        {{-- @else
-        < class="alert alert-info">There is No Posts.</>
-        @endif --}}
-
-    </div>
-    {{-- PAGINATION --}}
-    {{ $wisatas->links('pagination::bootstrap-4') }}
 </div>
+<!-- Akhir Judul -->
 
-@stop()
+<!-- pencarian -->
+<div class="container pencarian mt-5">
+    <div class="row justify-content-center">
+        <form class="col-md-10 d-flex" method="POST">
+            <input class="form-control form-control-lg-2" type="text"
+                placeholder="Temukan tempat wisata yang ingin anda kunjungi di Madiun"
+                aria-label="default input example" />
+            <!-- Button cari -->
+            <button type="button" class="btn cta">Cari</button>
+        </form>
+    </div>
+</div>
+<!-- Akhir Pencarian -->
+
+<!-- miniatur -->
+<div class="container miniatur">
+    <div class="row">
+        <h3>Mau Melihat Miniatur Kota Madiun?</h3>
+    </div>
+    <div class="row">
+        <div class="container custom-card mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6 align-self-center gambar">
+                    <img src="image/peceland/pl1.jpg" alt="peceland" />
+                </div>
+                <div class="col-md-5 peceland">
+                    <h2>PeceLand</h2>
+                    <p>
+                        Tempat wisata yang mengusung konsep miniatur Kota Madiun ini sangat menarik untuk dikunjungi.
+                        Didalamnya, anda dapat menemukan laboratorium pembuatan pecel, perkebunan, wahana permainan,
+                        serta tempat ibadah dengan desain
+                        yang estetik.
+                    </p>
+                    <a class="cta" href="#">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Akhir Miniatur -->
+
+<!-- Wisata Lainnya -->
+<div class="container wisata-lainnya">
+    <div class="row judul">
+        <h3>Wisata Lainnya</h3>
+    </div>
+    <!-- Semua Card-card  Wisata -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-between">
+        @forelse ($wisatas as $wisata)
+        <!-- Card wisata [1,1] -->
+        <div class="col-md-4">
+            <div class="card h-100 custom-card">
+                <div class="card-body">
+                    <img src="image/pahlawan/psc.jpg" class="card-img-top" alt="psc" />
+                    <h5 class="text-center mb-5 mt-5">{{ $wisata->nama }}</h5>
+                    <div class="d-flex justify-content-evenly mb-3">
+                        <a class="cta" href="{{ route('wisatas.show', $wisata->slug) }}">Lihat</a>
+                        <a class="tombol" href="{{ $wisata->gmap }}">Lokasi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Akhir Card wisata [1,1] -->
+        @empty
+        Tidak ada data
+        @endforelse
+    </div>
+    <!-- Akhir semua card-card wisata -->
+</div>
+<!-- Akhir Wisata Lainnya -->
+
+<!-- Footer -->
+<footer class="background">
+    <p>MadiunWisata | 2021</p>
+</footer>
+<!-- Akhir Footer -->
+
+@endsection()
+
+@section('script')
+<!-- AOS Animasi -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+@endsection

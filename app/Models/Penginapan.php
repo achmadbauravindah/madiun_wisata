@@ -10,7 +10,7 @@ class Penginapan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'lodger_id', 'nama', 'slug', 'lokasi', 'harga', 'spesifikasi', 'gambar', 'agree',
+        'lodger_id', 'nama', 'slug', 'lokasi', 'gmap',  'harga', 'spesifikasi', 'gambar', 'agree',
     ];
 
     public function lodger()
