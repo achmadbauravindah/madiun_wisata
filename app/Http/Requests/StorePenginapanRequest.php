@@ -25,9 +25,13 @@ class StorePenginapanRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'deskripsi' => 'required',
             'lokasi' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+            'gmap' => 'required',
+            'harga' => 'required',
+            'spesifikasi' => 'required',
+            'imgdepan' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'imgkamar' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'imgwc' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ];
     }
 }

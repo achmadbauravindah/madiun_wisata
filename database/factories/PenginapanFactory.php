@@ -34,7 +34,9 @@ class PenginapanFactory extends Factory
             'gmap' => 'https://www.google.co.id/maps',
             'harga' => '50.0000',
             'spesifikasi' => 'Spesifikasinya Gatau',
-            'gambar' => 'storage/images/penginapans/penghome.png',
+            'imgdepan' => 'storage/images/penginapans/loginhsdepan.jpg',
+            'imgkamar' => 'storage/images/penginapans/loginhskamarmandi.jpg',
+            'imgwc' => 'storage/images/penginapans/logihhskamarmandi.jpg',
             'agree' => $agree,
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')

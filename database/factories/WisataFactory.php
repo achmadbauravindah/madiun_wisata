@@ -28,7 +28,7 @@ class WisataFactory extends Factory
             'slug' => \Str::slug($this->faker->sentence()),
             'deskripsi' => $this->faker->paragraph(10),
             'lokasi' => $this->faker->sentence(),
-            'gmap' => $this->faker->sentence(),
+            'gmap' => 'https://www.google.co.id/maps',
             'gambar' => $this->faker->sentence(),
         ];
     }

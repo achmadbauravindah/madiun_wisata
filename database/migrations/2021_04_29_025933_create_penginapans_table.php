@@ -22,14 +22,11 @@ class CreatePenginapansTable extends Migration
             $table->string('gmap');
             $table->string('harga', 100);
             $table->text('spesifikasi');
-            $table->string('gambar')->nullable();
+            $table->string('imgdepan')->nullable();
+            $table->string('imgkamar')->nullable();
+            $table->string('imgwc')->nullable();
             $table->boolean('agree')->default(false);
             $table->timestamps();
-
-            // Foreign Constraint jika Lodger di hapus
-            // $table->foreign('lodger_id')
-            //     ->references('id')->on('lodgers')
-            //     ->onDelete('cascade');
         });
     }
 

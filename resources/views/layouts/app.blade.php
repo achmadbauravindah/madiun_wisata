@@ -19,7 +19,7 @@
 <body>
 
     {{-- Navigation --}}
-    @include('layouts.navigation')
+    {{-- @include('layouts.navigation') --}}
     {{-- Content --}}
     @yield('content')
     {{-- Script --}}

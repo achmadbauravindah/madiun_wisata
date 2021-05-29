@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 500px">
         @if (session()->has('success'))
         {{ request()->session()->get('success') }}
         @endif

@@ -4,11 +4,13 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BusController;
 use App\Http\Controllers\GaleriwisataController;
 use App\Http\Controllers\LapakUMKMController;
 use App\Http\Controllers\LodgerController;
 use App\Http\Controllers\MabourController;
 use App\Http\Controllers\PenginapanController;
+use App\Http\Controllers\TourController;
 use App\Http\Controllers\WisataController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,38 +54,39 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout'); //LOGO
 // MIDDLEWARE
 
 // MIDDLEWARE ADMIN
-Route::group(['middleware' => 'auth:admin'], function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+// Route::group(['middleware' => 'auth:admin'], function () {
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
-    // wisatas
-    Route::get('/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
-    Route::post('/wisatas/store', [WisataController::class, 'store'])->name('wisatas.store');
-    Route::get('/wisatas/{wisata:slug}/edit', [WisataController::class, 'edit'])->name('wisatas.edit');
-    Route::patch('/wisatas/{wisata:slug}/update', [WisataController::class, 'update'])->name('wisatas.update');
-    Route::delete('/wisatas/{wisata:slug}/delete', [WisataController::class, 'destroy'])->name('wisatas.delete');
+// wisatas
+Route::get('/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
+Route::post('/wisatas/store', [WisataController::class, 'store'])->name('wisatas.store');
+Route::get('/wisatas/{wisata:slug}/edit', [WisataController::class, 'edit'])->name('wisatas.edit');
+Route::patch('/wisatas/{wisata:slug}/update', [WisataController::class, 'update'])->name('wisatas.update');
+Route::delete('/wisatas/{wisata:slug}/delete', [WisataController::class, 'destroy'])->name('wisatas.delete');
 
-    // galeriwisatas
-    Route::patch('/galeriwisatas/{galeriwisata:id}/update', [GaleriwisataController::class, 'update'])->name('galeriwisatas.update');
-    Route::delete('/galeriwisatas/{galeriwisata:id}/delete', [GaleriwisataController::class, 'destroy'])->name('galeriwisatas.delete');
+// galeriwisatas
+Route::patch('/galeriwisatas/{galeriwisata:id}/update', [GaleriwisataController::class, 'update'])->name('galeriwisatas.update');
+Route::delete('/galeriwisatas/{galeriwisata:id}/delete', [GaleriwisataController::class, 'destroy'])->name('galeriwisatas.delete');
 
-    // lapakumkms
-    Route::get('/lapakumkms', [LapakUMKMController::class, 'index'])->name('admin.lapakumkms');
+// lapakumkms
+Route::get('/lapakumkms', [LapakUMKMController::class, 'index'])->name('admin.lapakumkms');
+Route::get('/lapakumkms', [LapakUMKMController::class, 'index'])->name('admin.lapakumkms');
 
-    // mabours
-    Route::get('/mabours', [MabourController::class, 'index'])->name('admin.mabours');
-});
+// mabours
+Route::get('/mabours', [MabourController::class, 'index'])->name('admin.mabours');
+// });
 
 
 // MIDDLEWARE LODGER
 
-Route::group(['middleware' => 'auth:admin,lodger'], function () {
-    // penginapans
-    Route::get('/penginapans/create', [PenginapanController::class, 'create'])->name('penginapans.create');
-    Route::post('/penginapans/store', [PenginapanController::class, 'store'])->name('penginapans.store');
-    Route::get('/penginapans/{penginapan:slug}/edit', [PenginapanController::class, 'edit'])->name('penginapans.edit');
-    Route::patch('/penginapans/{penginapan:slug}/update', [PenginapanController::class, 'update'])->name('penginapans.update');
-    Route::delete('/penginapans/{penginapan:slug}/delete', [PenginapanController::class, 'destroy'])->name('penginapans.delete');
-});
+// Route::group(['middleware' => 'auth:admin,lodger'], function () {
+// penginapans
+Route::get('/penginapans/create', [PenginapanController::class, 'create'])->name('penginapans.create');
+Route::post('/penginapans/store', [PenginapanController::class, 'store'])->name('penginapans.store');
+Route::get('/penginapans/{penginapan:slug}/edit', [PenginapanController::class, 'edit'])->name('penginapans.edit');
+Route::patch('/penginapans/{penginapan:slug}/update', [PenginapanController::class, 'update'])->name('penginapans.update');
+Route::delete('/penginapans/{penginapan:slug}/delete', [PenginapanController::class, 'destroy'])->name('penginapans.delete');
+// });
 
 // MIDDLEWARE LODGER
 
@@ -108,4 +111,10 @@ Route::get('/penginapans/{penginapan:slug}', [PenginapanController::class, 'show
 
 // Sekk
 Route::get('/lapakumkms', [LapakUMKMController::class, 'index'])->name('lapakumkms');
+
 Route::get('/mabours', [MabourController::class, 'index'])->name('mabours');
+Route::get('/mabours/edit', [MabourController::class, 'edit'])->name('mabours.edit');
+Route::post('/tours/store', [TourController::class, 'store'])->name('tours.store');
+Route::put('/tours/update/{id}', [TourController::class, 'updateAndDelete'])->name('tours.update');
+Route::post('/buses/store', [BusController::class, 'store'])->name('buses.store');
+Route::put('/buses/update/{id}', [BusController::class, 'updateAndDelete'])->name('buses.update');

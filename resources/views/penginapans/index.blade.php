@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="CSS/penginapan.css" />
 @endsection
 @section('content')
+@if (session('success'))
+<div class="alert alert-success mt-5">
+    {{ session('success') }}
+</div>
+@endif
 <!-- Bagian Atas -->
 <div class="container atas">
     <div class="row">
@@ -49,7 +54,7 @@
         <div class="col-md-4">
             <div class="card h-100 custom-card">
                 <div class="card-body">
-                    <img src="{{ asset($penginapan->gambar) }}" class="card-img-top" alt="psc" />
+                    <img src="{{ asset($penginapan->imgdepan) }}" class="card-img-top" alt="psc" />
                     <h5 class="text-center mb-5 mt-5">{{ $penginapan->nama }}</h5>
                     <p class="text-center">{{ $penginapan->lokasi }}</p>
                     <div class="d-flex justify-content-between mt-sm-5">

@@ -24,7 +24,14 @@ class UpdatePenginapanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama' => 'required',
+            'lokasi' => 'required',
+            'gmap' => 'required',
+            'harga' => 'required',
+            'spesifikasi' => 'required',
+            'imgdepan' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+            'imgkamar' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+            'imgwc' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
         ];
     }
 }

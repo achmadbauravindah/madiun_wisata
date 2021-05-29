@@ -20,9 +20,8 @@ class LapakumkmController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $wisatas =  Lapakumkm::latest()->paginate(8);
-        return view('lapakumkm', compact('wisatas'));
+        $lapakumkms =  Lapakumkm::latest()->paginate(8);
+        return view('lapakumkm', compact('lapakumkms'));
     }
 
     /**

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
-use App\Models\Mabour;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 
-class MabourController extends Controller
+class TourController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,7 @@ class MabourController extends Controller
      */
     public function index()
     {
-        $tours = Tour::all();
-        $buses  = Bus::all();
-        return view('mabours.index', compact('tours', 'buses'));
+        //
     }
 
     /**
@@ -39,16 +36,19 @@ class MabourController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = request()->all();
+        Tour::create($attr);
+        return redirect()->route('mabours.edit')
+            ->with('success', 'Tour Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Mabour  $mabour
+     * @param  \App\Models\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function show(Mabour $mabour)
+    public function show(Tour $tour)
     {
         //
     }
@@ -56,35 +56,45 @@ class MabourController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Mabour  $mabour
+     * @param  \App\Models\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mabour $mabour)
+    public function edit(Tour $tour)
     {
-        $tours = Tour::all();
-        $buses  = Bus::all();
-        return view('mabours.edit', compact('tours', 'buses'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Mabour  $mabour
+     * @param  \App\Models\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function updateAndDelete($id)
     {
-        //
+        $tour = Tour::find($id);
+
+        if ($tour) {
+            if (request()->update) {
+                $attr = request()->all();
+                $tour->update($attr);
+            } else if (request()->delete) {
+                $tour->delete();
+            }
+        } else {
+            abort(404);
+        }
+        return redirect()->route('mabours.edit');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Mabour  $mabour
+     * @param  \App\Models\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mabour $mabour)
+    public function destroy(Tour $tour)
     {
         //
     }

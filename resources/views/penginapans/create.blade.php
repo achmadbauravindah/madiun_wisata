@@ -1,4 +1,3 @@
-{{-- Dibawah ini akan mengirimkan data title ke layouts/app --}}
 @extends('layouts/app', ['title' => 'Tambah penginapan'])
 
 
@@ -8,7 +7,10 @@
 @if (session()->has('success'))
 {{ request()->session()->get('success') }}
 @endif
-<div class="container">
+<div class="container mt-5">
+    SEk
+</div>
+<div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -39,8 +41,16 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="gmap">gmap penginapan (GMAPS)</label>
+                            <input type="text" name="gmap" id="gmap" class="form-control" value="{{ old('gmap') }}">
+                            @error('gmap')
+                            <div class="mt-2 text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="harga">harga</label>
-
                             <textarea class="form-control" name="harga" id="harga"
                                 rows="4">{{ old('harga') }}</textarea>
                             @error('harga')
@@ -61,11 +71,32 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="gambar">gambar penginapan</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control"
-                                value="{{ old('gambar') }}">
+                            <label for="imgdepan">Tampak Depan penginapan</label>
+                            <input type="file" name="imgdepan" id="imgdepan" class="form-control"
+                                value="{{ old('imgdepan') }}">
                             {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
-                            @error('gambar')
+                            @error('imgdepan')
+                            <div class="mt-2 text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="imgkamar">Tampak Kamar penginapan</label>
+                            <input type="file" name="imgkamar" id="imgkamar" class="form-control"
+                                value="{{ old('imgkamar') }}">
+                            {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
+                            @error('imgkamar')
+                            <div class="mt-2 text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="imgwc">Tampak WC penginapan</label>
+                            <input type="file" name="imgwc" id="imgwc" class="form-control" value="{{ old('imgwc') }}">
+                            {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
+                            @error('imgwc')
                             <div class="mt-2 text-danger">
                                 {{ $message }}
                             </div>

@@ -9,7 +9,7 @@
 {{ request()->session()->get('success') }}
 @endif
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 500px">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Tambah Wisata</div>
