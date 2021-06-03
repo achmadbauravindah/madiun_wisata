@@ -79,13 +79,14 @@ class TourController extends Controller
             if (request()->update) {
                 $attr = request()->all();
                 $tour->update($attr);
+                return redirect()->route('mabours.edit')->with('success', 'Tour Berhasil Diedit');
             } else if (request()->delete) {
                 $tour->delete();
+                return redirect()->route('mabours.edit')->with('success', 'Tour Berhasil Dihapus');
             }
         } else {
             abort(404);
         }
-        return redirect()->route('mabours.edit');
     }
 
     /**

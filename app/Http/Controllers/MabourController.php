@@ -21,6 +21,13 @@ class MabourController extends Controller
         return view('mabours.index', compact('tours', 'buses'));
     }
 
+    public function indexAdmin()
+    {
+        $tours = Tour::all();
+        $buses  = Bus::all();
+        return view('auth.admin.mabours.index', compact('tours', 'buses'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -63,7 +70,7 @@ class MabourController extends Controller
     {
         $tours = Tour::all();
         $buses  = Bus::all();
-        return view('mabours.edit', compact('tours', 'buses'));
+        return view('auth.admin.mabours.edit', compact('tours', 'buses'));
     }
 
     /**

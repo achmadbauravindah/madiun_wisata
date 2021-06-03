@@ -1,12 +1,22 @@
-@extends('layouts.app')
-
+@extends('layouts.admin.app')
 
 @section('content')
-<div class="container py-4" style="margin-left: 40vh">
+
+<div class="container">
+
     @if(session()->has('success'))
-    <p> {{ session()->get('success') }}</p>
+    <div class="alert alert-success mt-4">
+        {{ session()->get('success') }}
+    </div>
     @endif
-    <h1>Mabour</h1>
+
+    @if(session()->has('error'))
+    <div class="alert alert-danger mt-4">
+        {{ session()->get('error') }}
+    </div>
+    @endif
+
+    <h1>Edit Jadwal Mabour</h1>
     {{-- BUS --}}
     <div class="table-responsive">
         <h2 class="mt-5">Ubah Bus</h2>
@@ -82,7 +92,6 @@
         <p> Waktu Singgah = Waktu Berhenti Bus pada titik singgah</p>
         <p> Waktu Perjalanan = Waktu perjalanan Bus ke tempat singgah yang lain</p>
         {{-- END TOURS --}}
-
     </div>
 </div>
 @endsection

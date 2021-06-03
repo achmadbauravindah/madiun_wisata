@@ -29,6 +29,12 @@ class WisataController extends Controller
         return view('wisatas.index', compact('wisatas'));
     }
 
+    public function indexAdmin()
+    {
+        $wisatas =  Wisata::all();
+        return view('auth.admin.wisatas.index', compact('wisatas'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +42,7 @@ class WisataController extends Controller
      */
     public function create(Wisata $wisata)
     {
-        return view('wisatas.create', compact('wisata'));
+        return view('auth.admin.wisatas.create', compact('wisata'));
     }
 
     /**
@@ -79,7 +85,7 @@ class WisataController extends Controller
         }
 
         session()->flash('success', 'Wisata telah ditambahkan');
-        return redirect(route('wisatas', $wisata));
+        return redirect(route('admin.wisatas', $wisata));
     }
 
     /**
@@ -108,7 +114,7 @@ class WisataController extends Controller
     {
         $galeriwisatas = DB::table('galeriwisatas')->where('wisata_id', $wisata->id)->get();
 
-        return view('wisatas.edit', compact('wisata', 'galeriwisatas'));
+        return view('auth.admin.wisatas.edit', compact('wisata', 'galeriwisatas'));
     }
 
     /**
@@ -159,7 +165,7 @@ class WisataController extends Controller
         $wisata->update($attr);
 
         session()->flash('success', 'Wisata berhasil diedit');
-        return redirect(route('wisatas'));
+        return redirect(route('admin.wisatas'));
     }
 
     /**
@@ -187,6 +193,6 @@ class WisataController extends Controller
 
 
         session()->flash('success', 'Wisata berhasil dihapus');
-        return redirect(route('wisatas'));
+        return redirect(route('admin.wisatas'));
     }
 }

@@ -19,7 +19,7 @@
 <body>
 
     {{-- Navigation --}}
-    @include('layouts.navigation')
+    @include('layouts.lodger.navigation')
     {{-- Content --}}
     @yield('content')
     {{-- Script --}}

@@ -25,7 +25,7 @@ class CreatePenginapansTable extends Migration
             $table->string('imgdepan')->nullable();
             $table->string('imgkamar')->nullable();
             $table->string('imgwc')->nullable();
-            $table->boolean('agree')->default(false);
+            $table->tinyInteger('agree')->default(1);
             $table->timestamps();
         });
     }

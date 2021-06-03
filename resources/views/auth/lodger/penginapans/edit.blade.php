@@ -1,15 +1,11 @@
-{{-- Dibawah ini akan mengirimkan data title ke layouts/app --}}
-@extends('layouts/app', ['title' => 'Update post'])
-
-
+@extends('layouts.admin.app')
 
 @section('content')
+
 <div class="container">
-    <div class="row mt-5">
-        @if (session()->has('success'))
-        {{ request()->session()->get('  success') }}
-        @endif
-        <div class="col-md-6 mt-5">
+    <h1>Edit Penginapan</h1>
+    <div class="row">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Update post: {{ $penginapan->nama }}</div>
 
@@ -112,14 +108,16 @@
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
                 </div>
-
-
             </div>
         </div>
-
     </div>
+    <form action="{{ route('penginapans.delete', $penginapan->slug) }}" method="post">
+        @csrf
+        @method('delete')
+        <button class="btn btn-danger">Hapus Penginapan</button>
+    </form>
 </div>
 
 
 
-@stop()
+@endsection()

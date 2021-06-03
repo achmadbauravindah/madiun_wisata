@@ -1,4 +1,15 @@
-@extends('layouts.app')
+@extends('layouts/app')
+
+@section('title', 'Wisata')
+
+@section('header')
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+<!-- AOS Animasi -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!-- custom CSS -->
+<link rel="stylesheet" href="CSS/tempatwisata.css" />
+@endsection
 
 @section('content')
 <div class="container">

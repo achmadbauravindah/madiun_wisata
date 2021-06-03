@@ -17,7 +17,7 @@ class Authenticate extends Middleware
     {
         // Sebelum ke ini, akan di cek di handler unauthenticated
         if (!$request->expectsJson()) {
-            return route('login.admin');
+            return route('admin.login');
         }
     }
 }

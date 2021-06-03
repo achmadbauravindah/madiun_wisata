@@ -83,21 +83,16 @@ class BusController extends Controller
             if (request()->update) {
                 $attr = request()->all();
                 $bus->update($attr);
+                return redirect()->route('mabours.edit')->with('success', 'Bus Berhasil Diedit');
             } else if (request()->delete) {
                 $bus->delete();
+                return redirect()->route('mabours.edit')->with('success', 'Bus Berhasil Dihapus');
             }
         } else {
             abort(404);
         }
-        return redirect()->route('mabours.edit')->with('success', 'Bus Berhasil Diedit');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bus  $bus
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Bus $bus)
     {
         //

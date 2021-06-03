@@ -1,14 +1,10 @@
-{{-- Dibawah ini akan mengirimkan data title ke layouts/app --}}
-@extends('layouts/app', ['title' => 'Update post'])
-
-
+@extends('layouts.admin.app')
 
 @section('content')
+
 <div class="container">
-    <div class="row" style="margin-top: 500px">
-        @if (session()->has('success'))
-        {{ request()->session()->get('success') }}
-        @endif
+    <h1>Edit Wisata</h1>
+    <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Update wisata: {{ $wisata->nama }}</div>
@@ -62,8 +58,8 @@
                         </div>
 
                         {{-- GAMBAR WISATA --}}
-                        <label for="gambar">gambar Wisata</label>
                         <div class="form-group row">
+                            <label for="gambar">gambar Wisata</label>
                             <div class="col-md-6">
                                 <img src="{{ $wisata->takeImage() }}" width="40px">
                             </div>
@@ -123,7 +119,11 @@
             </div>
         </div>
 
+        <form action="{{ route('wisatas.delete', $wisata->slug) }}" method="post">
+            @csrf
+            @method('delete')
+            <button class="btn btn-danger">Hapus Wisata</button>
+        </form>
     </div>
 </div>
-
-@stop()
+@endsection

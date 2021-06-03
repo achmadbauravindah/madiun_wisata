@@ -38,13 +38,10 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         if ($request->is('admin') || $request->is('admin/*')) {
-            return redirect()->guest('/login/admin');
+            return redirect()->guest('/admin/login');
         }
         if ($request->is('lodger') || $request->is('lodger/*')) {
-            return redirect()->guest('/login/lodger');
-        }
-        if ($request->is('penginapans') || $request->is('penginapans/*')) {
-            return redirect()->guest('/login/lodger');
+            return redirect()->guest('/lodger/login');
         }
         return abort(403, "Unauthorized action");
     }

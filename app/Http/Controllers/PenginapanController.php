@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePenginapanRequest;
 use App\Http\Requests\UpdatePenginapanRequest;
+use App\Models\Lodger;
 use App\Models\Penginapan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
 
 
 class PenginapanController extends Controller
@@ -24,6 +25,22 @@ class PenginapanController extends Controller
         return view('penginapans.index', compact('penginapans'));
     }
 
+    public function indexLodger()
+    {
+        $lodger_id = auth()->guard('lodger')->user()->id;
+        $penginapans =
+            DB::table('penginapans')
+            ->where('lodger_id', '=', $lodger_id)
+            ->get();
+        return view('auth.lodger.penginapans.index', compact('penginapans'));
+    }
+
+    public function indexAdmin()
+    {
+        $penginapans = Penginapan::all();
+        return view('auth.admin.verification-penginapans.index', compact('penginapans'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +48,7 @@ class PenginapanController extends Controller
      */
     public function create(Penginapan $penginapan)
     {
-        return view('penginapans.create', compact('penginapan'));
+        return view('auth.lodger.penginapans.create', compact('penginapan'));
     }
 
     /**
@@ -66,21 +83,28 @@ class PenginapanController extends Controller
         Penginapan::create($attr);
 
         session()->flash('success', 'Penginapan telah ditambahkan');
-        return redirect(route('penginapans'));
+        return redirect(route('lodger.penginapans'));
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Penginapan  $penginapan
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Penginapan $penginapan)
     {
         if (!$penginapan) {
             abort(404);
         }
 
-        return view('penginapans.show', compact('penginapan'));
+        return view('auth.admin.penginapans.show', compact('penginapan'));
+    }
+
+    public function showAdmin(Penginapan $penginapan)
+    {
+        if (!$penginapan) {
+            abort(404);
+        }
+
+        $lodger_id = $penginapan->lodger_id;
+        $lodger = Lodger::find($lodger_id);
+
+        return view('auth.admin.verification-penginapans.show', compact('penginapan', 'lodger'));
     }
 
     /**
@@ -91,7 +115,7 @@ class PenginapanController extends Controller
      */
     public function edit(Penginapan $penginapan)
     {
-        return view('penginapans.edit', compact('penginapan'));
+        return view('auth.lodger.penginapans.edit', compact('penginapan'));
     }
 
     /**
@@ -104,7 +128,6 @@ class PenginapanController extends Controller
     public function update(UpdatePenginapanRequest $request, Penginapan $penginapan)
     {
         $attr = $request->all();
-
         $slug = Str::slug($request->nama);
         $attr['slug'] = $slug;
 
@@ -138,8 +161,8 @@ class PenginapanController extends Controller
 
         $penginapan->update($attr);
 
-        session()->flash('success', 'penginapan berhasil diedit');
-        return redirect(route('penginapans'));
+        session()->flash('success', 'Penginapan berhasil diedit');
+        return redirect(route('lodger.penginapans'));
     }
 
     /**
@@ -154,7 +177,20 @@ class PenginapanController extends Controller
         Storage::delete($penginapan->imgdepan);
         Storage::delete($penginapan->imgkamar);
         Storage::delete($penginapan->imgwc);
-        session()->flash('success', 'penginapan berhasil dihapus');
-        return redirect(route('penginapans'));
+        session()->flash('success', 'Penginapan berhasil dihapus');
+        return redirect(route('lodger.penginapans'));
+    }
+
+    public function verification(Penginapan $penginapan)
+    {
+        $attr = request()->all();
+        if (request()->agree == 2) {
+            session()->flash('success', 'Penginapan telah diterima');
+        } else {
+            session()->flash('success', 'Penginapan telah ditolak');
+        }
+        $penginapan->update($attr);
+
+        return redirect(route('admin.penginapans'));
     }
 }

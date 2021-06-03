@@ -12,10 +12,10 @@ class RedirectIfAuthenticated
     {
         // dd(Auth::guard($guard)->check());
         if ($guard == "admin" && Auth::guard($guard)->check()) {
-            return redirect('/');
+            return redirect('/admin');
         }
         if ($guard == "lodger" && Auth::guard($guard)->check()) {
-            return redirect('/penginapan');
+            return redirect('/lodger');
         }
         if (Auth::guard($guard)->check()) {
             return abort(403, "WHO ARE YOU?");

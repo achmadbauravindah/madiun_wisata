@@ -8,8 +8,9 @@
 <!-- AOS Animasi -->
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <!-- custom CSS -->
-<link rel="stylesheet" href="CSS/tempatwisata.css" />
+<link rel="stylesheet" href="{{ asset('css/tempatwisata.css') }}" />
 @endsection
+
 @section('content')
 <!-- judul -->
 <div class="container judul">
