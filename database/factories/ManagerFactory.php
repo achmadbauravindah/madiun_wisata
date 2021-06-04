@@ -2,18 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Lapakumkm;
+use App\Models\Manager;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class LapakumkmFactory extends Factory
+
+class ManagerFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Lapakumkm::class;
+    protected $model = Manager::class;
 
     /**
      * Define the model's default state.
@@ -24,13 +26,14 @@ class LapakumkmFactory extends Factory
     {
         $nama = $this->faker->name;
         return [
-            'manager_id' => rand(1, 9),
+            'lapakumkm_id' => rand(1, 9),
             'nama' => $nama,
-            'slug' => Str::slug($nama),
-            'kelurahan' => 'Kelurahan Mbuh',
-            'lokasi' => 'JL. Ini Lokasi Lapak UMKM',
-            'gmap' => 'https://www.google.co.id/maps',
-            'foto' => 'storage/images/lapakumkms/inifotolapak.jpg',
+            'nik' => rand(1111111111111111, 9999999999999999),
+            'password' => Hash::make('123123'),
+            'email' => $this->faker->unique()->email,
+            'ktp_img' => $this->faker->image('public/storage/images', 640, 480, null, false),
+            'no_wa' => Str::random(10),
+            'alamat' => Str::random(20),
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
         ];

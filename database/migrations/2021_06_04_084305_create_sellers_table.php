@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLodgersTable extends Migration
+class CreateSellersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateLodgersTable extends Migration
      */
     public function up()
     {
-        Schema::create('lodgers', function (Blueprint $table) {
+        Schema::create('sellers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('lapakumkm_id');
             $table->string('nama');
             $table->char('nik', 16)->unique();
             $table->string('password', 64);
             $table->string('email')->unique();
             $table->string('ktp_img')->nullable();
-            $table->string('no_telp', 20);
             $table->string('no_wa', 20);
+            $table->tinyInteger('jenis_kelamin');
             $table->text('alamat');
-            $table->boolean('is_super')->default(false);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ class CreateLodgersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lodgers');
+        Schema::dropIfExists('sellers');
     }
 }

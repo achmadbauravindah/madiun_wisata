@@ -58,31 +58,70 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
-            // dd(auth()->guard('admin')->check());
             return redirect()->intended('/admin');
         }
+        session()->flash('error', 'Username atau Password salah');
         return back()->withInput($request->only('username', 'remember'));
     }
-
-
 
     // Lodgers
     public function showLodgerLoginForm()
     {
-        return view('auth.lodger.login', ['url' => 'lodger']);
+        return view('auth.lodger.login');
     }
 
     public function lodgerLogin(Request $request)
     {
         $this->validate($request, [
-            'email'   => 'required|email|string',
+            'nik'   => 'required|min:16',
             'password' => 'required|min:6'
         ]);
 
-
-        if (Auth::guard('lodger')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+        if (Auth::guard('lodger')->attempt(['nik' => $request->nik, 'password' => $request->password], $request->get('remember'))) {
             return redirect()->intended('/lodger');
         }
-        return back()->withInput($request->only('email', 'remember'));
+        session()->flash('error', 'Username atau Password salah');
+        return back()->withInput($request->only('nik', 'remember'));
+    }
+
+    // Manager
+    public function showManagerLoginForm()
+    {
+        return view('auth.manager.login');
+    }
+
+    public function managerLogin(Request $request)
+    {
+        $this->validate($request, [
+            'nik'   => 'required|min:16',
+            'password' => 'required|min:6'
+        ]);
+
+        // dd($request->password);
+        if (Auth::guard('manager')->attempt(['nik' => $request->nik, 'password' => $request->password], $request->get('remember'))) {
+            return redirect()->intended('/manager');
+        }
+        session()->flash('error', 'Username atau Password salah');
+        return back()->withInput($request->only('nik', 'remember'));
+    }
+
+    // Manager
+    public function showSellerLoginForm()
+    {
+        return view('auth.seller.login');
+    }
+
+    public function sellerLogin(Request $request)
+    {
+        $this->validate($request, [
+            'nik'   => 'required|min:16',
+            'password' => 'required|min:6'
+        ]);
+
+        if (Auth::guard('seller')->attempt(['nik' => $request->nik, 'password' => $request->password], $request->get('remember'))) {
+            return redirect()->intended('/seller');
+        }
+        session()->flash('error', 'Username atau Password salah');
+        return back()->withInput($request->only('nik', 'remember'));
     }
 }

@@ -64,15 +64,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="no_ktp"
+                                <label for="nik"
                                     class="col-md-4 col-form-label text-md-right">{{ __('No. KTP') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="no_ktp" type="text"
-                                        class="form-control @error('no_ktp') is-invalid @enderror" name="no_ktp"
-                                        value="{{ old('no_ktp') }}" autocomplete="no_ktp" maxlength="16">
+                                    <input id="nik" type="text" class="form-control @error('nik') is-invalid @enderror"
+                                        name="nik" value="{{ old('nik') }}" autocomplete="nik" maxlength="16">
 
-                                    @error('no_ktp')
+                                    @error('nik')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -85,7 +84,7 @@
 
                                 <div class="col-md-6">
                                     <input id="ktp_img" type="file"
-                                        class="form-control @error('no_ktp') is-invalid @enderror" name="ktp_img"
+                                        class="form-control @error('nik') is-invalid @enderror" name="ktp_img"
                                         value="{{ old('ktp_img') }}" autocomplete="ktp_img">
 
                                     @error('ktp_img')

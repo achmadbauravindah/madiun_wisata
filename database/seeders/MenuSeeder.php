@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Lapakumkm;
 use Illuminate\Database\Seeder;
 
-class LapakumkmSeeder extends Seeder
+class MenuSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +13,6 @@ class LapakumkmSeeder extends Seeder
      */
     public function run()
     {
-        Lapakumkm::factory()
-            ->count(10)
-            // ->hasLodgers(1)
-            ->create();
+        //
     }
 }

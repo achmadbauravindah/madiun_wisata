@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePenginapansTable extends Migration
+class CreateKiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreatePenginapansTable extends Migration
      */
     public function up()
     {
-        Schema::create('penginapans', function (Blueprint $table) {
+        Schema::create('kios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lodger_id')->constrained();
+            $table->foreignId('seller_id')->constrained();
+            $table->foreignId('lapakumkm_id')->constrained();
+            $table->string('no_kios', 191);
             $table->string('nama', 191);
             $table->string('slug', 191);
-            $table->string('lokasi');
-            $table->string('gmap');
-            $table->string('harga', 100);
-            $table->text('spesifikasi');
-            $table->string('imgdepan')->nullable();
-            $table->string('imgkamar')->nullable();
-            $table->string('imgwc')->nullable();
+            $table->string('foto')->nullable();
             $table->tinyInteger('agree')->default(1);
             $table->timestamps();
         });
@@ -37,6 +33,6 @@ class CreatePenginapansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penginapans');
+        Schema::dropIfExists('kios');
     }
 }

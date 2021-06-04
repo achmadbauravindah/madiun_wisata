@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
             WisatasTableSeeder::class,
             LodgersTableSeeder::class,
             PenginapansTableSeeder::class,
+            ManagerSeeder::class,
+            LapakumkmSeeder::class,
+            SellerSeeder::class,
+            KiosSeeder::class,
         ]);
     }
 }

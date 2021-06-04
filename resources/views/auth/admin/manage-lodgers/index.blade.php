@@ -36,7 +36,7 @@
                     <th class="align-middle" scope="row">{{$loop->index + 1}}</th>
                     <td class="align-middle">{{ $lodger->nama }}</td>
                     <td class="align-middle">{{ $lodger->email }}</td>
-                    <td class="align-middle">{{ $lodger->no_ktp }}</td>
+                    <td class="align-middle">{{ $lodger->nik }}</td>
 
 
                     @if (($lodger->penginapans)->isEmpty())

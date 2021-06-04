@@ -24,8 +24,6 @@ class PenginapanFactory extends Factory
     public function definition()
     {
         $nama = $this->faker->name;
-        // Ini akan mendapatkan nilai true atau false, karena '=='
-        $agree = rand(0, 1) == 1;
         return [
             'lodger_id' => rand(1, 3),
             'nama' => $nama,
@@ -37,7 +35,7 @@ class PenginapanFactory extends Factory
             'imgdepan' => 'storage/images/penginapans/loginhsdepan.jpg',
             'imgkamar' => 'storage/images/penginapans/loginhskamarmandi.jpg',
             'imgwc' => 'storage/images/penginapans/logihhskamarmandi.jpg',
-            'agree' => $agree,
+            'agree' => rand(0, 2),
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
 

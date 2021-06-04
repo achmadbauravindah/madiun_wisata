@@ -37,8 +37,8 @@
             <p class="form-control" readonly>{{$lodger->email}}</p>
         </div>
         <div class="col-md-6">
-            <label class="form-label">no_ktp</label>
-            <p class="form-control" readonly>{{$lodger->no_ktp}}</p>
+            <label class="form-label">nik</label>
+            <p class="form-control" readonly>{{$lodger->nik}}</p>
         </div>
         <div class="col-md-6">
             <label class="form-label">no_telp</label>

@@ -15,6 +15,13 @@ class CreateLapakumkmsTable extends Migration
     {
         Schema::create('lapakumkms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('manager_id')->constrained();
+            $table->string('nama', 191);
+            $table->string('slug', 191);
+            $table->string('kelurahan', 191);
+            $table->string('lokasi');
+            $table->string('gmap');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

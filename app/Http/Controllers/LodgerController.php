@@ -83,8 +83,8 @@ class LodgerController extends Controller
         // Update jika request gambar kosong
         $ktp_img = request()->file('ktp_img');
         if (isset($ktp_img)) {
-            $no_ktp = request()->no_ktp;
-            $ktp_imageUrl = $ktp_img->storeAs("images/ktps", "{$no_ktp}.{$ktp_img->extension()}");
+            $nik = request()->nik;
+            $ktp_imageUrl = $ktp_img->storeAs("images/ktps", "{$nik}.{$ktp_img->extension()}");
             Storage::delete($lodger->ktp_img);
         } else {
             $ktp_imageUrl = $lodger->ktp_img;

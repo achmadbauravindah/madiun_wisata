@@ -9,7 +9,9 @@ use App\Http\Controllers\GaleriwisataController;
 use App\Http\Controllers\LapakUMKMController;
 use App\Http\Controllers\LodgerController;
 use App\Http\Controllers\MabourController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PenginapanController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\WisataController;
 use App\Http\Requests\Penginapan;
@@ -48,12 +50,12 @@ Route::post('/lodger/login', [LoginController::class, 'lodgerLogin'])->name('lod
 Route::post('/lodger/register', [RegisterController::class, 'createLodger'])->name('lodger.register');
 // Manager
 Route::get('/manager/login', [LoginController::class, 'showManagerLoginForm'])->name('showManagerLoginForm');
-Route::post('/manager/login', [LoginController::class, 'managerLogin'])->name('login.lodger');
+Route::post('/manager/login', [LoginController::class, 'managerLogin'])->name('manager.login');
 // Seller
 Route::get('/seller/login', [LoginController::class, 'showSellerLoginForm'])->name('showSellerLoginForm');
 Route::get('/seller/register', [RegisterController::class, 'showSellerRegisterForm'])->name('showSellerRegisterForm');
-Route::post('/seller/login', [LoginController::class, 'sellerLogin'])->name('login.seller');
-Route::post('/seller/register', [RegisterController::class, 'createSeller'])->name('register.seller');
+Route::post('/seller/login', [LoginController::class, 'sellerLogin'])->name('seller.login');
+Route::post('/seller/register', [RegisterController::class, 'createSeller'])->name('seller.register');
 // All Logout
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -93,7 +95,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::delete('/admin/manage-lodger/{lodger:id}/delete', [LodgerController::class, 'destroy'])->name('manage-lodger.delete');
     // manager
     Route::get('/manager/register', [RegisterController::class, 'showManagerRegisterForm'])->name('showManagerRegisterForm');
-    Route::post('/manager/register', [RegisterController::class, 'createManager'])->name('register.lodger');
+    Route::post('/manager/register', [RegisterController::class, 'createManager'])->name('manager.register');
     Route::delete('/manager/delete', [Manager::class, 'destroy'])->name('manager.delete');
 });
 
@@ -110,6 +112,16 @@ Route::group(['middleware' => 'auth:lodger'], function () {
     Route::get('/lodger/penginapans/{penginapan:slug}/edit', [PenginapanController::class, 'edit'])->name('penginapans.edit');
     Route::patch('/lodger/penginapans/{penginapan:slug}/update', [PenginapanController::class, 'update'])->name('penginapans.update');
     Route::delete('/lodger/penginapans/{penginapan:slug}/delete', [PenginapanController::class, 'destroy'])->name('penginapans.delete');
+});
+
+// Akses Manager
+Route::group(['middleware' => 'auth:manager'], function () {
+    Route::get('/manager', [ManagerController::class, 'index'])->name('manager');
+});
+
+// Akses Seller
+Route::group(['middleware' => 'auth:seller'], function () {
+    Route::get('/seller', [SellerController::class, 'index'])->name('seller');
 });
 
 

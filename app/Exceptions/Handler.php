@@ -43,6 +43,12 @@ class Handler extends ExceptionHandler
         if ($request->is('lodger') || $request->is('lodger/*')) {
             return redirect()->guest('/lodger/login');
         }
+        if ($request->is('manager') || $request->is('manager/*')) {
+            return redirect()->guest('/manager/login');
+        }
+        if ($request->is('seller') || $request->is('seller/*')) {
+            return redirect()->guest('/seller/login');
+        }
         return abort(403, "Unauthorized action");
     }
 }

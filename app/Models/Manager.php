@@ -5,30 +5,30 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Lodger extends Authenticatable
+class Manager extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
 
-    protected $guard = 'lodgers';
+    protected $guard = 'managers';
 
     protected $fillable = [
-        'nama', 'email', 'nik', 'ktp_img', 'password', 'no_telp', 'no_wa', 'alamat',
+        'lapakumkm_id', 'nama', 'nik', 'password', 'email', 'ktp_img', 'no_wa', 'alamat',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    public function penginapans()
+    public function lapakumkm()
     {
-        return $this->hasMany(Penginapan::class);
+        return $this->hasOne(Lapakumkm::class);
     }
 
-    public function takeImage()
+    public function sellers()
     {
-        // dd($this->gambar);
-        return "/storage/" . $this->ktp_img;
+        return $this->hasMany(Seller::class);
     }
 }

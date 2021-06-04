@@ -17,6 +17,12 @@ class RedirectIfAuthenticated
         if ($guard == "lodger" && Auth::guard($guard)->check()) {
             return redirect('/lodger');
         }
+        if ($guard == "manager" && Auth::guard($guard)->check()) {
+            return redirect('/manager');
+        }
+        if ($guard == "seller" && Auth::guard($guard)->check()) {
+            return redirect('/seller');
+        }
         if (Auth::guard($guard)->check()) {
             return abort(403, "WHO ARE YOU?");
         }

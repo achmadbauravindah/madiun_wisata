@@ -19,10 +19,10 @@
 
     <div class="card mt-5">
         <div class="card-header">
-            Login Lodger
+            Login Seller
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('lodger.login') }}" aria-label="{{ __('Login') }}">
+            <form method="POST" action="{{ route('seller.login') }}" aria-label="{{ __('Login') }}">
                 @csrf
                 <div class="form-group row">
                     <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('nik') }}</label>

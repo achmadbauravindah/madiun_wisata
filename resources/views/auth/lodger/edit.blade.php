@@ -49,10 +49,10 @@
 
 
                     <div class="form-group">
-                        <label for="no_ktp">no_ktp lodger</label>
-                        <input type="text" name="no_ktp" id="no_ktp" class="form-control"
-                            value="{{ old('no_ktp')??$lodger->no_ktp }}" maxlength="16">
-                        @error('no_ktp')
+                        <label for="nik">nik lodger</label>
+                        <input type="text" name="nik" id="nik" class="form-control"
+                            value="{{ old('nik')??$lodger->nik }}" maxlength="16">
+                        @error('nik')
                         <div class="mt-2 text-danger">
                             {{ $message }}
                         </div>

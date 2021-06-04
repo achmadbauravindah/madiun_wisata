@@ -64,14 +64,14 @@ class RegisterController extends Controller
     protected function createLodger(RegisterLodgerRequest $request)
     {
         // Get Path File For FOTO KTP (ktp_img)
-        $no_ktp = request()->no_ktp;
+        $nik = request()->nik;
         $ktp_img = request()->file('ktp_img');
-        $imageUrl = $ktp_img->storeAs("images/ktps", "{$no_ktp}.{$ktp_img->extension()}");
+        $imageUrl = $ktp_img->storeAs("images/ktps", "{$nik}.{$ktp_img->extension()}");
 
         Lodger::create([
             'nama' => $request->nama,
             'email' => $request->email,
-            'no_ktp' => $request->no_ktp,
+            'nik' => $request->nik,
             'ktp_img' => $imageUrl,
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,

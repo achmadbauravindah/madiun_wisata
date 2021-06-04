@@ -14,7 +14,7 @@
                     <br>
                     Namamu adalah {{ request()->user()->nama }}
                     <br>
-                    No Ktpmu adalah {{ auth()->user()->no_ktp }}
+                    No Ktpmu adalah {{ auth()->user()->nik }}
 
                     {{-- {{ user() }} --}}
                 </div>

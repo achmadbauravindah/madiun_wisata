@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Lapakumkm;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Kios;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-class LapakumkmFactory extends Factory
+class KiosFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Lapakumkm::class;
+    protected $model = Kios::class;
 
     /**
      * Define the model's default state.
@@ -24,13 +24,13 @@ class LapakumkmFactory extends Factory
     {
         $nama = $this->faker->name;
         return [
-            'manager_id' => rand(1, 9),
+            'seller_id' => rand(1, 9),
+            'lapakumkm_id' => rand(1, 9),
+            'no_kios' => rand(1111111111111111, 9999999999999999),
             'nama' => $nama,
             'slug' => Str::slug($nama),
-            'kelurahan' => 'Kelurahan Mbuh',
-            'lokasi' => 'JL. Ini Lokasi Lapak UMKM',
-            'gmap' => 'https://www.google.co.id/maps',
-            'foto' => 'storage/images/lapakumkms/inifotolapak.jpg',
+            'foto' => 'storage/images/kioses/inifotokios.jpg',
+            'agree' => rand(0, 2),
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
         ];

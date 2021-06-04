@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGaleriwisatasTable extends Migration
+class CreateMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateGaleriwisatasTable extends Migration
      */
     public function up()
     {
-        Schema::create('galeriwisatas', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('galeri');
-            $table->foreignId('wisata_id')->nullable()->constrained();
+            $table->foreignId('kios_id')->constrained();
+            $table->tinyInteger('jenis_makanan');
+            $table->string('nama', 100);
+            $table->string('harga', 100);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateGaleriwisatasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galeriwisatas');
+        Schema::dropIfExists('menus');
     }
 }

@@ -26,7 +26,7 @@ class RegisterLodgerRequest extends FormRequest
         return [
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:lodgers',
-            'no_ktp' => 'required|string|min:16|unique:lodgers',
+            'nik' => 'required|string|min:16|unique:lodgers',
             'ktp_img' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'password' => 'required|string|min:6|confirmed',
             'no_telp' => 'required|string|max:20',
