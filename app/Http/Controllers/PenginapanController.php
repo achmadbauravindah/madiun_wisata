@@ -101,10 +101,8 @@ class PenginapanController extends Controller
             abort(404);
         }
 
-        $lodger_id = $penginapan->lodger_id;
-        $lodger = Lodger::find($lodger_id);
 
-        return view('auth.admin.verification-penginapans.show', compact('penginapan', 'lodger'));
+        return view('auth.admin.verification-penginapans.show', compact('penginapan'));
     }
 
     /**

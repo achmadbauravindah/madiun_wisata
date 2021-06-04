@@ -45,7 +45,7 @@ class LodgerController extends Controller
 
     public function showAdmin(Lodger $lodger)
     {
-        return view('auth.admin.manage-lodgers.show');
+        return view('auth.admin.manage-lodgers.show', compact('lodger'));
     }
 
     /**
@@ -105,7 +105,8 @@ class LodgerController extends Controller
      */
     public function destroy(Lodger $lodger)
     {
-        //
+        $lodger->delete();
 
+        return redirect()->route('manage-lodger')->with('success', 'Akun berhasil dihapus');
     }
 }

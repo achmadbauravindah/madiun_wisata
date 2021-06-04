@@ -23,34 +23,34 @@
         <div class="row g-3">
             <div class="col-md-6">
                 <label class="form-label">Nama</label>
-                <p class="form-control" readonly>{{$lodger->nama}}</p>
+                <p class="form-control" readonly>{{$penginapan->lodger->nama}}</p>
             </div>
             <div class="col-md-6    ">
                 <label for="" class="form-label">Scan KTP</label>
-                <p class="form-control"><img src="{{asset("storage/".$lodger->ktp_img)}}" alt="Scan KTP"
+                <p class="form-control"><img src="{{asset("storage/".$penginapan->lodger->ktp_img)}}" alt="Scan KTP"
                         style="width: 20rem; height:auto;">
                 </p>
             </div>
         </div>
         <div class="col-md-6">
             <label class="form-label">email</label>
-            <p class="form-control" readonly>{{$lodger->email}}</p>
+            <p class="form-control" readonly>{{$penginapan->lodger->email}}</p>
         </div>
         <div class="col-md-6">
             <label class="form-label">no_ktp</label>
-            <p class="form-control" readonly>{{$lodger->no_ktp}}</p>
+            <p class="form-control" readonly>{{$penginapan->lodger->no_ktp}}</p>
         </div>
         <div class="col-md-6">
             <label class="form-label">no_telp</label>
-            <p class="form-control" readonly>{{$lodger->no_telp}}</p>
+            <p class="form-control" readonly>{{$penginapan->lodger->no_telp}}</p>
         </div>
         <div class="col-md-6">
             <label class="form-label">no_wa</label>
-            <p class="form-control" readonly>{{$lodger->no_wa}}</p>
+            <p class="form-control" readonly>{{$penginapan->lodger->no_wa}}</p>
         </div>
         <div class="col-md-6">
             <label class="form-label">alamat</label>
-            <p class="form-control" readonly>{{$lodger->alamat}}</p>
+            <p class="form-control" readonly>{{$penginapan->lodger->alamat}}</p>
         </div>
 
         <h3>Identitas Penginapan</h3>

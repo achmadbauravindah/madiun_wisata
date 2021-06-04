@@ -18,7 +18,7 @@
 
     <h1>Menu Wisata Admin</h1>
 
-    <form action="{{ route('admin.wisatas.create') }}" method="get">
+    <form action="{{ route('wisatas.create') }}" method="get">
         @csrf
         <button class="btn btn-primary">Tambah Wisata</button>
     </form>

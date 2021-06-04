@@ -37,9 +37,17 @@
                     <td class="align-middle">{{ $lodger->nama }}</td>
                     <td class="align-middle">{{ $lodger->email }}</td>
                     <td class="align-middle">{{ $lodger->no_ktp }}</td>
+
+
+                    @if (($lodger->penginapans)->isEmpty())
                     <td class="align-middle">
-                        <a href="{{ route('admin.manage-lodger.show', $lodger->id) }}" class="btn btn-success">Edit</a>
+                        <a href="{{ route('manage-lodger.show', $lodger->id) }}" class="btn btn-warning">Lihat</a>
                     </td>
+                    @else
+                    <td class="align-middle">
+                        <a href="{{ route('manage-lodger.show', $lodger->id) }}" class="btn btn-success">Lihat</a>
+                    </td>
+                    @endif
                 </tr>
                 @empty
                 Tidak ada data

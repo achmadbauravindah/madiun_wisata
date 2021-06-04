@@ -44,7 +44,7 @@ class UpdateWisataRequest extends FormRequest
             ],
             'deskripsi' => ['required'],
             'lokasi' => ['required'],
-            'gambar' => ['image|mimes:jpeg,png,jpg,svg|max:2048'],
+            'gambar' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
             'galeri' => [$requiredGaleri, 'array', 'max:' . $maxGaleri], // Ini nanti max 6 buat pengurangan di sama reouest inputnya
         ];
     }
