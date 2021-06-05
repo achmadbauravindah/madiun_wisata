@@ -27,11 +27,11 @@ class KiosFactory extends Factory
         return [
             'seller_id' => $number++,
             'lapakumkm_id' => rand(1, 9),
-            'no_kios' => rand(1111111111111111, 9999999999999999),
+            'no_kios' => null,
             'nama' => $nama,
             'slug' => Str::slug($nama),
             'foto' => 'storage/images/kioses/inifotokios.jpg',
-            'agree' => rand(0, 2),
+            'agree' => 1,
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
         ];

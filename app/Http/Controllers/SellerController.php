@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateSellerRequest;
 use App\Models\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class SellerController extends Controller
 {
@@ -57,7 +60,8 @@ class SellerController extends Controller
      */
     public function edit(Seller $seller)
     {
-        //
+        $seller = auth()->guard('seller')->user();
+        return view('auth.seller.edit', compact('seller'));
     }
 
     /**
@@ -67,9 +71,34 @@ class SellerController extends Controller
      * @param  \App\Models\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seller $seller)
+    public function update(UpdateSellerRequest $request, Seller $seller)
     {
-        //
+        $seller_id = auth()->guard('seller')->user()->id;
+        $seller = Seller::find($seller_id);
+
+        $attr = request()->all();
+
+        // Update jika request password kosong
+        if (request()->password) {
+            $attr['password'] = Hash::make(request()->password);
+        } else {
+            $attr['password'] = $seller->password;
+        }
+        // Update jika request gambar kosong
+        $ktp_img = request()->file('ktp_img');
+        if (isset($ktp_img)) {
+            $nik = request()->nik;
+            $ktp_imageUrl = $ktp_img->storeAs("images/ktps/sellers", "{$nik}.{$ktp_img->extension()}");
+            Storage::delete($seller->ktp_img);
+        } else {
+            $ktp_imageUrl = $seller->ktp_img;
+        }
+
+        $attr['ktp_img'] = $ktp_imageUrl;
+
+        $seller->update($attr);
+
+        return redirect()->route('seller.edit')->with('success', 'Akun telah diubah');
     }
 
     /**

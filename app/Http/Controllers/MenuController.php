@@ -35,7 +35,14 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = request()->all();
+
+        $kios_id = auth()->guard('seller')->user()->kios_id;
+
+        $attr['kios_id'] = $kios_id;
+        Menu::create($attr);
+        return redirect()->route('seller.kios')
+            ->with('success', 'Menu Berhasil Ditambahkan');
     }
 
     /**
@@ -67,19 +74,21 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function updateAnddelete($id)
     {
-        //
-    }
+        $menu = Menu::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Menu $menu)
-    {
-        //
+        if ($menu) {
+            if (request()->update) {
+                $attr = request()->all();
+                $menu->update($attr);
+                return redirect()->route('seller.kios')->with('success', 'menu Berhasil Diedit');
+            } else if (request()->delete) {
+                $menu->delete();
+                return redirect()->route('seller.kios')->with('success', 'menu Berhasil Dihapus');
+            }
+        } else {
+            abort(404);
+        }
     }
 }

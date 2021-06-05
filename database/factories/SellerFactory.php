@@ -23,9 +23,11 @@ class SellerFactory extends Factory
      */
     public function definition()
     {
+        static $number = 1;
         $nama = $this->faker->name;
         return [
             'lapakumkm_id' => rand(1, 9),
+            'kios_id' => $number++,
             'nama' => $nama,
             'nik' => rand(1111111111111111, 9999999999999999),
             'password' => Hash::make('123123'),

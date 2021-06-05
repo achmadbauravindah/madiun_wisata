@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateManagerRequest;
 use App\Models\Lapakumkm;
 use App\Models\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ManagerController extends Controller
 {
@@ -17,7 +20,10 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        return view('auth.manager.index');
+        $manager_id = auth()->guard('manager')->user()->id;
+        $lapakumkm = Lapakumkm::where('manager_id', '=', $manager_id)->first();
+
+        return view('auth.manager.index', compact('lapakumkm'));
     }
 
     public function indexAdmin()
@@ -92,9 +98,10 @@ class ManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function edit(Manager $manager)
+    public function edit()
     {
-        //
+        $manager = auth()->guard('manager')->user();
+        return view('auth.manager.edit', compact('manager'));
     }
 
     /**
@@ -104,9 +111,34 @@ class ManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Manager $manager)
+    public function update(UpdateManagerRequest $request, Manager $manager)
     {
-        //
+        $manager_id = auth()->guard('manager')->user()->id;
+        $manager = Manager::find($manager_id);
+
+        $attr = request()->all();
+
+        // Update jika request password kosong
+        if (request()->password) {
+            $attr['password'] = Hash::make(request()->password);
+        } else {
+            $attr['password'] = $manager->password;
+        }
+        // Update jika request gambar kosong
+        $ktp_img = request()->file('ktp_img');
+        if (isset($ktp_img)) {
+            $nik = request()->nik;
+            $ktp_imageUrl = $ktp_img->storeAs("images/ktps", "{$nik}.{$ktp_img->extension()}");
+            Storage::delete($manager->ktp_img);
+        } else {
+            $ktp_imageUrl = $manager->ktp_img;
+        }
+
+        $attr['ktp_img'] = $ktp_imageUrl;
+
+        $manager->update($attr);
+
+        return redirect()->route('manager.edit')->with('success', 'Akun telah diubah');
     }
 
     /**

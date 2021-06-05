@@ -31,6 +31,14 @@ class LapakumkmController extends Controller
         return view('auth.admin.lapakumkms.index', compact('lapakumkms'));
     }
 
+    public function indexManager()
+    {
+        $manager_id = auth()->guard('manager')->user()->id;
+        $lapakumkm = Lapakumkm::where('manager_id', '=', $manager_id)->first();
+
+        return view('auth.manager.lapakumkms.index', compact('lapakumkm'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -113,7 +121,10 @@ class LapakumkmController extends Controller
         $lapakumkm->update($attr);
 
         session()->flash('success', 'lapakumkm berhasil diedit');
-        return redirect(route('admin.lapakumkms'));
+        if (auth()->guard('admin')->check()) {
+            return redirect(route('admin.lapakumkms'));
+        }
+        return redirect(route('manager.lapakumkm'));
     }
 
     /**

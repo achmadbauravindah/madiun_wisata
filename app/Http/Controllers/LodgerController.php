@@ -57,7 +57,7 @@ class LodgerController extends Controller
     public function edit()
     {
         $lodger = auth()->guard('lodger')->user();
-        return view('auth.lodger.edit', compact('lodger'));
+        return view('auth.seller.edit', compact('lodger'));
     }
 
     /**
@@ -84,7 +84,7 @@ class LodgerController extends Controller
         $ktp_img = request()->file('ktp_img');
         if (isset($ktp_img)) {
             $nik = request()->nik;
-            $ktp_imageUrl = $ktp_img->storeAs("images/ktps", "{$nik}.{$ktp_img->extension()}");
+            $ktp_imageUrl = $ktp_img->storeAs("images/ktps/lodgers", "{$nik}.{$ktp_img->extension()}");
             Storage::delete($lodger->ktp_img);
         } else {
             $ktp_imageUrl = $lodger->ktp_img;

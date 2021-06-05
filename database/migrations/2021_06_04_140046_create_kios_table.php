@@ -17,7 +17,7 @@ class CreateKiosTable extends Migration
             $table->id();
             $table->foreignId('seller_id')->nullable()->constrained();
             $table->foreignId('lapakumkm_id')->nullable()->constrained();
-            $table->string('no_kios', 191);
+            $table->string('no_kios', 191)->nullable();
             $table->string('nama', 191);
             $table->string('slug', 191);
             $table->string('foto')->nullable();
