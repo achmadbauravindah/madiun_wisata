@@ -6,12 +6,36 @@
 <div class="container">
     <div class="card mt-5">
         <div class="card-header">
-            Register Lodger
+            Register Manager
         </div>
         <div class="card-body">
-            <form method="POST" action='{{ route('lodger.register') }}' aria-label="{{ __('Register') }}"
+            <form method="POST" action='{{ route('seller.register') }}' aria-label="{{ __('Register') }}"
                 enctype="multipart/form-data">
                 @csrf
+
+                <div class="form-group row">
+                    <label for="lapakumkm_id"
+                        class="col-md-4 col-form-label text-md-right">{{ __('Pilih lapak ditempat anda') }}</label>
+
+                    <div class="col-md-6">
+                        <select name="lapakumkm_id" id="lapakumkm_id">
+                            @forelse ($lapakumkms as $lapakumkm)
+                            <option value="{{ $lapakumkm->id }}">
+                                {{ $lapakumkm->nama.'('.$lapakumkm->kelurahan.')' }}
+                            </option>
+                            @empty
+                            <option value="0">
+                                Kosong
+                            </option>
+                            @endforelse
+                        </select>
+                        @error('jenis_kelamin')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
@@ -21,21 +45,6 @@
                             name="nama" value="{{ old('nama') }}" autocomplete="nama" autofocus>
 
                         @error('nama')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') }}" autocomplete="email">
-
-                        @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -59,6 +68,21 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" autocomplete="email">
+
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="ktp_img"
                         class="col-md-4 col-form-label text-md-right">{{ __('Bukti Foto KTP') }}</label>
                     <div class="col-md-6">
@@ -73,12 +97,16 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="no_telp" class="col-md-4 col-form-label text-md-right">{{ __('No. Telp') }}</label>
-                    <div class="col-md-6">
-                        <input id="no_telp" type="text" class="form-control @error('no_telp') is-invalid @enderror"
-                            name="no_telp" value="{{ old('no_telp') }}" autocomplete="no_telp">
+                    <label for="jenis_kelamin"
+                        class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
 
-                        @error('no_telp')
+                    <div class="col-md-6">
+                        <select name="jenis_kelamin" id="jenis_kelamin">
+                            <option value="0">Laki-laki</option>
+                            <option value="1">Perempuan</option>
+                        </select>
+
+                        @error('jenis_kelamin')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

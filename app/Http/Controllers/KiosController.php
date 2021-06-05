@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Kios;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class KiosController extends Controller
 {

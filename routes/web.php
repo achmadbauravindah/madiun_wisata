@@ -79,8 +79,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/penginapans/{penginapan:slug}/show', [PenginapanController::class, 'showAdmin'])->name('admin.penginapans.show');
     Route::patch('/admin/penginapans/{penginapan:slug}/verification', [PenginapanController::class, 'verification'])->name('admin.penginapans.verification');
     // lapakumkms
-    Route::get('/admin/lapakumkms', [LapakUMKMController::class, 'index'])->name('admin.lapakumkms');
-    Route::get('/admin/lapakumkms', [LapakUMKMController::class, 'index'])->name('admin.lapakumkms');
+    Route::get('/admin/lapakumkms', [LapakUMKMController::class, 'indexAdmin'])->name('admin.lapakumkms');
+    Route::get('/admin/lapakumkms/create', [LapakUMKMController::class, 'create'])->name('admin.lapakumkms.create');
+    Route::post('/admin/lapakumkms/store', [LapakUMKMController::class, 'store'])->name('admin.lapakumkms.store');
+    Route::get('/admin/lapakumkms/{lapakumkm:slug}/edit', [LapakUMKMController::class, 'edit'])->name('admin.lapakumkms.edit');
+    Route::patch('/admin/lapakumkms/{lapakumkm:slug}/update', [LapakUMKMController::class, 'update'])->name('admin.lapakumkms.update');
+    Route::delete('/admin/lapakumkms/{lapakumkm:slug}/delete', [LapakUMKMController::class, 'destroy'])->name('admin.lapakumkms.delete');
     // mabours
     Route::get('/admin/mabours', [MabourController::class, 'indexAdmin'])->name('admin.mabours');
     Route::get('/admin/mabours/edit', [MabourController::class, 'edit'])->name('mabours.edit');
@@ -94,9 +98,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/manage-lodger/{lodger:id}/show', [LodgerController::class, 'showAdmin'])->name('manage-lodger.show');
     Route::delete('/admin/manage-lodger/{lodger:id}/delete', [LodgerController::class, 'destroy'])->name('manage-lodger.delete');
     // manager
-    Route::get('/manager/register', [RegisterController::class, 'showManagerRegisterForm'])->name('showManagerRegisterForm');
-    Route::post('/manager/register', [RegisterController::class, 'createManager'])->name('manager.register');
-    Route::delete('/manager/delete', [Manager::class, 'destroy'])->name('manager.delete');
+    Route::get('/admin/manage-manager', [ManagerController::class, 'indexAdmin'])->name('manage-manager');
+    Route::get('/admin/manage-manager/{manager:id}/show', [ManagerController::class, 'showAdmin'])->name('manage-manager.show');
+    Route::delete('/admin/manage-manager/{manager:id}/delete', [ManagerController::class, 'destroy'])->name('manager.delete');
+    Route::get('/admin/manage-manager/register', [ManagerController::class, 'create'])->name('showManagerRegisterForm');
+    Route::post('/admin/manage-manager/register', [ManagerController::class, 'store'])->name('manager.register');
 });
 
 

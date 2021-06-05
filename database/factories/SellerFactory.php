@@ -25,7 +25,7 @@ class SellerFactory extends Factory
     {
         $nama = $this->faker->name;
         return [
-            'lapakumkm_id' => rand(1, 3),
+            'lapakumkm_id' => rand(1, 9),
             'nama' => $nama,
             'nik' => rand(1111111111111111, 9999999999999999),
             'password' => Hash::make('123123'),

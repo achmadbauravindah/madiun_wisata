@@ -15,7 +15,8 @@ class CreateSellersTable extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lapakumkm_id');
+            $table->foreignId('lapakumkm_id')->nullable();
+            $table->foreignId('kios_id')->nullable();
             $table->string('nama');
             $table->char('nik', 16)->unique();
             $table->string('password', 64);

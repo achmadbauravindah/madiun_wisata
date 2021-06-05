@@ -4,12 +4,13 @@
 
 namespace App\Http\Controllers;
 
-
-
-
+use App\Http\Requests\StoreLapakumkmRequest;
+use App\Http\Requests\UpdateLapakumkmRequest;
 use App\Models\Lapakumkm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LapakumkmController extends Controller
 {
@@ -24,6 +25,12 @@ class LapakumkmController extends Controller
         return view('lapakumkm', compact('lapakumkms'));
     }
 
+    public function indexAdmin()
+    {
+        $lapakumkms =  Lapakumkm::all();
+        return view('auth.admin.lapakumkms.index', compact('lapakumkms'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +38,7 @@ class LapakumkmController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.admin.lapakumkms.create');
     }
 
     /**
@@ -40,9 +47,22 @@ class LapakumkmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLapakumkmRequest $request)
     {
-        //
+        $attr = $request->all();
+
+        $slug = Str::slug($request->nama);
+        $attr['slug'] = $slug;
+
+        // Menyimpan File foto
+        $foto = request()->file('foto');
+        $fotoUrl = $foto->storeAs("images/lapakumkms", "{$slug}.{$foto->extension()}");
+        $attr['foto'] = $fotoUrl;
+
+        Lapakumkm::create($attr);
+
+        session()->flash('success', 'Lapak UMKM telah ditambahkan');
+        return redirect(route('admin.lapakumkms'));
     }
 
     /**
@@ -64,7 +84,7 @@ class LapakumkmController extends Controller
      */
     public function edit(Lapakumkm $lapakumkm)
     {
-        //
+        return view('auth.admin.lapakumkms.edit', compact('lapakumkm'));
     }
 
     /**
@@ -74,9 +94,26 @@ class LapakumkmController extends Controller
      * @param  \App\Models\Lapakumkm  $lapakumkm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lapakumkm $lapakumkm)
+    public function update(UpdateLapakumkmRequest $request, Lapakumkm $lapakumkm)
     {
-        //
+        $attr = $request->all();
+        $slug = Str::slug($request->nama);
+        $attr['slug'] = $slug;
+
+        $foto = request()->file('foto');
+        if ($foto) {
+            Storage::delete($lapakumkm->foto);
+            $fotoUrl = $foto->storeAs("images/lapakumkms", "{$slug}.{$foto->extension()}");
+        } else {
+            $fotoUrl = $lapakumkm->foto;
+        }
+
+        $attr['foto'] = $fotoUrl;
+
+        $lapakumkm->update($attr);
+
+        session()->flash('success', 'lapakumkm berhasil diedit');
+        return redirect(route('admin.lapakumkms'));
     }
 
     /**
@@ -87,6 +124,17 @@ class LapakumkmController extends Controller
      */
     public function destroy(Lapakumkm $lapakumkm)
     {
-        //
+        if ($lapakumkm->manager_id) {
+            session()->flash('error', 'Lapak gagal dihapus, karena masih ada manager yang punya');
+            return redirect(route('admin.lapakumkms'));
+        }
+        if ($lapakumkm->kioses) {
+            session()->flash('error', 'Lapak gagal dihapus, karena masih ada kios yang punya');
+            return redirect(route('admin.lapakumkms'));
+        }
+        $lapakumkm->delete();
+        Storage::delete($lapakumkm->foto);
+        session()->flash('success', 'Lapak berhasil dihapus');
+        return redirect(route('admin.lapakumkms'));
     }
 }

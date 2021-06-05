@@ -8,9 +8,10 @@
 
     <h2><a href="{{ route('admin.wisatas') }}">Menu Wisata</a></h2>
     <h2><a href="{{ route('admin.mabours') }}">Menu Mabour</a></h2>
+    <h2><a href="{{ route('admin.lapakumkms') }}">Menu Lapak UMKM</a></h2>
     <h2><a href="{{ route('admin.penginapans') }}">Menu Verifikasi Penginapan</a></h2>
     <h2><a href="{{ route('manage-lodger') }}">Menu Manage Lodger</a></h2>
-    <h2><a href="">Menu Manage Manager</a></h2>
+    <h2><a href="{{ route('manage-manager') }}">Menu Manage Manager</a></h2>
     <h2><a href="{{ route('logout') }}">Logout</a></h2>
 
 </div>

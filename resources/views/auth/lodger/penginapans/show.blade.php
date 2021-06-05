@@ -16,7 +16,5 @@
         <button type="submit" class="mt-5">Delete</button>
     </form>
 
-
-
 </div>
 @endsection

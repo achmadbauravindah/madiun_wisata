@@ -6,12 +6,36 @@
 <div class="container">
     <div class="card mt-5">
         <div class="card-header">
-            Register Lodger
+            Register Manager
         </div>
         <div class="card-body">
-            <form method="POST" action='{{ route('lodger.register') }}' aria-label="{{ __('Register') }}"
+            <form method="POST" action='{{ route('manager.register') }}' aria-label="{{ __('Register') }}"
                 enctype="multipart/form-data">
                 @csrf
+
+                <div class="form-group row">
+                    <label for="lapakumkm_id"
+                        class="col-md-4 col-form-label text-md-right">{{ __('Lapak UMKM') }}</label>
+
+                    <div class="col-md-6">
+                        <select name="lapakumkm_id" id="lapakumkm_id">
+                            @forelse ($lapakumkms as $lapakumkm)
+                            <option value="{{ $lapakumkm->id }}">
+                                {{ $lapakumkm->nama.'('.$lapakumkm->kelurahan.')' }}
+                            </option>
+                            @empty
+                            <option value="0">
+                                Kosong
+                            </option>
+                            @endforelse
+                        </select>
+                        @error('jenis_kelamin')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
@@ -65,20 +89,6 @@
                         <input id="ktp_img" type="file" class="form-control @error('nik') is-invalid @enderror"
                             name="ktp_img" value="{{ old('ktp_img') }}" autocomplete="ktp_img">
                         @error('ktp_img')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="no_telp" class="col-md-4 col-form-label text-md-right">{{ __('No. Telp') }}</label>
-                    <div class="col-md-6">
-                        <input id="no_telp" type="text" class="form-control @error('no_telp') is-invalid @enderror"
-                            name="no_telp" value="{{ old('no_telp') }}" autocomplete="no_telp">
-
-                        @error('no_telp')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

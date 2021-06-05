@@ -15,7 +15,8 @@ class CreateManagersTable extends Migration
     {
         Schema::create('managers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lapakumkm_id');
+            // lapakumkm_id belum dikasih constrained karena nanti kalau refresh bisa tabrakan atau error
+            $table->foreignId('lapakumkm_id')->nullable();
             $table->string('nama');
             $table->char('nik', 16)->unique();
             $table->string('password', 64);

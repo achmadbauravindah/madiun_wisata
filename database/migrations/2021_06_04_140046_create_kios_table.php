@@ -15,8 +15,8 @@ class CreateKiosTable extends Migration
     {
         Schema::create('kios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('seller_id')->constrained();
-            $table->foreignId('lapakumkm_id')->constrained();
+            $table->foreignId('seller_id')->nullable()->constrained();
+            $table->foreignId('lapakumkm_id')->nullable()->constrained();
             $table->string('no_kios', 191);
             $table->string('nama', 191);
             $table->string('slug', 191);

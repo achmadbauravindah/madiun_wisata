@@ -22,9 +22,10 @@ class LapakumkmFactory extends Factory
      */
     public function definition()
     {
+        static $number = 1;
         $nama = $this->faker->name;
         return [
-            'manager_id' => rand(1, 9),
+            'manager_id' => $number++,
             'nama' => $nama,
             'slug' => Str::slug($nama),
             'kelurahan' => 'Kelurahan Mbuh',

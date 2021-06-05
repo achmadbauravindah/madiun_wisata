@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lapakumkm;
 use App\Models\Manager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
@@ -17,6 +20,12 @@ class ManagerController extends Controller
         return view('auth.manager.index');
     }
 
+    public function indexAdmin()
+    {
+        $managers = Manager::all();
+        return view('auth.admin.manage-managers.index', compact('managers'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +33,8 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        //
+        $lapakumkms = DB::table('lapakumkms')->where('manager_id', '=', null)->get();
+        return view('auth.admin.manage-managers.register', compact('lapakumkms'));
     }
 
     /**
@@ -35,7 +45,29 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Get Path File For FOTO KTP (ktp_img)
+        $nik = request()->nik;
+        $ktp_img = request()->file('ktp_img');
+        $imageUrl = $ktp_img->storeAs("images/ktps/managers", "{$nik}.{$ktp_img->extension()}");
+
+        Manager::create([
+            'lapakumkm_id' => $request->lapakumkm_id,
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'password' => Hash::make($request->password),
+            'email' => $request->email,
+            'ktp_img' => $imageUrl,
+            'no_wa' => $request->no_wa,
+            'alamat' => $request->alamat,
+        ]);
+
+        // Update manager_id in lapakumkm field
+        Lapakumkm::where('id', $request->lapakumkm_id)
+            ->update(['manager_id' => DB::getPdo()->lastInsertId()]);
+
+
+
+        return redirect()->route('manage-manager')->with('success', 'Akun telah ditambahkan, Silahkan Login');
     }
 
     /**
@@ -47,6 +79,11 @@ class ManagerController extends Controller
     public function show(Manager $manager)
     {
         //
+    }
+
+    public function showAdmin(Manager $manager)
+    {
+        return view('auth.admin.manage-managers.show', compact('manager'));
     }
 
     /**
@@ -80,6 +117,12 @@ class ManagerController extends Controller
      */
     public function destroy(Manager $manager)
     {
-        //
+        $lapakumkm = Lapakumkm::find($manager->lapakumkm_id);
+        if ($lapakumkm) {
+            Lapakumkm::where('manager_id', $manager->id)
+                ->update(['manager_id' => null]);
+        }
+        $manager->delete();
+        return redirect()->route('manage-manager')->with('success', 'Akun berhasil dihapus');
     }
 }

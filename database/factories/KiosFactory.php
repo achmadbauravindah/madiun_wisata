@@ -22,9 +22,10 @@ class KiosFactory extends Factory
      */
     public function definition()
     {
+        static $number = 1;
         $nama = $this->faker->name;
         return [
-            'seller_id' => rand(1, 9),
+            'seller_id' => $number++,
             'lapakumkm_id' => rand(1, 9),
             'no_kios' => rand(1111111111111111, 9999999999999999),
             'nama' => $nama,

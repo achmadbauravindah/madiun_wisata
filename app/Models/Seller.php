@@ -34,6 +34,6 @@ class Seller extends Authenticatable
 
     public function kioses()
     {
-        return $this->hasMany(Kios::class);
+        return $this->hasOne(Kios::class);
     }
 }

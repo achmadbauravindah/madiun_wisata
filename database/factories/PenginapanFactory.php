@@ -35,7 +35,7 @@ class PenginapanFactory extends Factory
             'imgdepan' => 'storage/images/penginapans/loginhsdepan.jpg',
             'imgkamar' => 'storage/images/penginapans/loginhskamarmandi.jpg',
             'imgwc' => 'storage/images/penginapans/logihhskamarmandi.jpg',
-            'agree' => rand(0, 2),
+            'agree' => 1,
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
 
