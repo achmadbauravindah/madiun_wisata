@@ -17,45 +17,123 @@
     <div class="container">
         <div class="custom-card p-3">
             <h3 class="judul text-center">Pendaftaran Penjual Kios</h3>
-            <form class="row g-3">
-                <div class="col-md-6">
-                    <label for="name" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="name" />
-                </div>
-                <div class="col-md-6">
-                    <label for="NIK" class="form-label">NIK</label>
-                    <input type="text" class="form-control" id="NIK" />
-                </div>
+            <form class="row g-3" method="POST" action='{{ route('seller.register') }}' enctype="multipart/form-data">
+                @csrf
                 <div class="col-12">
-                    <label for="inputAddress" class="form-label">Alamat</label>
-                    <textarea name="address" id="address" cols="100%" rows="5" class="form-control"></textarea>
-                </div>
-                <div class="col-md-4">
-                    <label for="jeniskelamin" class="form-label">Jenis Kelamin</label>
-                    <select id="jeniskelamin" class="form-select">
-                        <option selected>Laki-Laki</option>
-                        <option>Perempuan</option>
+                    <label for="lapakumkm_id" class="form-label">Pilih Lapak :</label>
+                    <select name="lapakumkm_id" id="lapakumkm_id">
+                        @forelse ($lapakumkms as $lapakumkm)
+                        <option value="{{ $lapakumkm->id }}">
+                            {{ $lapakumkm->nama.'('.$lapakumkm->kelurahan.')' }}
+                        </option>
+                        @empty
+                        <option value="0">
+                            Kosong
+                        </option>
+                        @endforelse
                     </select>
+                    @error('lapakumkm_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+                <div class="col-md-6">
+                    <label for="nama" class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                        value="{{ old('nama') }}" id="name" />
+                    @error('nama')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="nik" class="form-label">NIK</label>
+                    <input type="text" class="form-control @error('nik') is-invalid @enderror" name="nik"
+                        value="{{ old('nik') }}" id="nik" maxlength="16" />
+                    @error('nik')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="col-12  ">
+                    <label for="alamat" class="form-label">Alamat</label>
+                    <textarea name="alamat" id="address" cols="100%" rows="5"
+                        class="form-control @error('alamat') is-invalid @enderror"
+                        name="alamat">{{ old('alamat') }}</textarea>
+                    @error('alamat')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                    <select id="jenis_kelamin" class="form-select @error('jenis_kelamin') is-invalid @enderror"
+                        name="jenis_kelamin">
+                        <option selected value="0">Laki-Laki</option>
+                        <option value="1">Perempuan</option>
+                    </select>
+                    @error('jenis_kelamin')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
                 <div class="col-md-4">
-                    <label for="name" class="form-label">No WA</label>
-                    <input type="text" class="form-control" id="name" />
+                    <label for="no_wa" class="form-label">No WA</label>
+                    <input type="text" class="form-control @error('no_wa') is-invalid @enderror" name="no_wa"
+                        value="{{ old('no_wa') }}" id="no_wa" />
+                    @error('no_wa')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
                 <div class="col-md-4">
-                    <label for="NIK" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="NIK" />
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email"
+                        value="{{ old('email') }}" id="email" />
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
                 <div class="col-12">
-                    <label for="formFile" class="form-label">Scan KTP (jpg)</label>
-                    <input class="form-control" type="file" id="formFile" />
+                    <label for="ktp_img" class="form-label">Scan KTP (jpg)</label>
+                    <input class="form-control @error('ktp_img') is-invalid @enderror" name="ktp_img"
+                        value="{{ old('ktp_img') }}" type="file" id="ktp_img" />
+                    @error('ktp_img')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
                 <div class="col-md-6">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" />
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                        autocomplete="new-password" id="password" />
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
                 <div class="col-md-6">
-                    <label for="konfirmasi-password" class="form-label">Konfirmasi Password</label>
-                    <input type="password" class="form-control" id="konfirmasi-password" />
+                    <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                        autocomplete="new-password" />
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn cta">Daftar</button>
