@@ -28,13 +28,13 @@ class ManagerFactory extends Factory
         $nama = $this->faker->name;
         return [
             'lapakumkm_id' => $number++,
-            'nama' => $nama,
+            'nama' => 'Indah Yunita',
             'nik' => rand(1111111111111111, 9999999999999999),
             'password' => Hash::make('123123'),
             'email' => $this->faker->unique()->email,
-            'ktp_img' => $this->faker->image('public/storage/images', 640, 480, null, false),
+            'ktp_img' => $this->faker->image('public/storage', 640, 480, null, false),
             'no_wa' => Str::random(10),
-            'alamat' => Str::random(20),
+            'alamat' => 'Jl. Ini Alamatnya Manager',
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
         ];

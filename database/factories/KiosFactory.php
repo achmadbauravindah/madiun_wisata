@@ -30,7 +30,7 @@ class KiosFactory extends Factory
             'no_kios' => null,
             'nama' => $nama,
             'slug' => Str::slug($nama),
-            'foto' => 'storage/images/kioses/inifotokios.jpg',
+            'foto' => $this->faker->image('public/storage', 640, 480, null, false),
             'agree' => 1,
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')

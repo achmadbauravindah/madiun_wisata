@@ -80,12 +80,12 @@ class RegisterController extends Controller
             'nik' => $request->nik,
             'ktp_img' => $imageUrl,
             'password' => Hash::make($request->password),
-            'no_telp' => $request->no_telp,
             'no_wa' => $request->no_wa,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
         ]);
-
-        return redirect()->intended('lodger/login')->with('success', 'Akun telah ditambahkan, Silahkan Login');
+        session()->flash('success', 'Akun telah ditambahkan, Silahkan Login');
+        return redirect()->route('lodger.login');
     }
 
     // Seller

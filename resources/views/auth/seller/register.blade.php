@@ -1,181 +1,81 @@
-@extends('layouts.lodger.app')
+@extends('layouts/app')
+
+@section('title', 'Login')
+
+@section('header')
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+<!-- AOS Animasi -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!-- custom CSS -->
+<link rel="stylesheet" href="{{ asset('css/lapakumkm.css') }}" />
+@endsection
 
 
 @section('content')
-
-<div class="container">
-    <div class="card mt-5">
-        <div class="card-header">
-            Register Manager
-        </div>
-        <div class="card-body">
-            <form method="POST" action='{{ route('seller.register') }}' aria-label="{{ __('Register') }}"
-                enctype="multipart/form-data">
-                @csrf
-
-                <div class="form-group row">
-                    <label for="lapakumkm_id"
-                        class="col-md-4 col-form-label text-md-right">{{ __('Pilih lapak ditempat anda') }}</label>
-
-                    <div class="col-md-6">
-                        <select name="lapakumkm_id" id="lapakumkm_id">
-                            @forelse ($lapakumkms as $lapakumkm)
-                            <option value="{{ $lapakumkm->id }}">
-                                {{ $lapakumkm->nama.'('.$lapakumkm->kelurahan.')' }}
-                            </option>
-                            @empty
-                            <option value="0">
-                                Kosong
-                            </option>
-                            @endforelse
-                        </select>
-                        @error('jenis_kelamin')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+<main class="atas">
+    <div class="container">
+        <div class="custom-card p-3">
+            <h3 class="judul text-center">Pendaftaran Penjual Kios</h3>
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="name" />
                 </div>
-
-                <div class="form-group row">
-                    <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror"
-                            name="nama" value="{{ old('nama') }}" autocomplete="nama" autofocus>
-
-                        @error('nama')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-md-6">
+                    <label for="NIK" class="form-label">NIK</label>
+                    <input type="text" class="form-control" id="NIK" />
                 </div>
-
-                <div class="form-group row">
-                    <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('No. KTP') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="nik" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik"
-                            value="{{ old('nik') }}" autocomplete="nik" maxlength="16">
-
-                        @error('nik')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Alamat</label>
+                    <textarea name="address" id="address" cols="100%" rows="5" class="form-control"></textarea>
                 </div>
-
-                <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') }}" autocomplete="email">
-
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-md-4">
+                    <label for="jeniskelamin" class="form-label">Jenis Kelamin</label>
+                    <select id="jeniskelamin" class="form-select">
+                        <option selected>Laki-Laki</option>
+                        <option>Perempuan</option>
+                    </select>
                 </div>
-
-                <div class="form-group row">
-                    <label for="ktp_img"
-                        class="col-md-4 col-form-label text-md-right">{{ __('Bukti Foto KTP') }}</label>
-                    <div class="col-md-6">
-                        <input id="ktp_img" type="file" class="form-control @error('nik') is-invalid @enderror"
-                            name="ktp_img" value="{{ old('ktp_img') }}" autocomplete="ktp_img">
-                        @error('ktp_img')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-md-4">
+                    <label for="name" class="form-label">No WA</label>
+                    <input type="text" class="form-control" id="name" />
                 </div>
-
-                <div class="form-group row">
-                    <label for="jenis_kelamin"
-                        class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
-
-                    <div class="col-md-6">
-                        <select name="jenis_kelamin" id="jenis_kelamin">
-                            <option value="0">Laki-laki</option>
-                            <option value="1">Perempuan</option>
-                        </select>
-
-                        @error('jenis_kelamin')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-md-4">
+                    <label for="NIK" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="NIK" />
                 </div>
-
-                <div class="form-group row">
-                    <label for="no_wa" class="col-md-4 col-form-label text-md-right">{{ __('No. WA') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="no_wa" type="text" class="form-control @error('no_wa') is-invalid @enderror"
-                            name="no_wa" value="{{ old('no_wa') }}" autocomplete="no_wa">
-
-                        @error('no_wa')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-12">
+                    <label for="formFile" class="form-label">Scan KTP (jpg)</label>
+                    <input class="form-control" type="file" id="formFile" />
                 </div>
-
-                <div class="form-group row">
-                    <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
-                    <div class="col-md-6">
-                        <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror"
-                            name="alamat" value="{{ old('alamat') }}" autocomplete="alamat">
-                        @error('alamat')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" />
                 </div>
-
-                <div class="form-group row">
-                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-                    <div class="col-md-6">
-                        <input id="password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password"
-                            autocomplete="new-password">
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="col-md-6">
+                    <label for="konfirmasi-password" class="form-label">Konfirmasi Password</label>
+                    <input type="password" class="form-control" id="konfirmasi-password" />
                 </div>
-
-                <div class="form-group row">
-                    <label for="password-confirm"
-                        class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-                    <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            autocomplete="new-password">
-                    </div>
-                </div>
-
-                <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Register') }}
-                        </button>
-                    </div>
+                <div class="col-12">
+                    <button type="submit" class="btn cta">Daftar</button>
                 </div>
             </form>
         </div>
     </div>
-</div>
+</main>
 
+<!-- Footer -->
+<footer class="background">
+    <p>MadiunWisata | 2021</p>
+</footer>
+<!-- Akhir Footer -->
+@endsection
+
+@section('script')
+<!-- AOS Animasi -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 @endsection

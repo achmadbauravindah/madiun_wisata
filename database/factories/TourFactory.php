@@ -21,8 +21,11 @@ class TourFactory extends Factory
      */
     public function definition()
     {
+        static $number = 1;
         return [
-            //
+            'nama' => 'T' . $number++,
+            'berjalan' => '4',
+            'berhenti' => '4',
         ];
     }
 }

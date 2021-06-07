@@ -27,14 +27,14 @@ class LodgerFactory extends Factory
 
         $nama = $this->faker->name;
         return [
-            'nama' => $nama,
+            'nama' => 'Achmad Bauravindah',
             'email' => $this->faker->unique()->email,
             'nik' => rand(1111111111111111, 9999999999999999),
-            'ktp_img' => $this->faker->image('public/storage/images', 640, 480, null, false),
+            'ktp_img' => $this->faker->image('public/storage', 640, 480, null, false),
             'password' => Hash::make('123123'),
-            'no_telp' => Str::random(10),
             'no_wa' => Str::random(10),
-            'alamat' => Str::random(20),
+            'jenis_kelamin' => rand(0, 1),
+            'alamat' => 'Jl. Ini Alamatnya Lodger',
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
         ];

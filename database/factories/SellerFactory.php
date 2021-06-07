@@ -28,11 +28,11 @@ class SellerFactory extends Factory
         return [
             'lapakumkm_id' => rand(1, 9),
             'kios_id' => $number++,
-            'nama' => $nama,
+            'nama' => 'Riski Prasetyo',
             'nik' => rand(1111111111111111, 9999999999999999),
             'password' => Hash::make('123123'),
             'email' => $this->faker->unique()->email,
-            'ktp_img' => $this->faker->image('public/storage/images', 640, 480, null, false),
+            'ktp_img' => $this->faker->image('public/storage', 640, 480, null, false),
             'no_wa' => Str::random(10),
             'jenis_kelamin' => rand(0, 1),
             'alamat' => Str::random(20),

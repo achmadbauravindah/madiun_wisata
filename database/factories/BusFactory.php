@@ -21,8 +21,11 @@ class BusFactory extends Factory
      */
     public function definition()
     {
+        static $number = 1;
         return [
-            //
+            'nama' => 'Bus' . $number++,
+            'jam_berangkat' => '09:00:00',
+            'putaran' => 4,
         ];
     }
 }

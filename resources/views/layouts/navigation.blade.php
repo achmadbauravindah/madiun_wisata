@@ -15,20 +15,21 @@
                         href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('wisatas') ? ' active':''}}"
+                    <a class="nav-link {{ request()->is('wisatas','wisatas/*') ? ' active':''}}"
                         href="{{ route('wisatas') }}">Tempat
                         Wisata</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('penginapans') ? ' active':''}}"
+                    <a class="nav-link {{ request()->is('penginapans','penginapans/*') ? ' active':''}}"
                         href="{{ route('penginapans') }}">Penginapan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('lapakumkms') ? ' active':''}}"
+                    <a class="nav-link{{ request()->is('lapakumkms','lapakumkms/*') ? ' active':''}}"
                         href="{{ route('lapakumkms') }}">Lapak UMKM</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('mabours') ? ' active':''}}" href="{{ 'mabours' }}">Mabour</a>
+                    <a class="nav-link{{ request()->is('mabours','mabours/*') ? ' active':''}}"
+                        href="{{ 'mabours' }}">Mabour</a>
                 </li>
             </ul>
         </div>

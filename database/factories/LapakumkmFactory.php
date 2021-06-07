@@ -26,12 +26,12 @@ class LapakumkmFactory extends Factory
         $nama = $this->faker->name;
         return [
             'manager_id' => $number++,
-            'nama' => $nama,
+            'nama' => 'Lapak Pencerahan',
             'slug' => Str::slug($nama),
-            'kelurahan' => 'Kelurahan Mbuh',
+            'kelurahan' => 'Kelurahan Indonesia',
             'lokasi' => 'JL. Ini Lokasi Lapak UMKM',
             'gmap' => 'https://www.google.co.id/maps',
-            'foto' => 'storage/images/lapakumkms/inifotolapak.jpg',
+            'foto' => $this->faker->image('public/storage', 640, 480, null, false),
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')
         ];

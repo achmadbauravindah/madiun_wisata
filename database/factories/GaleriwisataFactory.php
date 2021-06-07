@@ -21,8 +21,10 @@ class GaleriwisataFactory extends Factory
      */
     public function definition()
     {
+        static $number = 1;
         return [
-            //
+            'wisata_id' => $number++,
+            'galeri' => $this->faker->image('public/storage', 640, 480, null, false),
         ];
     }
 }

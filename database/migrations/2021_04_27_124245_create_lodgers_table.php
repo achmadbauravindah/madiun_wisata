@@ -20,8 +20,8 @@ class CreateLodgersTable extends Migration
             $table->string('password', 64);
             $table->string('email')->unique();
             $table->string('ktp_img')->nullable();
-            $table->string('no_telp', 20);
             $table->string('no_wa', 20);
+            $table->tinyInteger('jenis_kelamin');
             $table->text('alamat');
             $table->boolean('is_super')->default(false);
             $table->rememberToken();

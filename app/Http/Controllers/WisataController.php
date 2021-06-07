@@ -195,4 +195,19 @@ class WisataController extends Controller
         session()->flash('success', 'Wisata berhasil dihapus');
         return redirect(route('admin.wisatas'));
     }
+
+    public function search()
+    {
+        $form = request();
+        if ($form->search) {
+            $wisatas = DB::table('wisatas')
+                ->where('nama', 'like', '%' . $form->search . '%')
+                ->orWhere('deskripsi', 'like', '%' . $form->search . '%')
+                ->orWhere('lokasi', 'like', '%' . $form->search . '%')
+                ->simplePaginate(5);
+        } else {
+            $wisatas = Wisata::simplePaginate(5);
+        }
+        return view('wisatas.index', compact('wisatas'));
+    }
 }

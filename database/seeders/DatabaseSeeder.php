@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tour;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             WisatasTableSeeder::class,
+            GaleriwisataSeeder::class,
+            BusSeeder::class,
+            TourSeeder::class,
             LodgersTableSeeder::class,
             PenginapansTableSeeder::class,
             ManagerSeeder::class,

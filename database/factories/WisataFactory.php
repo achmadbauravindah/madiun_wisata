@@ -24,12 +24,12 @@ class WisataFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => $this->faker->sentence(),
+            'nama' => 'Pecel Land',
             'slug' => \Str::slug($this->faker->sentence()),
             'deskripsi' => $this->faker->paragraph(10),
-            'lokasi' => $this->faker->sentence(),
+            'lokasi' => 'Jl. Ini Lokasi Wisata',
             'gmap' => 'https://www.google.co.id/maps',
-            'gambar' => $this->faker->sentence(),
+            'gambar' => $this->faker->image('public/storage', 640, 480, null, false),
         ];
     }
 }

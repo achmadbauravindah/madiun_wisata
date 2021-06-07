@@ -25,12 +25,14 @@
 <!-- pencarian -->
 <div class="container pencarian mt-5">
     <div class="row justify-content-center">
-        <form class="col-md-10 d-flex" method="POST">
+        <form action="{{ route('wisatas.search') }}" class="col-md-10 d-flex" method="POST">
+            @csrf
+            @method('post')
             <input class="form-control form-control-lg-2" type="text"
                 placeholder="Temukan tempat wisata yang ingin anda kunjungi di Madiun"
-                aria-label="default input example" />
+                aria-label="default input example" name="search" />
             <!-- Button cari -->
-            <button type="button" class="btn cta">Cari</button>
+            <button type="submit" class="btn cta">Cari</button>
         </form>
     </div>
 </div>
@@ -45,7 +47,7 @@
         <div class="container custom-card mt-4">
             <div class="row justify-content-center">
                 <div class="col-md-6 align-self-center gambar">
-                    <img src="image/peceland/pl1.jpg" alt="peceland" />
+                    <img src="{{ '/storage/images/wisatas/pl1.jpg' }}" alt="peceland" />
                 </div>
                 <div class="col-md-5 peceland">
                     <h2>PeceLand</h2>
@@ -75,7 +77,7 @@
         <div class="col-md-4">
             <div class="card h-100 custom-card">
                 <div class="card-body">
-                    <img src="image/pahlawan/psc.jpg" class="card-img-top" alt="psc" />
+                    <img src="{{ asset('/storage/'. $wisata->gambar) }}" class="card-img-top" alt="psc" />
                     <h5 class="text-center mb-5 mt-5">{{ $wisata->nama }}</h5>
                     <div class="d-flex justify-content-evenly mb-3">
                         <a class="cta" href="{{ route('wisatas.show', $wisata->slug) }}">Lihat</a>

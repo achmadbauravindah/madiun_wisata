@@ -1,6 +1,6 @@
 @extends('layouts/app')
 
-@section('title', 'Wisata')
+@section('title', 'Penginapan')
 
 @section('header')
 <!-- Icon -->
@@ -8,14 +8,11 @@
 <!-- AOS Animasi -->
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <!-- custom CSS -->
-<link rel="stylesheet" href="CSS/penginapan.css" />
+<link rel="stylesheet" href="{{ asset('css/penginapan.css') }}" />
 @endsection
+
 @section('content')
-@if (session('success'))
-<div class="alert alert-success mt-5">
-    {{ session('success') }}
-</div>
-@endif
+
 <!-- Bagian Atas -->
 <div class="container atas">
     <div class="row">
@@ -24,17 +21,20 @@
             <div class="custom-card p-md-4">
                 <h6>Anda memiliki penginapan di Kota Madiun?</h6>
                 <a class="linkhijau" href="{{ route('penginapans.create') }}">Promosikan</a>
-                <a class="linkabu ms-3" href="">Login</a>
+                <a class="linkabu ms-3" href="{{ route('lodger.login') }}">Login</a>
+                <a class="linkabu ms-3" href="{{ route('lodger.register') }}">Register</a>
             </div>
         </div>
         <!-- Akhir Penginapan Atas kiri -->
 
         <!-- Pencarian Atas kanan -->
         <form class="col-md-6 d-flex align-items-center pencarian" method="POST">
+            @csrf
+            @method('post')
             <input class="form-control form-control-lg-2" type="text" placeholder="Temukan Penginapan di Madiun"
-                aria-label="default input example" />
+                aria-label="default input example" name="search" />
             <!-- Button cari -->
-            <button type="button" class="btn cta">Cari</button>
+            <button type="submit" class="btn cta">Cari</button>
         </form>
         <!-- Akhir Pencarian Atas Kanan -->
     </div>
@@ -54,7 +54,7 @@
         <div class="col-md-4">
             <div class="card h-100 custom-card">
                 <div class="card-body">
-                    <img src="{{ asset($penginapan->imgdepan) }}" class="card-img-top" alt="psc" />
+                    <img src="{{ asset('/storage/'.$penginapan->imgdepan) }}" class="card-img-top" alt="psc" />
                     <h5 class="text-center mb-5 mt-5">{{ $penginapan->nama }}</h5>
                     <p class="text-center">{{ $penginapan->lokasi }}</p>
                     <div class="d-flex justify-content-between mt-sm-5">

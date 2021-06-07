@@ -29,7 +29,7 @@ class RegisterLodgerRequest extends FormRequest
             'nik' => 'required|string|min:16|unique:lodgers',
             'ktp_img' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'password' => 'required|string|min:6|confirmed',
-            'no_telp' => 'required|string|max:20',
+            'jenis_kelamin' => 'required|string|min:0|max:1',
             'no_wa' => 'required|string|max:20',
             'alamat' => 'required|string',
         ];

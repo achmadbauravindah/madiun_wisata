@@ -26,15 +26,15 @@ class PenginapanFactory extends Factory
         $nama = $this->faker->name;
         return [
             'lodger_id' => rand(1, 3),
-            'nama' => $nama,
+            'nama' => 'Penginapan Telang',
             'slug' => Str::slug($nama),
             'lokasi' => 'JL. Ini Lokasi Penginapan',
             'gmap' => 'https://www.google.co.id/maps',
-            'harga' => '50.0000',
-            'spesifikasi' => 'Spesifikasinya Gatau',
-            'imgdepan' => 'storage/images/penginapans/loginhsdepan.jpg',
-            'imgkamar' => 'storage/images/penginapans/loginhskamarmandi.jpg',
-            'imgwc' => 'storage/images/penginapans/logihhskamarmandi.jpg',
+            'harga' => '100.000',
+            'spesifikasi' => 'Lengkap No Minus No Cacat',
+            'imgdepan' => $this->faker->image('public/storage', 640, 480, null, false),
+            'imgkamar' => $this->faker->image('public/storage', 640, 480, null, false),
+            'imgwc' => $this->faker->image('public/storage', 640, 480, null, false),
             'agree' => 1,
             'created_at' => now()->format('Y-m-d'),
             'updated_at' => now()->format('Y-m-d')

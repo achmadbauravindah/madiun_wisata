@@ -10,6 +10,7 @@ use App\Models\Lapakumkm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class LapakumkmController extends Controller
@@ -21,8 +22,8 @@ class LapakumkmController extends Controller
      */
     public function index()
     {
-        $lapakumkms =  Lapakumkm::latest()->paginate(8);
-        return view('lapakumkm', compact('lapakumkms'));
+        $lapakumkms =  Lapakumkm::all();
+        return view('lapakumkms.index', compact('lapakumkms'));
     }
 
     public function indexAdmin()
@@ -81,7 +82,11 @@ class LapakumkmController extends Controller
      */
     public function show(Lapakumkm $lapakumkm)
     {
-        //
+        // $kios =
+        //     DB::table('kioses')
+        //     ->where('lapakumkm_id', '=', $lapakumkm->id)
+        //     ->get();
+        return view('lapakumkms.show', compact('lapakumkm'));
     }
 
     /**

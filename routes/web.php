@@ -162,10 +162,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // wisatas
 Route::get('/wisatas', [WisataController::class, 'index'])->name('wisatas');
 Route::get('/wisatas/{wisata:slug}', [WisataController::class, 'show'])->name('wisatas.show');
+Route::post('/wisatas', [WisataController::class, 'search'])->name('wisatas.search');
 // penginapans
 Route::get('/penginapans', [PenginapanController::class, 'index'])->name('penginapans');
 Route::get('/penginapans/{penginapan:slug}', [PenginapanController::class, 'show'])->name('penginapans.show');
+Route::post('/penginapans', [PenginapanController::class, 'search'])->name('penginapans.search');
 // lapakumkms
 Route::get('/lapakumkms', [LapakUMKMController::class, 'index'])->name('lapakumkms');
+Route::get('/lapakumkms/{lapakumkm:slug}', [LapakUMKMController::class, 'show'])->name('lapakumkms.show');
+Route::post('/lapakumkms', [LapakUMKMController::class, 'search'])->name('lapakumkms.search');
 // mabours
 Route::get('/mabours', [MabourController::class, 'index'])->name('mabours');

@@ -57,7 +57,7 @@ class LodgerController extends Controller
     public function edit()
     {
         $lodger = auth()->guard('lodger')->user();
-        return view('auth.seller.edit', compact('lodger'));
+        return view('auth.lodger.edit', compact('lodger'));
     }
 
     /**

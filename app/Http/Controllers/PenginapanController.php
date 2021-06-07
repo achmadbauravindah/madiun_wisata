@@ -91,8 +91,8 @@ class PenginapanController extends Controller
         if (!$penginapan) {
             abort(404);
         }
-
-        return view('auth.admin.penginapans.show', compact('penginapan'));
+        $redirectWA = 'https://api.whatsapp.com/send?phone=6285259961928&text=Hai%20Pak/Bu ' . $penginapan->lodger->nama . '%2C%20Apakah%20Penginapan ' . $penginapan->nama . '%20masih%20tersedia%3F';
+        return view('penginapans.show', compact('penginapan', 'redirectWA'));
     }
 
     public function showAdmin(Penginapan $penginapan)
@@ -179,16 +179,19 @@ class PenginapanController extends Controller
         return redirect(route('lodger.penginapans'));
     }
 
-    public function verification(Penginapan $penginapan)
+    public function search()
     {
-        $attr = request()->all();
-        if (request()->agree == 2) {
-            session()->flash('success', 'Penginapan telah diterima');
+        $form = request();
+        if ($form->search) {
+            $penginapans = DB::table('penginapans')
+                ->where('nama', 'like', '%' . $form->search . '%')
+                ->orWhere('lokasi', 'like', '%' . $form->search . '%')
+                ->orWhere('harga', 'like', '%' . $form->search . '%')
+                ->orWhere('spesifikasi', 'like', '%' . $form->search . '%')
+                ->simplePaginate(5);
         } else {
-            session()->flash('success', 'Penginapan telah ditolak');
+            $penginapans = Penginapan::simplePaginate(5);
         }
-        $penginapan->update($attr);
-
-        return redirect(route('admin.penginapans'));
+        return view('penginapans.index', compact('penginapans'));
     }
 }
