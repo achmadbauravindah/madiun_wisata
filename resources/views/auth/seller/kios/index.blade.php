@@ -76,12 +76,12 @@
                 <td><input type="text" value="{{$menu->nama}}" name="nama" class="form-control"></td>
                 <td>
                     <select name="jenis_makanan" id="jenis_menu">
-                        @if ($menu->jenis_makanan == 0)
-                        <option value="0">Makanan</option>
-                        <option value="1">Minuman</option>
+                        @if ($menu->jenis_makanan == 1)
+                        <option value="1">Makanan</option>
+                        <option value="0">Minuman</option>
                         @else
-                        <option value="1">Minuman</option>
-                        <option value="0">Makanan</option>
+                        <option value="0">Minuman</option>
+                        <option value="1">Makanan</option>
                         @endif
                     </select>
                 </td>
