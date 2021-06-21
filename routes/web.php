@@ -110,9 +110,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
 // Akses Lodger
 Route::group(['middleware' => 'auth:lodger'], function () {
-    Route::get('/lodger', [LodgerController::class, 'index'])->name('lodger');
+    Route::get('/lodger', [PenginapanController::class, 'indexLodger'])->name('lodger');
     Route::get('/lodger/edit', [LodgerController::class, 'edit'])->name('lodger.edit');
+    Route::get('/lodger/edit-password', [LodgerController::class, 'editPassword'])->name('lodger.editPassword');
     Route::patch('/lodger/update', [LodgerController::class, 'update'])->name('lodger.update');
+    Route::patch('/lodger/update-password', [LodgerController::class, 'updatePassword'])->name('lodger.updatePassword');
     // penginapans
     Route::get('/lodger/penginapans', [PenginapanController::class, 'indexLodger'])->name('lodger.penginapans');
     Route::get('/lodger/penginapans/create', [PenginapanController::class, 'create'])->name('penginapans.create');
@@ -120,6 +122,7 @@ Route::group(['middleware' => 'auth:lodger'], function () {
     Route::get('/lodger/penginapans/{penginapan:slug}/edit', [PenginapanController::class, 'edit'])->name('penginapans.edit');
     Route::patch('/lodger/penginapans/{penginapan:slug}/update', [PenginapanController::class, 'update'])->name('penginapans.update');
     Route::delete('/lodger/penginapans/{penginapan:slug}/delete', [PenginapanController::class, 'destroy'])->name('penginapans.delete');
+    Route::post('/lodger/penginapans', [PenginapanController::class, 'searchInLodger'])->name('penginapans.searchInLodger');
 });
 
 // Akses Manager

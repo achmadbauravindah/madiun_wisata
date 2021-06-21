@@ -1,4 +1,4 @@
-@extends('layouts/app')
+@extends('layouts.app')
 
 @section('title', 'Penginapan')
 
@@ -20,9 +20,8 @@
         <div class="col-md-6">
             <div class="custom-card p-md-4">
                 <h6>Anda memiliki penginapan di Kota Madiun?</h6>
-                <a class="linkhijau" href="{{ route('penginapans.create') }}">Promosikan</a>
+                <a class="linkhijau" href="{{ route('lodger.register') }}">Promosikan</a>
                 <a class="linkabu ms-3" href="{{ route('lodger.login') }}">Login</a>
-                <a class="linkabu ms-3" href="{{ route('lodger.register') }}">Register</a>
             </div>
         </div>
         <!-- Akhir Penginapan Atas kiri -->
@@ -69,6 +68,9 @@
         @endforelse
     </div>
     <!-- Akhir semua card-card penginapan -->
+    <div class="d-flex justify-content-center mt-5">
+        {{ $penginapans->links() }}
+    </div>
 </div>
 <!-- Akhir Semua Penginapan -->
 

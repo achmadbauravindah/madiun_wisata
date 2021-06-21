@@ -1,110 +1,134 @@
-@extends('layouts.admin.app')
+@extends('layouts.lodger.app')
 
-@section('title', 'Wisata')
+@section('title', 'Tambah Penginapan')
 
+@section('header')
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+<!-- AOS Animasi -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!-- custom CSS -->
+<link rel="stylesheet" href="{{ asset('css/crudpage.css') }}" />
+@endsection
 
 @section('content')
 
-<div class="container">
+<!-- Content -->
+<div class="container content">
 
-    <h1>Tambah Penginapan</h1>
-    <div class="card mt-5">
-        <div class="card-header">
-            Create Pengianapans
-        </div>
+    <div class="row justify-content-between">
 
-        <div class="card-body   ">
+        {{-- SIDEBAR --}}
+        @include('layouts.lodger.sidebar')
 
-            <form action="{{ route('penginapans.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                {{-- Isi dari semua form berada pada file form-control --}}
-                <div class="form-group">
-                    <label for="nama">Nama penginapan</label>
-                    <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}">
-                    @error('nama')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="lokasi">lokasi penginapan</label>
-                    <input type="text" name="lokasi" id="lokasi" class="form-control" value="{{ old('lokasi') }}">
-                    @error('lokasi')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="gmap">gmap penginapan (GMAPS)</label>
-                    <input type="text" name="gmap" id="gmap" class="form-control" value="{{ old('gmap') }}">
-                    @error('gmap')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="harga">harga</label>
-                    <textarea class="form-control" name="harga" id="harga" rows="4">{{ old('harga') }}</textarea>
-                    @error('harga')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="spesifikasi">spesifikasi</label>
+        <div class="kanan col-md-8">
+            <div class="custom-card p-5">
+                <a class="cta-sm mb-2" href="{{ route('lodger') }}">Back</a>
 
-                    <textarea class="form-control" name="spesifikasi" id="spesifikasi"
-                        rows="4">{{ old('spesifikasi') }}</textarea>
-                    @error('spesifikasi')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
+                <form class="form-crud row g-3" action="{{ route('penginapans.store') }}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('post')
+                    <div class="col-md-6">
+                        <label for="nama" class="form-label">Nama Penginapan</label>
+                        <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama')}}">
+                        @error('nama')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="imgdepan">Tampak Depan penginapan</label>
-                    <input type="file" name="imgdepan" id="imgdepan" class="form-control" value="{{ old('imgdepan') }}">
-                    {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
-                    @error('imgdepan')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
+                    <div class="col-md-6">
+                        <label for="harga" class="form-label">Harga</label>
+                        <input type="text" name="harga" id="harga" class="form-control" value="{{ old('harga') }}">
+                        @error('harga')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="imgkamar">Tampak Kamar penginapan</label>
-                    <input type="file" name="imgkamar" id="imgkamar" class="form-control" value="{{ old('imgkamar') }}">
-                    {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
-                    @error('imgkamar')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
+                    <div class="col-md-6">
+                        <label for="Lokasi" class="form-label">Lokasi Penginapan</label>
+                        <input type="text" name="lokasi" id="Lokasi" class="form-control" value="{{ old('lokasi') }}">
+                        @error('lokasi')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="imgwc">Tampak WC penginapan</label>
-                    <input type="file" name="imgwc" id="imgwc" class="form-control" value="{{ old('imgwc') }}">
-                    {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
-                    @error('imgwc')
-                    <div class="mt-2 text-danger">
-                        {{ $message }}
+                    <div class="col-md-6">
+                        <label for="Maps" class="form-label">Link Maps</label>
+                        <input type="text" name="gmap" id="Maps" class="form-control" value="{{ old('gmap') }}">
+                        @error('gmap')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    @enderror
-                </div>
+                    <div class="col-12">
+                        <label for="spesifikasi" class="form-label">Spesifikasi</label>
+                        <textarea name="spesifikasi" id="spesifikasi" cols="100%" rows="5"
+                            class="form-control">{{ old('spesifikasi') }}</textarea>
+                        @error('spesifikasi')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
 
+                    <div class="col-12">
+                        <label for="formFile" class="form-label">Foto Depan</label>
+                        <input class="form-control" type="file" id="formFile" name="imgdepan"
+                            value="{{ old('imgdepan') }}" />
+                        @error('imgdepan')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
 
+                    <div class="col-12">
+                        <label for="formFile" class="form-label">Foto Kamar</label>
+                        <input class="form-control" type="file" id="formFile" name="imgkamar"
+                            value="{{ old('imgkamar') }}" />
+                        @error('imgkamar')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Tambah</button>
-            </form>
+                    <div class="col-12">
+                        <label for="formFile" class="form-label">Foto Kamar Mandi</label>
+                        <input class="form-control" type="file" id="formFile" name="imgwc" value="{{ old('imgwc') }}" />
+                        @error('imgwc')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
 
+                    <div class="col-12">
+                        <button type="submit" class="btn cta-sm">Tambah</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<!-- Akhir content -->
 
+<!-- Footer -->
+<footer class="background">
+    <p>MadiunWisata | 2021</p>
+</footer>
+<!-- Akhir Footer -->
+@endsection()
 
-
-@stop()
+@section('script')
+<!-- AOS Animasi -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+@endsection

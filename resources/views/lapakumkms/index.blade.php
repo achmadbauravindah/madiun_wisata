@@ -58,7 +58,7 @@
                         <a href="{{ route('seller.login') }}" class="tombol">Login</a>
                     </div>
                     <hr style="color: #b2bec3" />
-                    <a href="" class="linkhijau text-center">Login Pengelola Lapak</a>
+                    <a href="{{ route('manager.login') }}" class="linkhijau text-center">Login Pengelola Lapak</a>
                 </div>
             </div>
         </div>

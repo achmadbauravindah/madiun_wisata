@@ -60,6 +60,11 @@ class LodgerController extends Controller
         return view('auth.lodger.edit', compact('lodger'));
     }
 
+    public function editPassword()
+    {
+        return view('auth.lodger.editPassword');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -95,6 +100,29 @@ class LodgerController extends Controller
         $lodger->update($attr);
 
         return redirect()->route('lodger.edit')->with('success', 'Akun telah diubah');
+    }
+
+    public function updatePassword()
+    {
+        request()->validate([
+            'oldPassword' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $attr = request()->all();
+
+        $lodger_id = auth()->guard('lodger')->user()->id;
+        $lodger = Lodger::find($lodger_id);
+
+        if (Hash::check(request()->oldPassword, $lodger->password)) {
+            $attr['password'] = Hash::make(request()->password);
+            $lodger->update($attr);
+            return redirect()->route('lodger.editPassword')->with('success', 'Password telah diubah');
+        } else {
+            return redirect()->route('lodger.editPassword')->with('error', 'Password lama salah');
+        }
+
+        return redirect()->route('lodger.editPassword')->with('success', 'Password telah diubah');
     }
 
     /**

@@ -21,7 +21,7 @@ class PenginapanController extends Controller
      */
     public function index()
     {
-        $penginapans =  Penginapan::latest()->paginate(8);
+        $penginapans =  Penginapan::latest()->simplePaginate(9);
         return view('penginapans.index', compact('penginapans'));
     }
 
@@ -31,8 +31,10 @@ class PenginapanController extends Controller
         $penginapans =
             DB::table('penginapans')
             ->where('lodger_id', '=', $lodger_id)
-            ->get();
-        return view('auth.lodger.penginapans.index', compact('penginapans'));
+            ->simplePaginate(15);
+        $lodger = auth()->guard('lodger')->user();
+
+        return view('auth.lodger.penginapans.index', compact('penginapans', 'lodger'));
     }
 
     public function indexAdmin()
@@ -159,7 +161,7 @@ class PenginapanController extends Controller
 
         $penginapan->update($attr);
 
-        session()->flash('success', 'Penginapan berhasil diedit');
+        session()->flash('success', $penginapan->nama . ' berhasil diedit');
         return redirect(route('lodger.penginapans'));
     }
 
@@ -193,5 +195,28 @@ class PenginapanController extends Controller
             $penginapans = Penginapan::simplePaginate(5);
         }
         return view('penginapans.index', compact('penginapans'));
+    }
+
+    public function searchInLodger()
+    {
+        // $penginapans = Penginapan::search('Tel')->get();
+        // dd($penginapans);
+
+        $lodger_id = auth()->guard('lodger')->user()->id;
+        $form = request();
+        if ($form->searchInLodger) {
+            $penginapans = DB::table('penginapans')
+                ->where('lodger_id', '=', $lodger_id);
+            $penginapans = $penginapans
+                ->where('nama', 'like', '%' . $form->searchInLodger . '%')
+                ->where('lokasi', 'like', '%' . $form->searchInLodger . '%')
+                ->get();
+            dd($penginapans);
+        } else {
+            $penginapans = DB::table('penginapans')
+                ->where('lodger_id', '=', $lodger_id)
+                ->simplePaginate(15);
+        }
+        return view('auth.lodger.penginapans.index', compact('penginapans'));
     }
 }

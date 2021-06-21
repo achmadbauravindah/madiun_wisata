@@ -20,11 +20,11 @@
                         Wisata</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('penginapans','penginapans/*') ? ' active':''}}"
+                    <a class="nav-link {{ request()->is('penginapans','penginapans/*','lodger/*') ? ' active':''}}"
                         href="{{ route('penginapans') }}">Penginapan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('lapakumkms','lapakumkms/*') ? ' active':''}}"
+                    <a class="nav-link{{ request()->is('lapakumkms','lapakumkms/*','manager/*') ? ' active':''}}"
                         href="{{ route('lapakumkms') }}">Lapak UMKM</a>
                 </li>
                 <li class="nav-item">

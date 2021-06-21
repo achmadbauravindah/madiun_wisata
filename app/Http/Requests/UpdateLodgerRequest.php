@@ -31,10 +31,9 @@ class UpdateLodgerRequest extends FormRequest
         return [
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:lodgers,email,' . $lodgerId,
-            'nik' => 'required|string|min:16|unique:lodgers,nik,' . $lodgerId,
+            'nik' => 'required|numeric|min:16|unique:lodgers,nik,' . $lodgerId,
             'ktp_img' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
             'password' => [$pass, 'confirmed'],
-            'no_telp' => 'required|string|max:20',
             'no_wa' => 'required|string|max:20',
             'alamat' => 'required|string',
         ];
