@@ -32,7 +32,7 @@ class Seller extends Authenticatable
         return $this->belongsTo(Lapakumkm::class, 'lapakumkm_id');
     }
 
-    public function kioses()
+    public function kios()
     {
         return $this->hasOne(Kios::class);
     }

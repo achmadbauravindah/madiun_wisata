@@ -44,7 +44,7 @@
                         <input class="form-control form-control-lg-2" type="text" placeholder="Temukan Penginapan"
                             aria-label="default input example" name="searchInLodger" />
                         <!-- Button cari -->
-                        <button type="suubmit" class="btn cta">Cari</button>
+                        <button type="submit" class="btn cta">Cari</button>
                     </form>
                     <!-- Akhir Pencarian  -->
                 </div>
@@ -69,7 +69,9 @@
                             <th scope="row">{{ $loop->index+1 }}</th>
                             <td>{{ $penginapan->nama }}</td>
                             <td>{{ $penginapan->lokasi }}</td>
-                            <td>{{ $penginapan->agree === 1 ? "Sudah di-acc" : "Belum di-acc" }}</td>
+                            <td>
+                                {{ $penginapan->agree === 2 ? "Sudah di-acc" : ($penginapan->agree === 1 ? "Belum di-acc": "Sudah ditolak") }}
+                            </td>
                             <td><a href="{{ route('penginapans.edit', $penginapan->slug) }}"
                                     class="btn btn-success">Edit</a></td>
                         </tr>

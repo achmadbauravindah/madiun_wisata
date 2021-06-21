@@ -20,6 +20,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
+        // Index ganti di manager.verification-kioses
         $manager_id = auth()->guard('manager')->user()->id;
         $lapakumkm = Lapakumkm::where('manager_id', '=', $manager_id)->first();
 
@@ -104,6 +105,11 @@ class ManagerController extends Controller
         return view('auth.manager.edit', compact('manager'));
     }
 
+    public function editPassword()
+    {
+        return view('auth.manager.editPassword');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -139,6 +145,29 @@ class ManagerController extends Controller
         $manager->update($attr);
 
         return redirect()->route('manager.edit')->with('success', 'Akun telah diubah');
+    }
+
+    public function updatePassword()
+    {
+        request()->validate([
+            'oldPassword' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $attr = request()->all();
+
+        $manager_id = auth()->guard('manager')->user()->id;
+        $manager = Manager::find($manager_id);
+
+        if (Hash::check(request()->oldPassword, $manager->password)) {
+            $attr['password'] = Hash::make(request()->password);
+            $manager->update($attr);
+            return redirect()->route('manager.editPassword')->with('success', 'Password telah diubah');
+        } else {
+            return redirect()->route('manager.editPassword')->with('error', 'Password lama salah');
+        }
+
+        return redirect()->route('manager.editPassword')->with('success', 'Password telah diubah');
     }
 
     /**

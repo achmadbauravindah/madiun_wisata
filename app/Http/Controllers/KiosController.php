@@ -38,12 +38,13 @@ class KiosController extends Controller
 
     public function indexManager()
     {
+        $manager = auth()->guard('manager')->user();
         $lapakumkm_id = auth()->guard('manager')->user()->lapakumkm_id;
         $kioses =
             DB::table('kios')
             ->where('lapakumkm_id', '=', $lapakumkm_id)
             ->get();
-        return view('auth.manager.verification-kioses.index', compact('kioses'));
+        return view('auth.manager.verification-kioses.index', compact('kioses', 'manager'));
     }
 
     /**
@@ -142,7 +143,7 @@ class KiosController extends Controller
         $attr = request()->all();
 
         if (!request()->no_kios) {
-            session()->flash('<no_kios></no_kios>', 'Harap isi nomer kios');
+            session()->flash('no_kios', 'Harap isi nomer kios');
             return redirect()->back();
         }
         if (request()->agree == 2) {

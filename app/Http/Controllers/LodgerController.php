@@ -13,6 +13,7 @@ class LodgerController extends Controller
 {
     public function index()
     {
+        // Index ganti di lodger.penginapan.index
         return view('auth.lodger.index');
     }
 

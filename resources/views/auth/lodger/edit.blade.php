@@ -1,6 +1,6 @@
 @extends('layouts.lodger.app')
 
-@section('title', 'Tambah Penginapan')
+@section('title', 'Atur Akun Lodger')
 
 @section('header')
 <!-- Icon -->
@@ -112,7 +112,7 @@
                     </div>
 
                     <div class="col-12">
-                        <button type="submit" class="btn cta-sm">Submit</button>
+                        <button type="submit" class="btn cta-sm">Edit</button>
                     </div>
                 </form>
             </div>
