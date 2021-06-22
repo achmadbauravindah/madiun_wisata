@@ -10,7 +10,7 @@ class Menu extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kios_id', 'jenis_makanan', 'nama', 'harga',
+        'kios_id', 'jenis_menu', 'nama', 'harga',
     ];
 
     public function kios()

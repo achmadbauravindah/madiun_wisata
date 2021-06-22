@@ -64,6 +64,11 @@ class SellerController extends Controller
         return view('auth.seller.edit', compact('seller'));
     }
 
+    public function editPassword()
+    {
+        return view('auth.seller.editPassword');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -99,6 +104,29 @@ class SellerController extends Controller
         $seller->update($attr);
 
         return redirect()->route('seller.edit')->with('success', 'Akun telah diubah');
+    }
+
+    public function updatePassword()
+    {
+        request()->validate([
+            'oldPassword' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $attr = request()->all();
+
+        $seller_id = auth()->guard('seller')->user()->id;
+        $seller = Seller::find($seller_id);
+
+        if (Hash::check(request()->oldPassword, $seller->password)) {
+            $attr['password'] = Hash::make(request()->password);
+            $seller->update($attr);
+            return redirect()->route('seller.editPassword')->with('success', 'Password telah diubah');
+        } else {
+            return redirect()->route('seller.editPassword')->with('error', 'Password lama salah');
+        }
+
+        return redirect()->route('seller.editPassword')->with('success', 'Password telah diubah');
     }
 
     /**

@@ -24,7 +24,7 @@
                         href="{{ route('penginapans') }}">Penginapan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->is('lapakumkms','lapakumkms/*','manager','manager/*') ? ' active':''}}"
+                    <a class="nav-link{{ request()->is('lapakumkms','manager','lapakumkms/*','manager/*','seller','seller/*') ? ' active':''}}"
                         href="{{ route('lapakumkms') }}">Lapak UMKM</a>
                 </li>
                 <li class="nav-item">

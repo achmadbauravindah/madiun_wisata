@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreKiosRequest;
 use App\Http\Requests\UpdateKiosRequest;
 use App\Models\Kios;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -29,11 +31,8 @@ class KiosController extends Controller
             DB::table('kios')
             ->where('seller_id', '=', $seller_id)
             ->first();
-        $menus =
-            DB::table('menus')
-            ->where('kios_id', '=', $kios->id)
-            ->get();
-        return view('auth.seller.kios.index', compact('kios', 'menus'));
+
+        return view('auth.seller.kios.index', compact('kios'));
     }
 
     public function indexManager()
@@ -54,7 +53,7 @@ class KiosController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.seller.kios.create');
     }
 
     /**
@@ -63,9 +62,33 @@ class KiosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Kios $kios, StoreKiosRequest $request)
     {
-        //
+        $seller = auth()->guard('seller')->user();
+        $seller_id = $seller->id;
+        $lapakumkm_id = $seller->lapakumkm->id;
+
+        // Kios
+        $attr['nama'] = $request->nama_kios;
+        $attr['seller_id'] = $seller_id;
+        $attr['lapakumkm_id'] = $lapakumkm_id;
+        $slug = Str::slug($request->nama_kios);
+        $attr['slug'] = $slug;
+        Kios::create($attr);
+
+        // Clear in attr
+        unset($attr);
+
+        // Menus
+        $kios_id = DB::getPdo()->lastInsertId();
+        $attr['kios_id'] = $kios_id;
+        $attr['nama'] = $request->nama_menu;
+        $attr['jenis_menu'] = $request->jenis_menu;
+        $attr['harga'] = $request->harga;
+        Menu::create($attr);
+
+        session()->flash('success', 'Kios telah didaftarkan');
+        return redirect(route('seller'));
     }
 
     /**
@@ -92,7 +115,17 @@ class KiosController extends Controller
      */
     public function edit(Kios $kios)
     {
-        //
+        $seller_id = auth()->guard('seller')->user()->id;
+        $kios =
+            DB::table('kios')
+            ->where('seller_id', '=', $seller_id)
+            ->first();
+        $menus =
+            DB::table('menus')
+            ->where('kios_id', '=', $kios->id)
+            ->get();
+
+        return view('auth.seller.kios.edit', compact('kios', 'menus'));
     }
 
     /**
@@ -108,6 +141,7 @@ class KiosController extends Controller
         $slug = Str::slug($request->nama);
         $attr['slug'] = $slug;
 
+        // Foto kios tidak dipakai
         $foto = request()->file('foto');
         if ($foto) {
             Storage::delete($kios->foto);

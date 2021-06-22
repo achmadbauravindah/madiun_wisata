@@ -1,6 +1,6 @@
-@extends('layouts.lodger.app')
+@extends('layouts.manager.app')
 
-@section('title', 'Manager')
+@section('title', 'Verifikasi Kios')
 
 @section('header')
 <!-- Icon -->
@@ -96,7 +96,7 @@
                         <table class="table table-sm">
                             <tbody>
                                 @forelse ($kios->menus as $menu)
-                                @if ($menu->jenis_makanan == 1)
+                                @if ($menu->jenis_menu == 1)
                                 <tr>
                                     <td>{{ $menu->nama }}</td>
                                     <td>Rp {{ $menu->harga }}</td>
@@ -119,7 +119,7 @@
                         <table class="table table-sm">
                             <tbody>
                                 @forelse ($kios->menus as $menu)
-                                @if ($menu->jenis_makanan == 0)
+                                @if ($menu->jenis_menu == 0)
                                 <tr>
                                     <td>{{ $menu->nama }}</td>
                                     <td>Rp {{ $menu->harga }}</td>

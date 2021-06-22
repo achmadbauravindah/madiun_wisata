@@ -15,10 +15,10 @@
             class="list-group-item list-group-item-action {{ request()->is('lodger/edit') ? ' list-group-item-dark':''}}"><i
                 class="bi bi-gear-fill"></i> Pengaturan
             Akun</a>
-        <a href="{{ route('lodger.editPassword') }}"
-            class="list-group-item list-group-item-action {{ request()->is('lodger/edit-password') ? ' list-group-item-dark':''}}"><i
-                class="bi bi-shield-lock-fill"></i> Ganti
-            Password</a>
+        <a href="{{ route('lodger.editPassword') }}" class="list-group-item list-group-item-action
+        {{ request()->is('lodger/edit-password') ? ' list-group-item-dark':''}}">
+            <i class="bi bi-shield-lock-fill"></i>Ganti Password
+        </a>
         <a href="{{ route('logout') }}" class="list-group-item list-group-item-action"><i
                 class="bi bi-box-arrow-right"></i>
             Logout</a>

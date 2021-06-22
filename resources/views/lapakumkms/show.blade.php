@@ -22,6 +22,8 @@
                     alt="sumber wangi" />
 
                 @forelse ($lapakumkm->kioses as $kios)
+                {{-- Tampil hanya yang disetujui --}}
+                @if ($kios->agree == 2)
                 <!-- Card per Kios -->
                 <div class="card mb-3 custom-card">
                     <div class="row g-0">
@@ -35,7 +37,7 @@
                             <table class="table table-sm">
                                 <tbody>
                                     @forelse ($kios->menus as $menu)
-                                    @if ($menu->jenis_makanan == 1)
+                                    @if ($menu->jenis_menu == 1)
                                     <tr>
                                         <td>{{ $menu->nama }}</td>
                                         <td>Rp {{ $menu->harga }}</td>
@@ -53,7 +55,7 @@
                             <table class="table table-sm">
                                 <tbody>
                                     @forelse ($kios->menus as $menu)
-                                    @if ($menu->jenis_makanan == 0)
+                                    @if ($menu->jenis_menu == 0)
                                     <tr>
                                         <td>{{ $menu->nama }}</td>
                                         <td>Rp {{ $menu->harga }}</td>
@@ -70,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 <!-- Akhir card per kios-->
                 @empty
                 Data tidak ada

@@ -1,6 +1,6 @@
 @extends('layouts.lodger.app')
 
-@section('title', 'Tambah Penginapan')
+@section('title', 'Ganti Password Lodger')
 
 @section('header')
 <!-- Icon -->

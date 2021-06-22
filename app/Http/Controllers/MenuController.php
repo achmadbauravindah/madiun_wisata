@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 
@@ -33,15 +35,15 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMenuRequest $request)
     {
         $attr = request()->all();
 
+        $seller = auth()->guard('seller')->user();
         $kios_id = auth()->guard('seller')->user()->kios_id;
-
         $attr['kios_id'] = $kios_id;
         Menu::create($attr);
-        return redirect()->route('seller.kios')
+        return redirect()->route('kios.edit', $seller->kios->slug)
             ->with('success', 'Menu Berhasil Ditambahkan');
     }
 
@@ -74,18 +76,17 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function updateAnddelete($id)
+    public function updateAnddelete(UpdateMenuRequest $request, $id)
     {
         $menu = Menu::find($id);
-
         if ($menu) {
             if (request()->update) {
                 $attr = request()->all();
                 $menu->update($attr);
-                return redirect()->route('seller.kios')->with('success', 'menu Berhasil Diedit');
+                return redirect()->route('kios.edit', $menu->kios->slug)->with('success', 'Menu Berhasil Diedit');
             } else if (request()->delete) {
                 $menu->delete();
-                return redirect()->route('seller.kios')->with('success', 'menu Berhasil Dihapus');
+                return redirect()->route('kios.edit', $menu->kios->slug)->with('success', 'Menu Berhasil Dihapus');
             }
         } else {
             abort(404);

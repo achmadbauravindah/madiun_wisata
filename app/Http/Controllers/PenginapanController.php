@@ -21,7 +21,7 @@ class PenginapanController extends Controller
      */
     public function index()
     {
-        $penginapans =  Penginapan::latest()->simplePaginate(9);
+        $penginapans =  Penginapan::where('agree', '=', '2')->simplePaginate(9);
         return view('penginapans.index', compact('penginapans'));
     }
 
@@ -98,8 +98,11 @@ class PenginapanController extends Controller
         $no_wa = substr_replace($no_wa, '62', 0, 1);
         // dd($no_wa);
         $redirectWA = 'https://api.whatsapp.com/send?phone=' . $no_wa . '&text=Hai%20Pak/Bu ' . $penginapan->lodger->nama . '%2C%20Apakah%20Penginapan ' . $penginapan->nama . '%20masih%20tersedia%3F';
+
         return view('penginapans.show', compact('penginapan', 'redirectWA'));
     }
+
+
     public function showAdmin(Penginapan $penginapan)
     {
         if (!$penginapan) {
@@ -200,19 +203,17 @@ class PenginapanController extends Controller
 
     public function searchInLodger()
     {
-        // $penginapans = Penginapan::search('Tel')->get();
-        // dd($penginapans);
-
         $lodger_id = auth()->guard('lodger')->user()->id;
-        $form = request();
-        if ($form->searchInLodger) {
+        if (request()->searchInLodger) {
             $penginapans = DB::table('penginapans')
-                ->where('lodger_id', '=', $lodger_id);
-            $penginapans = $penginapans
-                ->where('nama', 'like', '%' . $form->searchInLodger . '%')
-                ->where('lokasi', 'like', '%' . $form->searchInLodger . '%')
-                ->get();
-            dd($penginapans);
+                ->where('lodger_id', '=', $lodger_id)
+                ->where(
+                    function ($penginapans) {
+                        $penginapans->where('nama', 'like', '%' . request()->searchInLodger . '%')
+                            ->orWhere('lokasi', 'like', '%' . request()->searchInLodger . '%')
+                            ->get();
+                    }
+                )->simplePaginate(15);
         } else {
             $penginapans = DB::table('penginapans')
                 ->where('lodger_id', '=', $lodger_id)

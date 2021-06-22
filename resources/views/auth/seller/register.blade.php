@@ -1,6 +1,6 @@
-@extends('layouts/app')
+@extends('layouts.seller.app')
 
-@section('title', 'Login')
+@section('title', 'Register Seller')
 
 @section('header')
 <!-- Icon -->

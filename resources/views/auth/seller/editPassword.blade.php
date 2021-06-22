@@ -1,6 +1,6 @@
-@extends('layouts.manager.app')
+@extends('layouts.seller.app')
 
-@section('title', 'Ganti Password Manager')
+@section('title', 'Ganti Password Seller')
 
 @section('header')
 <!-- Icon -->
@@ -19,7 +19,7 @@
     <div class="row justify-content-between">
 
         {{-- SIDEBAR --}}
-        @include('layouts.manager.sidebar')
+        @include('layouts.seller.sidebar')
 
         <div class="kanan col-md-8">
             @if(session()->has('success'))
@@ -33,7 +33,7 @@
             </div>
             @endif
             <div class="custom-card p-5">
-                <form class="row g-3" method="post" action="{{ route('manager.updatePassword') }}">
+                <form class="row g-3" method="post" action="{{ route('seller.updatePassword') }}">
                     @csrf
                     @method('patch')
                     <div class="col-md-12">

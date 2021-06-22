@@ -1,8 +1,21 @@
-@extends('layouts.admin.app')
+@extends('layouts.seller.app')
+
+@section('title', 'Seller')
+
+@section('header')
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+<!-- AOS Animasi -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!-- custom CSS -->
+<link rel="stylesheet" href="{{ asset('css/crudpage.css') }}" />
+@endsection
 
 @section('content')
 
-<div class="container">
+<!-- Content -->
+<div class="container content">
+
     @if(session()->has('success'))
     <div class="alert alert-success mt-4">
         {{ session()->get('success') }}
@@ -14,106 +27,84 @@
         {{ session()->get('error') }}
     </div>
     @endif
-    <h1>Edit kios</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">Update kios: {{ $kios->nama }}</div>
 
-                <div class="card-body">
-                    <form action="{{ route('kios.update', $kios->slug) }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        @method('patch')
-                        <div class="form-group">
-                            <label for="nama">Nomer kios</label>
-                            <p>{{ $kios->no_kios }}</p>
+    <div class="row justify-content-between">
+
+        {{-- SIDEBAR --}}
+        @include('layouts.seller.sidebar')
+
+
+        <div class="kanan col-md-8">
+            <div class="custom-card p-5">
+                <h5 class="mb-3">Kios Saya</h5>
+
+                @if ($kios)
+                <!-- JIKA SUDAH ADA DATA -->
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img class="card-img" src="{{ asset('images/kios.jpg') }}" alt="lapak"
+                                style="height: 100%" />
                         </div>
-
-                        <div class="form-group">
-                            <label for="nama">Nama kios</label>
-                            <input type="text" name="nama" id="nama" class="form-control"
-                                value="{{ old('nama')??$kios->nama }}">
-                            @error('nama')
-                            <div class="mt-2 text-danger">
-                                {{ $message }}
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $kios->nama }}</h5>
+                                <div class="status">
+                                    @if ($kios->agree == 2)
+                                    <span class="badge bg-info text-dark">Disetujui</span>
+                                    @elseif ($kios->agree == 1)
+                                    <span class="badge bg-warning">Menunggu Persetujuan</span>
+                                    @else
+                                    <span class="badge bg-danger">Ditolak</span>
+                                    @endif
+                                </div>
+                                <div class="d-flex justify-content-end align-self-end">
+                                    <a class="cta-sm" href="{{ route('kios.edit', $kios->slug) }}">Lihat</a>
+                                </div>
                             </div>
-                            @enderror
                         </div>
-
-                        <div class="form-group">
-                            <label for="foto">Foto kios</label>
-                            <input type="file" name="foto" id="foto" class="form-control" value="{{ old('foto') }}">
-                            {{-- old('...') digunakan untuk mengambil value yang terkahir di masukan --}}
-                            @error('foto')
-                            <div class="mt-2 text-danger">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                    </form>
+                    </div>
                 </div>
+                @else
+                <!-- JIKA BELUM ADA DATA -->
+                <div class="d-flex justify-content-end">
+                    <a class="cta-sm" href="{{ route('kios.create') }}">Daftarkan Kios</a>
+                </div>
+
+                <!-- JIKA BELUM ADA DATA -->
+                <div class="belum-ada-data">
+                    <figure>
+                        <img style="width: 80%" src="{{ asset('images/no-data.jpg') }}" alt="no-data" />
+                        <figcaption style="font-size: 5pt"><a
+                                href="https://www.freepik.com/free-photos-vectors/data">Data vector
+                                created by stories -
+                                www.freepik.com</a></figcaption>
+                    </figure>
+                </div>
+                @endif
+
+
             </div>
         </div>
     </div>
-
-    <h2 class="mt-5">Ubah Menu</h2>
-    <table class="table table-striped">
-        <tr>
-            <th>#</th>
-            <th>Nama Menu</th>
-            <th>Jenis Menu</th>
-            <th>Harga</th>
-        </tr>
-        @foreach ($menus as $menu)
-        <tr>
-            <td>{{$loop->index+1}}</td>
-            {{-- Update menus --}}
-            <form action="{{route('menus.update', $menu->id)}}" method="POST">
-                @method('put')
-                @csrf
-                <td><input type="text" value="{{$menu->nama}}" name="nama" class="form-control"></td>
-                <td>
-                    <select name="jenis_makanan" id="jenis_menu">
-                        @if ($menu->jenis_makanan == 1)
-                        <option value="1">Makanan</option>
-                        <option value="0">Minuman</option>
-                        @else
-                        <option value="0">Minuman</option>
-                        <option value="1">Makanan</option>
-                        @endif
-                    </select>
-                </td>
-                <td><input type="text" value="{{$menu->harga}}" name="harga" class="form-control"></td>
-                <td>
-                    <input type="submit" value="Update" name="update" class="btn btn-success">
-                    <input type="submit" value="Delete" name="delete" class="btn btn-danger">
-                </td>
-
-            </form>
-        </tr>
-        @endforeach
-        {{-- Create menus --}}
-        <tr>
-            <td>#</td>
-            <form action="{{route('menus.store')}}" method="POST">
-                @csrf
-                <td><input type="text" name="nama" class="form-control" placeholder="Nama Menu (Ayam)"></td>
-                <td>
-                    <select name="jenis_makanan" id="jenis_menu">
-                        <option value="0">Makanan</option>
-                        <option value="1">Minuman</option>
-                    </select>
-                </td>
-                <td><input type="text" name="harga" class="form-control" placeholder="Harga"></td>
-                <td><button type="submit" class="btn bg-primary text-light">Create New</button></td>
-            </form>
-        </tr>
-    </table>
-
 </div>
+<!-- Akhir content -->
+
+<!-- Footer -->
+<footer class="background">
+    <p>MadiunWisata | 2021</p>
+</footer>
+<!-- Akhir Footer -->
+
 
 
 
 @endsection()
+
+@section('script')
+<!-- AOS Animasi -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+@endsection

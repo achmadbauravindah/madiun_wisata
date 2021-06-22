@@ -129,15 +129,15 @@ Route::group(['middleware' => 'auth:lodger'], function () {
 Route::group(['middleware' => 'auth:manager'], function () {
     Route::get('/manager', [KiosController::class, 'indexManager'])->name('manager');
     Route::get('/manager/edit', [ManagerController::class, 'edit'])->name('manager.edit');
-    Route::get('/lodger/edit-password', [ManagerController::class, 'editPassword'])->name('manager.editPassword');
     Route::patch('/manager/update', [ManagerController::class, 'update'])->name('manager.update');
-    Route::patch('/lodger/update-password', [ManagerController::class, 'updatePassword'])->name('manager.updatePassword');
+    Route::get('/manager/edit-password', [ManagerController::class, 'editPassword'])->name('manager.editPassword');
+    Route::patch('/manager/update-password', [ManagerController::class, 'updatePassword'])->name('manager.updatePassword');
     // lapakumkm
     // Route::get('/manager/lapakumkm', [LapakUMKMController::class, 'indexManager'])->name('manager.lapakumkm');
     // Route::get('/manager/lapakumkm/{lapakumkm:slug}/edit', [LapakUMKMController::class, 'edit'])->name('manager.lapakumkm.edit');
     // Route::patch('/manager/lapakumkm/{lapakumkm:slug}/update', [LapakUMKMController::class, 'update'])->name('manager.lapakumkm.update');
     // kioses
-    Route::get('/manager/kioses', [KiosController::class, 'indexManager'])->name('manager.kioses');
+    Route::get('/manager/kioses', [KiosController::class, 'showSeller'])->name('manager.kioses');
     Route::get('/manager/kioses/{kios:slug}/show', [KiosController::class, 'showManager'])->name('manager.kioses.show');
     Route::patch('/manager/kioses/{kios:slug}/verification', [KiosController::class, 'verification'])->name('manager.kioses.verification');
     Route::delete('/manager/kioses/{kios:slug}/delete', [KiosController::class, 'destroy'])->name('manager.kioses.delete');
@@ -146,10 +146,12 @@ Route::group(['middleware' => 'auth:manager'], function () {
 
 // Akses Seller
 Route::group(['middleware' => 'auth:seller'], function () {
-    Route::get('/seller', [SellerController::class, 'index'])->name('seller');
+    Route::get('/seller', [KiosController::class, 'indexSeller'])->name('seller');
     Route::get('/seller/edit', [SellerController::class, 'edit'])->name('seller.edit');
     Route::patch('/seller/update', [SellerController::class, 'update'])->name('seller.update');
-    // penginapans
+    Route::get('/seller/edit-password', [SellerController::class, 'editPassword'])->name('seller.editPassword');
+    Route::patch('/seller/update-password', [SellerController::class, 'updatePassword'])->name('seller.updatePassword');
+    // kios
     Route::get('/seller/kios', [KiosController::class, 'indexSeller'])->name('seller.kios');
     Route::get('/seller/kios/create', [KiosController::class, 'create'])->name('kios.create');
     Route::post('/seller/kios/store', [KiosController::class, 'store'])->name('kios.store');

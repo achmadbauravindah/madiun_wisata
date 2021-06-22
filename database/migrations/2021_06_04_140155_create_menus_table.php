@@ -16,7 +16,7 @@ class CreateMenusTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kios_id')->nullable()->constrained();
-            $table->tinyInteger('jenis_makanan');
+            $table->tinyInteger('jenis_menu');
             $table->string('nama', 100);
             $table->string('harga', 100);
             $table->timestamps();
