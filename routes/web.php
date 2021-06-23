@@ -137,7 +137,7 @@ Route::group(['middleware' => 'auth:manager'], function () {
     // Route::get('/manager/lapakumkm/{lapakumkm:slug}/edit', [LapakUMKMController::class, 'edit'])->name('manager.lapakumkm.edit');
     // Route::patch('/manager/lapakumkm/{lapakumkm:slug}/update', [LapakUMKMController::class, 'update'])->name('manager.lapakumkm.update');
     // kioses
-    Route::get('/manager/kioses', [KiosController::class, 'showSeller'])->name('manager.kioses');
+    Route::get('/manager/kioses', [KiosController::class, 'indexManager'])->name('manager.kioses');
     Route::get('/manager/kioses/{kios:slug}/show', [KiosController::class, 'showManager'])->name('manager.kioses.show');
     Route::patch('/manager/kioses/{kios:slug}/verification', [KiosController::class, 'verification'])->name('manager.kioses.verification');
     Route::delete('/manager/kioses/{kios:slug}/delete', [KiosController::class, 'destroy'])->name('manager.kioses.delete');

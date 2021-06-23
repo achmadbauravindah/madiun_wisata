@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-6    ">
                 <label for="" class="form-label">Scan KTP</label>
-                <p class="form-control"><img src="{{asset("storage/".$penginapan->lodger->ktp_img)}}" alt="Scan KTP"
+                <p class="form-control"><img src="{{asset("/storage/".$penginapan->lodger->ktp_img)}}" alt="Scan KTP"
                         style="width: 20rem; height:auto;">
                 </p>
             </div>
@@ -59,28 +59,22 @@
                 <label class="form-label">Nama</label>
                 <p class="form-control" readonly>{{$penginapan->nama}}</p>
             </div>
-            <div class="col-md-6">
-                <label for="" class="form-label">Gambar Penginapan</label>
-                <p class="form-control"><img src="{{asset("storage/".$penginapan->gambar)}}" alt="Gambar Penginapan"
-                        style="width: 20rem; height:auto;">
-                </p>
-            </div>
         </div>
         <div class="col-md-6">
             <label for="" class="form-label">Foto Depan</label>
-            <p class="form-control"><img src="{{asset("storage/".$penginapan->gambar)}}" alt="Gambar Penginapan"
+            <p class="form-control"><img src="{{asset("/storage/".$penginapan->imgdepan)}}" alt="Gambar Penginapan"
                     style="width: 20rem; height:auto;">
             </p>
         </div>
         <div class="col-md-6">
             <label for="" class="form-label">Foto Kamar</label>
-            <p class="form-control"><img src="{{asset("storage/".$penginapan->gambar)}}" alt="Gambar Penginapan"
+            <p class="form-control"><img src="{{asset("/storage/".$penginapan->imgkamar)}}" alt="Gambar Penginapan"
                     style="width: 20rem; height:auto;">
             </p>
         </div>
         <div class="col-md-6">
             <label for="" class="form-label">Foto WC</label>
-            <p class="form-control"><img src="{{asset("storage/".$penginapan->gambar)}}" alt="Gambar Penginapan"
+            <p class="form-control"><img src="{{asset("/storage/".$penginapan->imgwc)}}" alt="Gambar Penginapan"
                     style="width: 20rem; height:auto;">
             </p>
         </div>

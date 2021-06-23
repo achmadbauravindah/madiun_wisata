@@ -47,7 +47,7 @@
         <div class="container custom-card mt-4">
             <div class="row justify-content-center">
                 <div class="col-md-6 align-self-center gambar">
-                    <img src="{{ '/storage/images/wisatas/pl1.jpg' }}" alt="peceland" />
+                    <img src="{{ '/images/peceland/pl1.jpg' }}" alt="peceland" />
                 </div>
                 <div class="col-md-5 peceland">
                     <h2>PeceLand</h2>
@@ -57,7 +57,7 @@
                         serta tempat ibadah dengan desain
                         yang estetik.
                     </p>
-                    <a class="cta" href="#">Selengkapnya</a>
+                    <a class="cta" href="wisatas/pecel-land">Selengkapnya</a>
                 </div>
             </div>
         </div>

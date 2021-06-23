@@ -9,7 +9,7 @@
     </div>
     <div class="list-group custom-card">
         <a href="{{ route('lodger') }}"
-            class="list-group-item list-group-item-action {{ request()->is('lodger') ? ' list-group-item-dark':''}}"
+            class="list-group-item list-group-item-action {{ request()->is('lodger','lodger/penginapans/*') ? ' list-group-item-dark':''}}"
             aria-current="true"><i class="bi bi-house-fill"></i> Penginapan Saya </a>
         <a href="{{ route('lodger.edit') }}"
             class="list-group-item list-group-item-action {{ request()->is('lodger/edit') ? ' list-group-item-dark':''}}"><i

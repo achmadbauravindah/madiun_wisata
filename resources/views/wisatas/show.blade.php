@@ -23,6 +23,7 @@
     <div class="d-flex justify-content-center">
         <a class="cta" href="{{ $wisata->gmap }}">Lokasi</a>
     </div>
+    <p class="text-center">({{ $wisata->lokasi }})</p>
 </div>
 <!-- Akhir Artikel Wisata -->
 

@@ -179,7 +179,9 @@
                     </div>
                     <!-- Tombol delete -->
                     <div class="col-md-12 mt-2 mb-3">
-                        <form method="" action="">
+                        <form method="post" action="{{ route('manager.kioses.delete', $kios->slug) }}">
+                            @csrf
+                            @method('delete')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
@@ -190,7 +192,9 @@
                     </div>
                     <!-- Tombol delete -->
                     <div class="col-md-12 mt-2 mb-3">
-                        <form method="" action="">
+                        <form method="post" action="{{ route('manager.kioses.delete', $kios->slug) }}">
+                            @csrf
+                            @method('delete')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>

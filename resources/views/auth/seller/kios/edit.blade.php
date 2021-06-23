@@ -109,6 +109,7 @@
                 </div>
                 @endforelse
 
+                @if ($kios->agree == 2)
                 <form class="form-crud row g-3 mt-3" action="{{route('menus.store')}}" method="POST">
                     @csrf
                     <div class="col-md-4">
@@ -130,6 +131,7 @@
                         <button type="submit" class="btn btn-primary">Tambah Menu</button>
                     </div>
                 </form>
+                @endif
             </div>
         </div>
     </div>

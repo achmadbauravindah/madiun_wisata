@@ -144,7 +144,7 @@ class LapakumkmController extends Controller
             session()->flash('error', 'Lapak gagal dihapus, karena masih ada manager yang punya');
             return redirect(route('admin.lapakumkms'));
         }
-        if ($lapakumkm->kioses) {
+        if ($lapakumkm->kioses->count() > 0) {
             session()->flash('error', 'Lapak gagal dihapus, karena masih ada kios yang punya');
             return redirect(route('admin.lapakumkms'));
         }

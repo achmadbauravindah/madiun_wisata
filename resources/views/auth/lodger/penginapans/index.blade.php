@@ -51,7 +51,7 @@
 
                 <a class="cta-sm mt-3" href="{{ route('penginapans.create') }}">Tambah Penginapan</a>
 
-                @if ($penginapans)
+                @if (isset($penginapans[0]))
                 <!-- JIKA SUDAH ADA DATA -->
                 <table class="table table-striped">
                     <thead>

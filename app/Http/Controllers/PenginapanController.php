@@ -33,7 +33,6 @@ class PenginapanController extends Controller
             ->where('lodger_id', '=', $lodger_id)
             ->simplePaginate(15);
         $lodger = auth()->guard('lodger')->user();
-
         return view('auth.lodger.penginapans.index', compact('penginapans', 'lodger'));
     }
 

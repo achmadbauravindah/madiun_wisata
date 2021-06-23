@@ -64,7 +64,17 @@
             </div>
         </div>
         @empty
-        Tidak ada data
+        <!-- JIKA BELUM ADA DATA -->
+        <div class="belum-ada-data">
+            <h4>Data tidak ditemukan</h4>
+            <figure>
+                <img style="width: 80%" src="{{ asset('images/no-data.jpg') }}" alt="no-data" />
+                <figcaption style="font-size: 5pt"><a href="https://www.freepik.com/free-photos-vectors/data">Data
+                        vector
+                        created by stories -
+                        www.freepik.com</a></figcaption>
+            </figure>
+        </div>
         @endforelse
     </div>
     <!-- Akhir semua card-card penginapan -->

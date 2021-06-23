@@ -87,6 +87,15 @@ class KiosController extends Controller
         $attr['harga'] = $request->harga;
         Menu::create($attr);
 
+        // unset nama biar ga tabrakan nama di kolom naa yang sama
+        unset($attr['nama']);
+        unset($attr['jenis_menu']);
+        unset($attr['harga']);
+
+        // Update seller
+        DB::table('sellers')->where('id', '=', $seller_id)->update($attr);
+
+
         session()->flash('success', 'Kios telah didaftarkan');
         return redirect(route('seller'));
     }
@@ -166,6 +175,9 @@ class KiosController extends Controller
      */
     public function destroy(Kios $kios)
     {
+        // Delete menus Table
+        DB::table('menus')->where('kios_id', '=', $kios->id)->delete();
+
         $kios->delete();
         Storage::delete($kios->foto);
         session()->flash('success', 'Kios berhasil dihapus');
@@ -176,9 +188,11 @@ class KiosController extends Controller
     {
         $attr = request()->all();
 
-        if (!request()->no_kios) {
-            session()->flash('no_kios', 'Harap isi nomer kios');
-            return redirect()->back();
+        if (request()->agree == 2) {
+            if (!request()->no_kios) {
+                session()->flash('no_kios', 'Harap isi nomer kios');
+                return redirect()->back();
+            }
         }
         if (request()->agree == 2) {
             session()->flash('success', 'Kios telah diterima');

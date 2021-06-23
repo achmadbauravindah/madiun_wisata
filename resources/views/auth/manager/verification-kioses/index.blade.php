@@ -50,7 +50,7 @@
                     <!-- Akhir Pencarian  -->
                 </div>
 
-                @if ($kioses)
+                @if ($kioses->count() > 0)
                 <!-- JIKA SUDAH ADA DATA -->
                 <table class="table table-striped">
                     <thead>

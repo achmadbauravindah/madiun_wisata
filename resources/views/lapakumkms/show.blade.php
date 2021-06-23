@@ -75,18 +75,33 @@
                 @endif
                 <!-- Akhir card per kios-->
                 @empty
-                Data tidak ada
-                @endforelse ()
+                <!-- JIKA BELUM ADA DATA -->
+                <div class="belum-ada-data text-center">
+                    <h6>Tidak ada kios</h6>
+                    <figure>
+                        <img style="width: 30%" src="{{ asset('images/no-data.jpg') }}" alt="no-data" />
+                        <figcaption style="font-size: 5pt"><a
+                                href="https://www.freepik.com/free-photos-vectors/data">Data vector
+                                created by stories -
+                                www.freepik.com</a></figcaption>
+                    </figure>
+                </div>
+                @endforelse
             </div>
             <!-- Akhir daftar keseluruhan kios -->
 
             <!-- Data pengelola lapak -->
             <div class="kanan col-md-4">
                 <div class="custom-sidebar">
+                    @if ($lapakumkm->manager)
                     <h6>Nama Pengelola</h6>
                     <p>{{ $lapakumkm->manager->nama }}</p>
                     <h6>No HP</h6>
                     <p>{{ $lapakumkm->manager->no_wa }}</p>
+                    @else
+                    <h6>Pengelola Lapak</h6>
+                    <p>Belum Terdaftar</p>
+                    @endif
                     <h6>Lokasi</h6>
                     <p>{{ $lapakumkm->lokasi }}</p>
                 </div>
