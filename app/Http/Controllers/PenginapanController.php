@@ -97,7 +97,7 @@ class PenginapanController extends Controller
         $no_wa =  $penginapan->lodger->no_wa;
         $no_wa = substr_replace($no_wa, '62', 0, 1);
         // dd($no_wa);
-        $redirectWA = 'https://api.whatsapp.com/send?phone=' . $no_wa . '&text=Hai%20Pak/Bu ' . $penginapan->lodger->nama . '%2C%20Apakah%20Penginapan ' . $penginapan->nama . '%20masih%20tersedia%3F';
+        $redirectWA = 'https://api.whatsapp.com/send?phone=' . $no_wa . '&text=Permisi%20Pak/Bu ' . $penginapan->lodger->nama . '%2C%20Apakah%20Penginapan ' . $penginapan->nama . '%20masih%20tersedia%3F';
 
         return view('penginapans.show', compact('penginapan', 'redirectWA'));
     }
