@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -62,6 +63,11 @@ class AdminController extends Controller
         //
     }
 
+    public function editPassword()
+    {
+        return view('auth.admin.editPassword');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -72,6 +78,29 @@ class AdminController extends Controller
     public function update(Request $request, Admin $admin)
     {
         //
+    }
+
+    public function updatePassword()
+    {
+        request()->validate([
+            'oldPassword' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $attr = request()->all();
+
+        $admin_id = auth()->guard('admin')->user()->id;
+        $admin = Admin::find($admin_id);
+
+        if (Hash::check(request()->oldPassword, $admin->password)) {
+            $attr['password'] = Hash::make(request()->password);
+            $admin->update($attr);
+            return redirect()->route('admin.editPassword')->with('success', 'Password telah diubah');
+        } else {
+            return redirect()->route('admin.editPassword')->with('error', 'Password lama salah');
+        }
+
+        return redirect()->route('admin.editPassword')->with('success', 'Password telah diubah');
     }
 
     /**

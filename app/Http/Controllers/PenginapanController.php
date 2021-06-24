@@ -221,6 +221,20 @@ class PenginapanController extends Controller
         return view('auth.lodger.penginapans.index', compact('penginapans'));
     }
 
+    public function searchInAdmin()
+    {
+        if (request()->searchInAdmin) {
+            $penginapans = DB::table('penginapans')
+                ->where('nama', 'like', '%' . request()->searchInAdmin . '%')
+                ->orWhere('lokasi', 'like', '%' . request()->searchInAdmin . '%')
+                ->orWhere('agree', 'like', '%' . request()->searchInAdmin . '%')
+                ->get();
+        } else {
+            $penginapans = Penginapan::get();
+        }
+        return view('auth.admin.verification-penginapans.index', compact('penginapans'));
+    }
+
     public function verification(Penginapan $penginapan)
     {
         $attr = request()->all();

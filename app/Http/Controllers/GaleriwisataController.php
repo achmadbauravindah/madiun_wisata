@@ -89,6 +89,7 @@ class GaleriwisataController extends Controller
 
         // Delete wisatas Table
         $galeriwisata->delete();
+        session()->flash('success', 'Galeri Wisata berhasil dihapus');
         return redirect(route('wisatas.edit', $slug));
     }
 }

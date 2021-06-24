@@ -2,6 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Poppins&display=swap');
 
 /* common */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 h1 {
   font-family: 'Krona One', sans-serif;
   font-size: 40px;
@@ -24,6 +34,11 @@ h5 {
 
 h6 {
   font-family: 'Krona One', sans-serif;
+}
+
+main {
+  min-height: 100%;
+  position: relative;
 }
 
 p {
@@ -131,6 +146,11 @@ table td {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: #616161;
+}
+
+.content {
+  min-height: 100%;
+  position: relative;
 }
 
 /* merubah font place holder */

@@ -43,7 +43,7 @@
                         @csrf
                         @method('post')
                         <input class="form-control form-control-lg-2" type="text" placeholder="Temukan Penginapan"
-                            aria-label="default input example" name="searchInLodger" />
+                            aria-label="default input example" name="searchInManager" />
                         <!-- Button cari -->
                         <button type="submit" class="btn cta">Cari</button>
                     </form>

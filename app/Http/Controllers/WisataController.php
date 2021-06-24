@@ -165,7 +165,7 @@ class WisataController extends Controller
         $wisata->update($attr);
 
         session()->flash('success', 'Wisata berhasil diedit');
-        return redirect(route('admin.wisatas'));
+        return redirect(route('wisatas.edit', $wisata->slug));
     }
 
     /**
@@ -204,10 +204,23 @@ class WisataController extends Controller
                 ->where('nama', 'like', '%' . $form->search . '%')
                 ->orWhere('deskripsi', 'like', '%' . $form->search . '%')
                 ->orWhere('lokasi', 'like', '%' . $form->search . '%')
-                ->simplePaginate(5);
+                ->simplePaginate(9);
         } else {
-            $wisatas = Wisata::simplePaginate(5);
+            $wisatas = Wisata::simplePaginate(9);
         }
         return view('wisatas.index', compact('wisatas'));
+    }
+
+    public function searchInAdmin()
+    {
+        if (request()->searchInAdmin) {
+            $wisatas = DB::table('wisatas')
+                ->where('nama', 'like', '%' . request()->searchInAdmin . '%')
+                ->orWhere('lokasi', 'like', '%' . request()->searchInAdmin . '%')
+                ->simplePaginate(9);
+        } else {
+            $wisatas = Wisata::simplePaginate(9);
+        }
+        return view('auth.admin.wisatas.index', compact('wisatas'));
     }
 }

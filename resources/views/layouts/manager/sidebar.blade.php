@@ -5,7 +5,7 @@
         @else
         <h6>Nama tidak ditemukan</h6>
         @endif
-        <p>manager</p>
+        <p>Manager</p>
     </div>
     <div class="list-group custom-card">
         <a href="{{ route('manager') }}"

@@ -204,4 +204,27 @@ class KiosController extends Controller
 
         return redirect(route('manager.kioses'));
     }
+
+    public function searchInManager()
+    {
+        $manager = auth()->guard('manager')->user();
+        $lapakumkm_id = auth()->guard('manager')->user()->lapakumkm_id;
+        if (request()->searchInManager) {
+            $kioses = DB::table('kios')
+                ->where('lapakumkm_id', '=', $lapakumkm_id)
+                ->where(
+                    function ($kioses) {
+                        $kioses->where('nama', 'like', '%' . request()->searchInManager . '%')
+                            ->get();
+                    }
+                )->simplePaginate(15);
+        } else {
+
+            $kioses =
+                DB::table('kios')
+                ->where('lapakumkm_id', '=', $lapakumkm_id)
+                ->get();
+        }
+        return view('auth.manager.verification-kioses.index', compact('manager', 'kioses'));
+    }
 }

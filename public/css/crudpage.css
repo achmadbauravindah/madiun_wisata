@@ -2,250 +2,264 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Poppins&display=swap');
 
 /* common */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 h1 {
-    font-family: 'Krona One', sans-serif;
-    font-size: 40px;
-    line-height: 50px;
+  font-family: 'Krona One', sans-serif;
+  font-size: 40px;
+  line-height: 50px;
 }
 
 h2 {
-    font-family: 'Krona One', sans-serif;
-    font-size: 30px;
+  font-family: 'Krona One', sans-serif;
+  font-size: 30px;
 }
 
 h3 {
-    font-family: 'Krona One', sans-serif;
-    font-size: 20px;
+  font-family: 'Krona One', sans-serif;
+  font-size: 20px;
 }
 
 h5 {
-    font-family: 'Krona One', sans-serif;
+  font-family: 'Krona One', sans-serif;
 }
 
 h6 {
-    font-family: 'Krona One', sans-serif;
+  font-family: 'Krona One', sans-serif;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    line-height: 33px;
-    color: #616161;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 33px;
+  color: #616161;
+}
+
+.content {
+  min-height: 100%;
+  position: relative;
 }
 
 .list-group a {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    line-height: 33px;
-    color: black;
-    font-weight: bolder;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 33px;
+  color: black;
+  font-weight: bolder;
 }
 
 .list-group aktif {
-    background-color: #bcd2bd;
+  background-color: #bcd2bd;
 }
 
 .background {
-    background-color: #bcd2bd;
-    margin-top: 50px;
-    padding: 30px;
+  background-color: #bcd2bd;
+  margin-top: 50px;
+  padding: 30px;
 }
 
 .custom-card {
-    background: #ffffff;
-    box-shadow: 0px 5px 10px 2px rgba(25, 96, 70, 0.2);
-    border: none;
-    margin-bottom: 30px;
+  background: #ffffff;
+  box-shadow: 0px 5px 10px 2px rgba(25, 96, 70, 0.2);
+  border: none;
+  margin-bottom: 30px;
 }
 
 .custom-sidebar {
-    background: #ffffff;
-    border: solid #dfe6e9 0.5px;
-    margin-bottom: 30px;
-    padding: 20px;
+  background: #ffffff;
+  border: solid #dfe6e9 0.5px;
+  margin-bottom: 30px;
+  padding: 20px;
 }
-
 input[type='text'] {
-    border-color: #196046;
+  border-color: #196046;
 }
 
 textarea,
 select,
 input {
-    border-color: #196046 !important;
+  border-color: #196046 !important;
 }
 
 /* tombol cta */
 .cta {
-    font-family: 'Krona One', sans-serif;
-    display: inline-block;
-    font-size: 15px;
-    background-color: #196046;
-    color: white;
-    text-decoration: none;
-    padding: 1em 2em;
-    transition: 0.5s ease;
+  font-family: 'Krona One', sans-serif;
+  display: inline-block;
+  font-size: 15px;
+  background-color: #196046;
+  color: white;
+  text-decoration: none;
+  padding: 1em 2em;
+  transition: 0.5s ease;
 }
 
 .cta-sm {
-    font-family: 'Krona One', sans-serif;
-    display: inline-block;
-    font-size: 12px;
-    background-color: #196046;
-    color: white;
-    text-decoration: none;
-    padding: 1em 2em;
-    transition: 0.5s ease;
+  font-family: 'Krona One', sans-serif;
+  display: inline-block;
+  font-size: 12px;
+  background-color: #196046;
+  color: white;
+  text-decoration: none;
+  padding: 1em 2em;
+  transition: 0.5s ease;
 }
 
 .cta:hover {
-    background-color: #19604667;
-    color: #196046;
+  background-color: #19604667;
+  color: #196046;
 }
 
 .cta-sm:hover {
-    background-color: #19604667;
-    color: #196046;
+  background-color: #19604667;
+  color: #196046;
 }
 
 .tombol {
-    font-family: 'Krona One', sans-serif;
-    display: inline-block;
-    font-size: 15px;
-    background-color: transparent;
-    border: 1px solid #196046;
-    color: #196046;
-    text-decoration: none;
-    padding: 1em 2em;
-    transition: 0.5s ease;
-    margin-right: 20px;
+  font-family: 'Krona One', sans-serif;
+  display: inline-block;
+  font-size: 15px;
+  background-color: transparent;
+  border: 1px solid #196046;
+  color: #196046;
+  text-decoration: none;
+  padding: 1em 2em;
+  transition: 0.5s ease;
+  margin-right: 20px;
 }
 
 .tombol:hover {
-    border: 3px solid #0f3a2a;
-    color: #196046;
+  border: 3px solid #0f3a2a;
+  color: #196046;
 }
-
 /* Navbar */
 .custom-nav {
-    background-color: white;
+  background-color: white;
 }
 
 .custom-nav .navbar-brand img {
-    width: 150px;
-    margin-left: 100px;
+  width: 150px;
+  margin-left: 100px;
 }
 
 .custom-nav .nav-item .nav-link {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12pt;
-    margin-right: 2em;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12pt;
+  margin-right: 2em;
 }
-
 /* pencarian */
 .pencarian .cta {
-    padding-top: 9px;
-    padding-bottom: 9px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 button {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 table {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #616161;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #616161;
 }
 
 .kios table {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    color: #616161;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: #616161;
 }
-
-label {
-    font-family: 'Poppins', sans-serif;
+label,
+option,
+.form-select {
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-crud img {
-    width: 60%;
+  width: 60%;
+}
+
+.form-crud p {
+  line-height: normal;
 }
 
 /* merubah font place holder */
 ::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+  /* Chrome/Opera/Safari */
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
 }
-
 ::-moz-placeholder {
-    /* Firefox 19+ */
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+  /* Firefox 19+ */
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
 }
-
 :-ms-input-placeholder {
-    /* IE 10+ */
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+  /* IE 10+ */
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
 }
-
 :-moz-placeholder {
-    /* Firefox 18- */
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+  /* Firefox 18- */
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
 }
 
 /* footer */
 footer p {
-    color: black;
-    text-align: center;
-    margin: auto;
-    padding: auto;
+  color: black;
+  text-align: center;
+  margin: auto;
+  padding: auto;
 }
 
 /* bagian atas */
 .atas {
-    margin-top: 98px;
+  margin-top: 98px;
 }
 
 .linkhijau {
-    color: #196046;
-    font-family: 'Krona One', sans-serif;
-    font-size: 12px;
-    text-decoration: none;
-    margin-top: 20px;
+  color: #196046;
+  font-family: 'Krona One', sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  margin-top: 20px;
 }
 
 .linkabu {
-    color: rgba(76, 76, 76, 0.62);
-    font-family: 'Krona One', sans-serif;
-    font-size: 12px;
-    text-decoration: none;
+  color: rgba(76, 76, 76, 0.62);
+  font-family: 'Krona One', sans-serif;
+  font-size: 12px;
+  text-decoration: none;
 }
 
 .linkhijau:hover,
 .linkabu:hover {
-    color: #bcd2bd;
+  color: #bcd2bd;
 }
 
 .judul {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 /* content */
 .content {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 .content .cta {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 /* Responsive */
 @media screen and (max-width: 992px) {
-    .atas .custom-card {
-        padding: 20px;
-    }
+  .atas .custom-card {
+    padding: 20px;
+  }
 }

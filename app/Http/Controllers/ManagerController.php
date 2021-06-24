@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterManagerRequest;
 use App\Http\Requests\UpdateManagerRequest;
 use App\Models\Lapakumkm;
 use App\Models\Manager;
@@ -50,7 +51,7 @@ class ManagerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterManagerRequest $request)
     {
         // Get Path File For FOTO KTP (ktp_img)
         $nik = request()->nik;
@@ -185,5 +186,18 @@ class ManagerController extends Controller
         }
         $manager->delete();
         return redirect()->route('manage-manager')->with('success', 'Akun berhasil dihapus');
+    }
+
+    public function searchInAdmin()
+    {
+        if (request()->searchInAdmin) {
+            $managers = DB::table('managers')
+                ->where('nama', 'like', '%' . request()->searchInAdmin . '%')
+                ->orWhere('nik', 'like', '%' . request()->searchInAdmin . '%')
+                ->get();
+        } else {
+            $managers = Manager::get();
+        }
+        return view('auth.admin.manage-managers.index', compact('managers'));
     }
 }

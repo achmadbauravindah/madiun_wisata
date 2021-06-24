@@ -138,4 +138,17 @@ class LodgerController extends Controller
 
         return redirect()->route('manage-lodger')->with('success', 'Akun berhasil dihapus');
     }
+
+    public function searchInAdmin()
+    {
+        if (request()->searchInAdmin) {
+            $lodgers = DB::table('lodgers')
+                ->where('nama', 'like', '%' . request()->searchInAdmin . '%')
+                ->orWhere('nik', 'like', '%' . request()->searchInAdmin . '%')
+                ->get();
+        } else {
+            $lodgers = Lodger::get();
+        }
+        return view('auth.admin.manage-lodgers.index', compact('lodgers'));
+    }
 }

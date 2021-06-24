@@ -1,4 +1,4 @@
-@extends('layouts/app')
+@extends('layouts.lodger.app')
 
 @section('title', 'Register Lodger')
 

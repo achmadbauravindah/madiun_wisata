@@ -65,7 +65,9 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 // Akses Admin
 Route::group(['middleware' => 'auth:admin'], function () {
     // index
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [WisataController::class, 'indexAdmin'])->name('admin');
+    Route::get('/admin/edit-password', [AdminController::class, 'editPassword'])->name('admin.editPassword');
+    Route::patch('/admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword');
     // wisatas
     Route::get('/admin/wisatas', [WisataController::class, 'indexAdmin'])->name('admin.wisatas');
     Route::get('/admin/wisatas/create', [WisataController::class, 'create'])->name('wisatas.create');
@@ -73,13 +75,18 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/wisatas/{wisata:slug}/edit', [WisataController::class, 'edit'])->name('wisatas.edit');
     Route::patch('/admin/wisatas/{wisata:slug}/update', [WisataController::class, 'update'])->name('wisatas.update');
     Route::delete('/admin/wisatas/{wisata:slug}/delete', [WisataController::class, 'destroy'])->name('wisatas.delete');
+    Route::post('/admin/wisatas', [WisataController::class, 'searchInAdmin'])->name('wisatas.searchInAdmin');
+
     // galeriwisatas for wisatas
     Route::patch('/admin/galeriwisatas/{galeriwisata:id}/update', [GaleriwisataController::class, 'update'])->name('galeriwisatas.update');
     Route::delete('/admin/galeriwisatas/{galeriwisata:id}/delete', [GaleriwisataController::class, 'destroy'])->name('galeriwisatas.delete');
     // penginapans
     Route::get('/admin/penginapans', [PenginapanController::class, 'indexAdmin'])->name('admin.penginapans');
     Route::get('/admin/penginapans/{penginapan:slug}/show', [PenginapanController::class, 'showAdmin'])->name('admin.penginapans.show');
+    Route::delete('/admin/penginapans/{penginapan:slug}/delete', [PenginapanController::class, 'destroy'])->name('admin.penginapans.delete');
     Route::patch('/admin/penginapans/{penginapan:slug}/verification', [PenginapanController::class, 'verification'])->name('admin.penginapans.verification');
+    Route::post('/admin/penginapans', [PenginapanController::class, 'searchInAdmin'])->name('penginapans.searchInAdmin');
+
     // lapakumkms
     Route::get('/admin/lapakumkms', [LapakUMKMController::class, 'indexAdmin'])->name('admin.lapakumkms');
     Route::get('/admin/lapakumkms/create', [LapakUMKMController::class, 'create'])->name('admin.lapakumkms.create');
@@ -87,24 +94,29 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/lapakumkms/{lapakumkm:slug}/edit', [LapakUMKMController::class, 'edit'])->name('admin.lapakumkms.edit');
     Route::patch('/admin/lapakumkms/{lapakumkm:slug}/update', [LapakUMKMController::class, 'update'])->name('admin.lapakumkms.update');
     Route::delete('/admin/lapakumkms/{lapakumkm:slug}/delete', [LapakUMKMController::class, 'destroy'])->name('admin.lapakumkms.delete');
+    Route::post('/admin/lapakumkms', [LapakUMKMController::class, 'searchInAdmin'])->name('lapakumkms.searchInAdmin');
+
     // mabours
-    Route::get('/admin/mabours', [MabourController::class, 'indexAdmin'])->name('admin.mabours');
+    Route::get('/admin/mabours',  [MabourController::class, 'edit'])->name('admin.mabours');
     Route::get('/admin/mabours/edit', [MabourController::class, 'edit'])->name('mabours.edit');
     Route::post('/admin/tours/store', [TourController::class, 'store'])->name('tours.store');
     Route::put('/admin/tours/update/{id}', [TourController::class, 'updateAndDelete'])->name('tours.update');
     Route::post('/admin/buses/store', [BusController::class, 'store'])->name('buses.store');
     Route::put('/admin/buses/update/{id}', [BusController::class, 'updateAndDelete'])->name('buses.update');
+
     // Manage Account
     // lodger
     Route::get('/admin/manage-lodger', [LodgerController::class, 'indexAdmin'])->name('manage-lodger');
     Route::get('/admin/manage-lodger/{lodger:id}/show', [LodgerController::class, 'showAdmin'])->name('manage-lodger.show');
     Route::delete('/admin/manage-lodger/{lodger:id}/delete', [LodgerController::class, 'destroy'])->name('manage-lodger.delete');
+    Route::post('/admin/manage-lodger', [LodgerController::class, 'searchInAdmin'])->name('manage-lodger.searchInAdmin');
     // manager
     Route::get('/admin/manage-manager', [ManagerController::class, 'indexAdmin'])->name('manage-manager');
     Route::get('/admin/manage-manager/{manager:id}/show', [ManagerController::class, 'showAdmin'])->name('manage-manager.show');
     Route::delete('/admin/manage-manager/{manager:id}/delete', [ManagerController::class, 'destroy'])->name('manager.delete');
     Route::get('/admin/manage-manager/register', [ManagerController::class, 'create'])->name('showManagerRegisterForm');
     Route::post('/admin/manage-manager/register', [ManagerController::class, 'store'])->name('manager.register');
+    Route::post('/admin/manage-manager', [ManagerController::class, 'searchInAdmin'])->name('manage-manager.searchInAdmin');
 });
 
 

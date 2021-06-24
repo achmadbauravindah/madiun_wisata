@@ -153,4 +153,17 @@ class LapakumkmController extends Controller
         session()->flash('success', 'Lapak berhasil dihapus');
         return redirect(route('admin.lapakumkms'));
     }
+
+    public function searchInAdmin()
+    {
+        if (request()->searchInAdmin) {
+            $lapakumkms = DB::table('lapakumkms')
+                ->where('nama', 'like', '%' . request()->searchInAdmin . '%')
+                ->orWhere('lokasi', 'like', '%' . request()->searchInAdmin . '%')
+                ->get();
+        } else {
+            $lapakumkms = Lapakumkm::get();
+        }
+        return view('auth.admin.lapakumkms.index', compact('lapakumkms'));
+    }
 }
