@@ -115,6 +115,14 @@
                         <button type="submit" class="btn cta-sm btn-success">Edit</button>
                     </div>
                 </form>
+                <form class="form-crud row g-3 mt-1" action="{{ route('wisatas.delete', $wisata->slug) }}"
+                    method="post">
+                    @csrf
+                    @method('delete')
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
 
                 <h2 class="mt-5">Galeri Wisata</h2>
                 @forelse ($galeriwisatas as $galeriwisata)
@@ -144,6 +152,7 @@
                     </figure>
                 </div>
                 @endforelse
+
             </div>
         </div>
     </div>

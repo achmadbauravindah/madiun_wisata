@@ -14,7 +14,7 @@
 @section('content')
 <!-- Judul -->
 <div class="container judul">
-    <h2 class="text-center">Login Homestay</h2>
+    <h2 class="text-center">{{ $penginapan->nama }}</h2>
 </div>
 
 <!-- Akhir judul -->
