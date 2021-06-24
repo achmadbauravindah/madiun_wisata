@@ -71,7 +71,13 @@
                             </td>
                             <td>{{ $kios->nama }}</td>
                             <td>
-                                {{ $kios->agree === 2 ? "Sudah di-acc" : ($kios->agree === 1 ? "Belum di-acc": "Sudah ditolak") }}
+                                @if ($kios->agree === 2)
+                                <span class="badge bg-info text-dark">Disetujui</span>
+                                @elseif ($kios->agree === 1)
+                                <span class="badge bg-warning">Menunggu Persetujuan</span>
+                                @else
+                                <span class="badge bg-danger">Ditolak</span>
+                                @endif
                             </td>
                             <td><a href="{{ route('manager.kioses.show', $kios->slug) }}"
                                     class="btn btn-primary">Lihat</a></td>

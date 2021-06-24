@@ -35,6 +35,25 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('post')
+                    <div class="col-md-12">
+                        <label for="lapakumkm_id" class="form-label">Pilih Lapak UMKM</label>
+                        <select name="lapakumkm_id" id="lapakumkm_id" class="form-select">
+                            @forelse ($lapakumkms as $lapakumkm)
+                            <option value="{{ old('lapakumkm_id')??$lapakumkm->id }}">
+                                {{ $lapakumkm->nama.'('.$lapakumkm->kelurahan.')' }}
+                            </option>
+                            @empty
+                            <option value="0">
+                                Kosong
+                            </option>
+                            @endforelse
+                        </select>
+                        @error('jenis_kelamin')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
                     <div class="col-md-6">
                         <label for="name" class="form-label">Nama Lengkap</label>
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" id="name"

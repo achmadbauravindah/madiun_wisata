@@ -45,6 +45,13 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('delete')
+                    <div class="col-md-12">
+                        <label for="lapak" class="form-label">Lapak UMKM</label>
+                        <input readonly type="text" class="form-control id=" lapak" name="lapak"
+                            value="{{ $manager->lapakumkm->nama }}" />
+                        <a class="btn btn-primary mt-2"
+                            href="{{ route('admin.lapakumkms.edit',$manager->lapakumkm->slug) }}">Lihat Lapak</a>
+                    </div>
                     <div class="col-md-6">
                         <label for="name" class="form-label">Nama Lengkap</label>
                         <input readonly type="text" class="form-control @error('nama') is-invalid @enderror" id="name"

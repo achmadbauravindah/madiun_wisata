@@ -35,6 +35,23 @@
                     @method('patch')
                     <div class="col-md-12">
                         <label for="nama" class="form-label">Nama Lapak</label>
+                        @if ($lapakumkm->manager)
+                        <input readonly type="text" name="nama" id="nama" class="form-control"
+                            value="{{ old('nama')??$lapakumkm->manager->nama}}">
+                        <a class="btn btn-primary mt-2"
+                            href="{{ route('manage-manager.show', $lapakumkm->manager->id) }}">Cek Manager</a>
+                        @else
+                        <input readonly type="text" name="nama" id="nama" class="form-control"
+                            value="Manager Belum Terdaftar">
+                        @endif
+                        @error('nama')
+                        <div class="mt-2 text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="col-md-12">
+                        <label for="nama" class="form-label">Nama Lapak</label>
                         <input type="text" name="nama" id="nama" class="form-control"
                             value="{{ old('nama')??$lapakumkm->nama}}">
                         @error('nama')
@@ -87,7 +104,7 @@
 
 
                     <div class="col-12">
-                        <button type="submit" class="btn cta-sm">Tambah</button>
+                        <button type="submit" class="btn cta-sm">Edit</button>
                     </div>
                 </form>
             </div>

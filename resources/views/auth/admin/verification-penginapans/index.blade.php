@@ -81,7 +81,13 @@
                             <td>{{ $penginapan->nama }}</td>
                             <td>{{ $penginapan->lokasi }}</td>
                             <td>
-                                {{ $penginapan->agree === 2 ? "Sudah di-acc" : ($penginapan->agree === 1 ? "Belum di-acc": "Sudah ditolak") }}
+                                @if ($penginapan->agree === 2)
+                                <span class="badge bg-info text-dark">Disetujui</span>
+                                @elseif ($penginapan->agree === 1)
+                                <span class="badge bg-warning">Menunggu Persetujuan</span>
+                                @else
+                                <span class="badge bg-danger">Ditolak</span>
+                                @endif
                             </td>
                             <td><a href="{{ route('admin.penginapans.show', $penginapan->slug) }}"
                                     class="btn btn-success">Lihat</a></td>
