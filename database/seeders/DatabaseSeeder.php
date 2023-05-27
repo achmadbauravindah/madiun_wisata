@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             LapakumkmSeeder::class,
             SellerSeeder::class,
             KiosSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

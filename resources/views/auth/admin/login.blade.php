@@ -34,7 +34,7 @@
                 <div class="col-md-12">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
-                        name="username" value="{{ old('username') }}" maxlength="16" />
+                        name="username" value="achmadbauravindah" maxlength="16" />
                     @error('username')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                 <div class="col-md-12">
                     <label for="inputPassword4" class="form-label">Password</label>
                     <input type="password" class="form-control @error('password') is-invalid
-                        @enderror" id="inputPassword4" name="password" autocomplete="current-password" />
+                        @enderror" id="inputPassword4" name="password" autocomplete="current-password" value="123123"/>
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

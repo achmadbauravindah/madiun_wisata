@@ -29,7 +29,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link{{ request()->is('mabours','mabours/*') ? ' active':''}}"
-                        href="{{ 'mabours' }}">Mabour</a>
+                        href="{{ route('mabours') }}">Mabour</a>
                 </li>
             </ul>
         </div>
